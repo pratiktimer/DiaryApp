@@ -8,12 +8,17 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeTopBar(onMenuClicked: () -> Unit){
+fun HomeTopBar(
+    scrollBehaviour: TopAppBarScrollBehavior,
+    onMenuClicked: () -> Unit
+){
 TopAppBar(
+    scrollBehavior = scrollBehaviour,
     title = {
             Text(text = "Diary")
     },

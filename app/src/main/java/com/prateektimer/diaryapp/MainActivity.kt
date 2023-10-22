@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.navigation.compose.rememberNavController
+import com.prateektimer.diaryapp.data.repository.MongoDB
 import com.prateektimer.diaryapp.navigation.Screen
 import com.prateektimer.diaryapp.navigation.SetupNavGraph
 import com.prateektimer.diaryapp.ui.theme.DiaryAppTheme
@@ -24,6 +25,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         WindowCompat.setDecorFitsSystemWindows(window, false)
+
         setContent {
             DiaryAppTheme {
                 val navController = rememberNavController()
