@@ -3,18 +3,21 @@ package com.prateektimer.diaryapp.data.repository
 
 import com.prateektimer.diaryapp.model.Diary
 import com.prateektimer.diaryapp.util.Constants.APP_ID
-import com.prateektimer.diaryapp.util.RequestState
+import com.prateektimer.diaryapp.model.RequestState
 import com.prateektimer.diaryapp.util.toInstant
 import io.realm.kotlin.Realm
 import io.realm.kotlin.ext.query
 import io.realm.kotlin.mongodb.App
 import io.realm.kotlin.mongodb.sync.SyncConfiguration
 import io.realm.kotlin.query.Sort
+import io.realm.kotlin.types.RealmInstant
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import java.time.ZoneId
 import org.mongodb.kbson.ObjectId
+import java.time.ZonedDateTime
+
 object MongoDB : MongoRepository {
     private val app = App.create(APP_ID)
     private val user = app.currentUser
@@ -141,6 +144,49 @@ object MongoDB : MongoRepository {
         }
         else{
             RequestState.Error(UserNotAuthenticatedException())
+        }
+    }
+
+    override suspend fun deleteAllDiaries(): RequestState<Boolean> {
+        return if(user != null) {
+            realm.write {
+             val diaries = this.query<Diary>("owner_id == $0", user.id).find()
+                try{
+                    delete(diaries)
+                    RequestState.Success(data = true)
+                }
+                catch (e: Exception){
+                    RequestState.Error(e)
+                }
+            }
+        }
+        else{
+            RequestState.Error(UserNotAuthenticatedException())
+        }
+
+    }
+
+    override suspend fun getfilterDiaries(zonedDateTime: ZonedDateTime): Flow<Diaries> {
+        return if (user != null) {
+            try {
+               realm.query<Diary>("owner_id == $0 AND date < $1 AND date > $2",
+                   user.id,
+                   RealmInstant.from(zonedDateTime.plusDays(1).toInstant().epochSecond, 0),
+                   RealmInstant.from(zonedDateTime.minusDays(1).toInstant().epochSecond, 0)).asFlow().map {
+                       result ->
+                   RequestState.Success(
+                       data = result.list.groupBy {
+                           it.date.toInstant()
+                               .atZone(ZoneId.systemDefault())
+                               .toLocalDate()
+                       }
+                   )
+               }
+            } catch (e: Exception) {
+                flow { emit(RequestState.Error(e)) }
+            }
+        } else {
+            flow { emit(RequestState.Error(UserNotAuthenticatedException())) }
         }
     }
 

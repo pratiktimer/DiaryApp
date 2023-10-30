@@ -1,4 +1,4 @@
-package com.prateektimer.diaryapp.util
+package com.prateektimer.diaryapp.model
 
 sealed class RequestState<out T> {
     object Idle : RequestState<Nothing>()

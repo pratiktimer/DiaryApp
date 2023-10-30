@@ -1,5 +1,6 @@
 package com.prateektimer.diaryapp.presentation.screens.write
 
+import android.net.Uri
 import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
@@ -41,7 +42,11 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.prateektimer.diaryapp.model.Diary
+import com.prateektimer.diaryapp.model.GalleryImage
+import com.prateektimer.diaryapp.model.GalleryState
 import com.prateektimer.diaryapp.model.Mood
+import com.prateektimer.diaryapp.presentation.components.GalleryUploader
+import io.realm.kotlin.ext.toRealmList
 import kotlinx.coroutines.launch
 
 
@@ -52,10 +57,13 @@ fun WriteContent(
     pagerState: PagerState,
     paddingValues: PaddingValues,
     onTitleChanged: (String) -> Unit,
-    title : String,
+    title: String,
     description: String,
     onDescriptionChanged: (String) -> Unit,
-    onSaveClicked:(Diary)-> Unit
+    onSaveClicked: (Diary) -> Unit,
+    galleryState: GalleryState,
+    onImageSelect:(Uri) -> Unit,
+    onImageClick:(GalleryImage) -> Unit
 ){
     val scrollState = rememberScrollState()
     val context = LocalContext.current
@@ -155,6 +163,13 @@ fun WriteContent(
 
         Column(verticalArrangement = Arrangement.Bottom){
             Spacer(modifier = Modifier.height(12.dp))
+          GalleryUploader(
+              galleryState = galleryState,
+              onAddClicked = {},
+              onImageSelect = onImageSelect,
+              onImageClicked = onImageClick
+          )
+            Spacer(modifier = Modifier.height(12.dp))
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -165,6 +180,7 @@ fun WriteContent(
                                   Diary().apply{
                                       this.title = uiState.title
                                       this.description = uiState.description
+                                      this.images = galleryState.images.map { it.remoteImagePath }.toRealmList()
                                   }
                               )
                           }

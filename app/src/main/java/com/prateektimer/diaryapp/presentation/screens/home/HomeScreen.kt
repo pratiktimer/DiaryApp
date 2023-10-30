@@ -10,15 +10,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
@@ -37,7 +38,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.prateektimer.diaryapp.R
 import com.prateektimer.diaryapp.data.repository.Diaries
-import com.prateektimer.diaryapp.util.RequestState
+import com.prateektimer.diaryapp.model.RequestState
+import java.time.ZonedDateTime
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -48,21 +50,30 @@ fun HomeScreen(
     drawerState: DrawerState,
     onMenuClicked:() -> Unit,
     onSignOutClicked: () -> Unit,
+    onDeleteAllClicked:()-> Unit,
     navigateToWrite:()-> Unit,
     navigateToWriteWithArgs:(String)-> Unit,
+    isDateSelected: Boolean,
+    onDateSelected:(ZonedDateTime) -> Unit,
+    onDateReset:()-> Unit
 ){
     var padding by remember { mutableStateOf(PaddingValues()) }
     val scrollBehaviour = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     NavigationDrawer(
         drawerState = drawerState ,
         onSignOutClicked = onSignOutClicked,
+        onDeleteAllClicked = onDeleteAllClicked
     ) {
         Scaffold(
             modifier = Modifier.nestedScroll(scrollBehaviour.nestedScrollConnection),
             topBar = {
                 HomeTopBar(
                     scrollBehaviour = scrollBehaviour,
-                    onMenuClicked = onMenuClicked)
+                    onMenuClicked = onMenuClicked,
+                    isDateSelected = isDateSelected,
+                    onDateReset =onDateReset,
+                    onDateSelected =  onDateSelected
+                    )
             },
             floatingActionButton = {
                 FloatingActionButton(onClick = navigateToWrite) {
@@ -111,6 +122,7 @@ fun HomeScreen(
 fun NavigationDrawer(
     drawerState: DrawerState,
     onSignOutClicked:()-> Unit,
+    onDeleteAllClicked:()-> Unit,
     content: @Composable ()-> Unit
 ){
     ModalNavigationDrawer(
@@ -138,6 +150,21 @@ fun NavigationDrawer(
                             } },
                         selected = false ,
                         onClick = onSignOutClicked)
+
+                        NavigationDrawerItem(
+                            label = {
+                                Row(modifier = Modifier.padding(horizontal = 12.dp)
+                                ){
+                                    Icon(
+                                        imageVector = Icons.Default.Delete,
+                                        contentDescription = "Delete All Icon",
+                                        tint = MaterialTheme.colorScheme.onSurface)
+                                    Spacer(modifier = Modifier.width(12.dp))
+                                    Text("Delete All Diaries")
+
+                                } },
+                            selected = false ,
+                            onClick = onDeleteAllClicked)
                 } )
         },
         content = content
