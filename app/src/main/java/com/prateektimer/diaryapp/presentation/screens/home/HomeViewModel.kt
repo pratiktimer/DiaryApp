@@ -6,7 +6,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import com.prateektimer.diaryapp.connectivity.ConnectivityObserver
@@ -15,7 +14,7 @@ import com.prateektimer.diaryapp.data.database.entity.ImageToDeleteDao
 import com.prateektimer.diaryapp.data.database.entity.ImagesToDelete
 import com.prateektimer.diaryapp.data.repository.Diaries
 import com.prateektimer.diaryapp.data.repository.MongoDB
-import com.prateektimer.diaryapp.model.RequestState
+import com.prateektimer.util.model.RequestState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

@@ -41,11 +41,11 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.prateektimer.diaryapp.model.Diary
+import com.prateektimer.util.model.Diary
 import com.prateektimer.diaryapp.model.GalleryImage
 import com.prateektimer.diaryapp.model.GalleryState
-import com.prateektimer.diaryapp.model.Mood
-import com.prateektimer.diaryapp.presentation.components.GalleryUploader
+import com.prateektimer.util.model.Mood
+import com.prateektimer.ui.components.GalleryUploader
 import io.realm.kotlin.ext.toRealmList
 import kotlinx.coroutines.launch
 

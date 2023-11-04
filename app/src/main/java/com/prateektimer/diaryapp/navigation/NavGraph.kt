@@ -25,10 +25,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.prateektimer.diaryapp.model.GalleryImage
-import com.prateektimer.diaryapp.model.Mood
-import com.prateektimer.diaryapp.model.rememberGalleryState
-import com.prateektimer.diaryapp.presentation.components.DisplayAlertDialog
+import com.prateektimer.util.model.Mood
+import com.prateektimer.ui.components.DisplayAlertDialog
 import com.prateektimer.diaryapp.presentation.screens.auth.AuthenticationScreen
 import com.prateektimer.diaryapp.presentation.screens.auth.AuthenticationViewModel
 import com.prateektimer.diaryapp.presentation.screens.home.HomeScreen

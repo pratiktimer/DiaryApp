@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "581166205945",
+    "project_id": "diaryapp-401815",
+    "storage_bucket": "diaryapp-401815.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:581166205945:android:91bd4bc38300e79ff98b28",
+        "android_client_info": {
+          "package_name": "com.prateektimer.diaryapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "581166205945-strv9b38tkfuj0bli28in3epq5n7ssgo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEOqP6jO2cfka1uFdAAifGGYS0nkG7H6Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "581166205945-mtmmis7kqqldg9ho629m3kaoddh5b5mc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

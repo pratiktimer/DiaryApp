@@ -30,8 +30,8 @@ import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import com.maxkeppeler.sheets.clock.ClockDialog
 import com.maxkeppeler.sheets.clock.models.ClockSelection
-import com.prateektimer.diaryapp.model.Diary
-import com.prateektimer.diaryapp.presentation.components.DisplayAlertDialog
+import com.prateektimer.util.model.Diary
+import com.prateektimer.ui.components.DisplayAlertDialog
 import com.prateektimer.diaryapp.util.toInstant
 import java.text.SimpleDateFormat
 import java.time.LocalDate

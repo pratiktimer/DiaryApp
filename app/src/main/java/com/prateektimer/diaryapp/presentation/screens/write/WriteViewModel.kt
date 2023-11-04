@@ -16,12 +16,12 @@ import com.prateektimer.diaryapp.data.database.entity.ImageToUpload
 import com.prateektimer.diaryapp.data.database.entity.ImageToUploadDao
 import com.prateektimer.diaryapp.data.database.entity.ImagesToDelete
 import com.prateektimer.diaryapp.data.repository.MongoDB
-import com.prateektimer.diaryapp.model.Diary
+import com.prateektimer.util.model.Diary
 import com.prateektimer.diaryapp.model.GalleryImage
 import com.prateektimer.diaryapp.model.GalleryState
-import com.prateektimer.diaryapp.model.Mood
+import com.prateektimer.util.model.Mood
 import com.prateektimer.diaryapp.util.Constants.WRITE_SCREEN_ARGUMENT_KEY
-import com.prateektimer.diaryapp.model.RequestState
+import com.prateektimer.util.model.RequestState
 import com.prateektimer.diaryapp.util.fetchImagesFromFirebase
 import com.prateektimer.diaryapp.util.toRealmInstant
 import dagger.hilt.android.lifecycle.HiltViewModel

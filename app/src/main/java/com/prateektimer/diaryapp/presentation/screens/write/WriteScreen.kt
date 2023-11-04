@@ -1,6 +1,5 @@
 package com.prateektimer.diaryapp.presentation.screens.write
 
-import android.annotation.SuppressLint
 import android.net.Uri
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -22,10 +21,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.prateektimer.diaryapp.model.Diary
+import com.prateektimer.util.model.Diary
 import com.prateektimer.diaryapp.model.GalleryImage
 import com.prateektimer.diaryapp.model.GalleryState
-import com.prateektimer.diaryapp.model.Mood
+import com.prateektimer.util.model.Mood
 import java.time.ZonedDateTime
 
 @OptIn(ExperimentalFoundationApi::class)

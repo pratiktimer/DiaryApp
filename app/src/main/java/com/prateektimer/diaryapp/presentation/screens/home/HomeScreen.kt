@@ -38,7 +38,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.prateektimer.diaryapp.R
 import com.prateektimer.diaryapp.data.repository.Diaries
-import com.prateektimer.diaryapp.model.RequestState
+import com.prateektimer.util.model.RequestState
 import java.time.ZonedDateTime
 
 
