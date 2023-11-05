@@ -2,9 +2,9 @@ package com.prateektimer.diaryapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.prateektimer.diaryapp.connectivity.NetworkConnectivityObserver
-import com.prateektimer.diaryapp.data.database.entity.ImagesDatabase
-import com.prateektimer.diaryapp.util.Constants.IMAGES_DATABASE
+import com.prateektimer.util.connectivity.NetworkConnectivityObserver
+import com.prateektimer.mongo.database.entity.ImagesDatabase
+import com.prateektimer.util.Constants.IMAGES_DATABASE
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,7 +20,7 @@ object DatabaseModule {
     @Singleton
     fun provideDatabase(
         @ApplicationContext context: Context
-    ):ImagesDatabase{
+    ): ImagesDatabase {
         return Room.databaseBuilder(
             context = context,
             klass = ImagesDatabase::class.java,

@@ -1,0 +1,3533 @@
+From 5f00e113f67843e1cd56d2823d979aedea8d8ef4 Mon Sep 17 00:00:00 2001
+From: praban <pbanawalkar2@gmail.com>
+Date: Sat, 4 Nov 2023 16:07:37 +0530
+Subject: [PATCH] commited current work
+
+---
+ .idea/gradle.xml                              |   3 +
+ app/build.gradle                              |   3 +
+ app/google-services.json                      |  39 ++++
+ .../data/database/entity/ImageToDeleteDao.kt  |  19 --
+ .../data/database/entity/ImageToUpload.kt     |  14 --
+ .../data/database/entity/ImageToUploadDao.kt  |  18 --
+ .../data/database/entity/ImagesDatabase.kt    |  14 --
+ .../data/database/entity/ImagesToDelete.kt    |  12 --
+ .../diaryapp/data/repository/MongoDB.kt       | 194 ------------------
+ .../data/repository/MongoRepository.kt        |  22 --
+ .../com/prateektimer/diaryapp/model/Diary.kt  |   3 +-
+ .../diaryapp/model/RequestState.kt            |   2 +
+ .../diaryapp/navigation/NavGraph.kt           |   6 +-
+ .../screens/auth/AuthenticationContent.kt     |   2 +-
+ .../presentation/screens/home/HomeContent.kt  |   7 +-
+ .../presentation/screens/home/HomeScreen.kt   |   2 +-
+ .../screens/home/HomeViewModel.kt             |   3 +-
+ .../screens/write/WriteContent.kt             |   6 +-
+ .../presentation/screens/write/WriteScreen.kt |   5 +-
+ .../presentation/screens/write/WriteTopBar.kt |   4 +-
+ .../screens/write/WriteViewModel.kt           |   6 +-
+ app/src/main/res/drawable/angry.xml           |  12 ++
+ app/src/main/res/drawable/awful.xml           |  27 +++
+ app/src/main/res/drawable/bored.xml           |  12 ++
+ app/src/main/res/drawable/calm.xml            |  12 ++
+ app/src/main/res/drawable/depressed.xml       |  12 ++
+ app/src/main/res/drawable/disappointed.xml    |  18 ++
+ app/src/main/res/drawable/happy.xml           |  21 ++
+ app/src/main/res/drawable/humorous.xml        |  21 ++
+ app/src/main/res/drawable/lonely.xml          |  36 ++++
+ app/src/main/res/drawable/mysterious.xml      |  18 ++
+ app/src/main/res/drawable/neutral.xml         |  18 ++
+ app/src/main/res/drawable/romantic.xml        |  18 ++
+ app/src/main/res/drawable/shameful.xml        |  15 ++
+ app/src/main/res/drawable/surprised.xml       |  24 +++
+ app/src/main/res/drawable/suspicious.xml      |  18 ++
+ app/src/main/res/drawable/tense.xml           |  21 ++
+ .../main/META-INF/buildSrc.kotlin_module      | Bin 0 -> 24 bytes
+ .../classes/kotlin/main/ProjectConfig.class   | Bin 0 -> 935 bytes
+ buildSrc/build/kotlin/buildSrcjar-classes.txt |   1 +
+ .../caches-jvm/inputs/source-to-output.tab    | Bin 0 -> 4096 bytes
+ .../inputs/source-to-output.tab.keystream     | Bin 0 -> 4096 bytes
+ .../inputs/source-to-output.tab.keystream.len | Bin 0 -> 8 bytes
+ .../inputs/source-to-output.tab.len           | Bin 0 -> 8 bytes
+ .../inputs/source-to-output.tab.values.at     | Bin 0 -> 585 bytes
+ .../caches-jvm/inputs/source-to-output.tab_i  | Bin 0 -> 32768 bytes
+ .../inputs/source-to-output.tab_i.len         | Bin 0 -> 8 bytes
+ .../jvm/kotlin/class-attributes.tab           | Bin 0 -> 4096 bytes
+ .../jvm/kotlin/class-attributes.tab.keystream | Bin 0 -> 4096 bytes
+ .../kotlin/class-attributes.tab.keystream.len | Bin 0 -> 8 bytes
+ .../jvm/kotlin/class-attributes.tab.len       | Bin 0 -> 8 bytes
+ .../jvm/kotlin/class-attributes.tab.values.at | Bin 0 -> 61 bytes
+ .../jvm/kotlin/class-attributes.tab_i         | Bin 0 -> 32768 bytes
+ .../jvm/kotlin/class-attributes.tab_i.len     | Bin 0 -> 8 bytes
+ .../jvm/kotlin/class-fq-name-to-source.tab    | Bin 0 -> 4096 bytes
+ .../class-fq-name-to-source.tab.keystream     | Bin 0 -> 4096 bytes
+ .../class-fq-name-to-source.tab.keystream.len | Bin 0 -> 8 bytes
+ .../kotlin/class-fq-name-to-source.tab.len    | Bin 0 -> 8 bytes
+ .../class-fq-name-to-source.tab.values.at     | Bin 0 -> 237 bytes
+ .../jvm/kotlin/class-fq-name-to-source.tab_i  | Bin 0 -> 32768 bytes
+ .../kotlin/class-fq-name-to-source.tab_i.len  | Bin 0 -> 8 bytes
+ .../caches-jvm/jvm/kotlin/constants.tab       | Bin 0 -> 4096 bytes
+ .../jvm/kotlin/constants.tab.keystream        | Bin 0 -> 4096 bytes
+ .../jvm/kotlin/constants.tab.keystream.len    | Bin 0 -> 8 bytes
+ .../caches-jvm/jvm/kotlin/constants.tab.len   | Bin 0 -> 8 bytes
+ .../jvm/kotlin/constants.tab.values.at        | Bin 0 -> 585 bytes
+ .../caches-jvm/jvm/kotlin/constants.tab_i     | Bin 0 -> 32768 bytes
+ .../caches-jvm/jvm/kotlin/constants.tab_i.len | Bin 0 -> 8 bytes
+ .../jvm/kotlin/internal-name-to-source.tab    | Bin 0 -> 4096 bytes
+ .../internal-name-to-source.tab.keystream     | Bin 0 -> 4096 bytes
+ .../internal-name-to-source.tab.keystream.len | Bin 0 -> 8 bytes
+ .../kotlin/internal-name-to-source.tab.len    | Bin 0 -> 8 bytes
+ .../internal-name-to-source.tab.values.at     | Bin 0 -> 237 bytes
+ .../jvm/kotlin/internal-name-to-source.tab_i  | Bin 0 -> 32768 bytes
+ .../kotlin/internal-name-to-source.tab_i.len  | Bin 0 -> 8 bytes
+ .../cacheable/caches-jvm/jvm/kotlin/proto.tab | Bin 0 -> 4096 bytes
+ .../caches-jvm/jvm/kotlin/proto.tab.keystream | Bin 0 -> 4096 bytes
+ .../jvm/kotlin/proto.tab.keystream.len        | Bin 0 -> 8 bytes
+ .../caches-jvm/jvm/kotlin/proto.tab.len       | Bin 0 -> 8 bytes
+ .../caches-jvm/jvm/kotlin/proto.tab.values.at | Bin 0 -> 1033 bytes
+ .../caches-jvm/jvm/kotlin/proto.tab_i         | Bin 0 -> 32768 bytes
+ .../caches-jvm/jvm/kotlin/proto.tab_i.len     | Bin 0 -> 8 bytes
+ .../jvm/kotlin/source-to-classes.tab          | Bin 0 -> 4096 bytes
+ .../kotlin/source-to-classes.tab.keystream    | Bin 0 -> 4096 bytes
+ .../source-to-classes.tab.keystream.len       | Bin 0 -> 8 bytes
+ .../jvm/kotlin/source-to-classes.tab.len      | Bin 0 -> 8 bytes
+ .../kotlin/source-to-classes.tab.values.at    | Bin 0 -> 173 bytes
+ .../jvm/kotlin/source-to-classes.tab_i        | Bin 0 -> 32768 bytes
+ .../jvm/kotlin/source-to-classes.tab_i.len    | Bin 0 -> 8 bytes
+ .../cacheable/caches-jvm/lookups/counters.tab |   2 +
+ .../caches-jvm/lookups/file-to-id.tab         | Bin 0 -> 4096 bytes
+ .../lookups/file-to-id.tab.keystream          | Bin 0 -> 4096 bytes
+ .../lookups/file-to-id.tab.keystream.len      | Bin 0 -> 8 bytes
+ .../caches-jvm/lookups/file-to-id.tab.len     | Bin 0 -> 8 bytes
+ .../lookups/file-to-id.tab.values.at          | Bin 0 -> 73 bytes
+ .../caches-jvm/lookups/file-to-id.tab_i       | Bin 0 -> 32768 bytes
+ .../caches-jvm/lookups/file-to-id.tab_i.len   | Bin 0 -> 8 bytes
+ .../caches-jvm/lookups/id-to-file.tab         | Bin 0 -> 4096 bytes
+ .../lookups/id-to-file.tab.keystream          | Bin 0 -> 4096 bytes
+ .../lookups/id-to-file.tab.keystream.len      | Bin 0 -> 8 bytes
+ .../caches-jvm/lookups/id-to-file.tab.len     | Bin 0 -> 8 bytes
+ .../lookups/id-to-file.tab.values.at          | Bin 0 -> 237 bytes
+ .../caches-jvm/lookups/id-to-file.tab_i       | Bin 0 -> 32768 bytes
+ .../caches-jvm/lookups/id-to-file.tab_i.len   | Bin 0 -> 8 bytes
+ .../cacheable/caches-jvm/lookups/lookups.tab  | Bin 0 -> 4096 bytes
+ .../caches-jvm/lookups/lookups.tab.keystream  | Bin 0 -> 4096 bytes
+ .../lookups/lookups.tab.keystream.len         | Bin 0 -> 8 bytes
+ .../caches-jvm/lookups/lookups.tab.len        | Bin 0 -> 8 bytes
+ .../caches-jvm/lookups/lookups.tab.values.at  | Bin 0 -> 121 bytes
+ .../caches-jvm/lookups/lookups.tab_i          | Bin 0 -> 32768 bytes
+ .../caches-jvm/lookups/lookups.tab_i.len      | Bin 0 -> 8 bytes
+ .../compileKotlin/cacheable/last-build.bin    | Bin 0 -> 18 bytes
+ .../local-state/build-history.bin             | Bin 0 -> 339 bytes
+ buildSrc/build/libs/buildSrc.jar              | Bin 0 -> 1132 bytes
+ buildSrc/build/tmp/jar/MANIFEST.MF            |   2 +
+ buildSrc/src/main/java/ProjectConfig.kt       |   4 +-
+ core/ui/.gitignore                            |   1 +
+ core/ui/build.gradle                          |  45 ++++
+ core/ui/src/main/AndroidManifest.xml          |   4 +
+ .../java/com/prateektimer/ui}/GalleryState.kt |   2 +-
+ .../ui}/components/AlertDialog.kt             |   2 +-
+ .../ui}/components/DiaryHolder.kt             |   4 +-
+ .../prateektimer/ui}/components/Gallery.kt    |   8 +-
+ .../ui}/components/GoogleButton.kt            |   4 +-
+ .../java/com/prateektimer}/ui/theme/Color.kt  |   2 +-
+ .../com/prateektimer}/ui/theme/Elevation.kt   |   2 +-
+ .../java/com/prateektimer}/ui/theme/Theme.kt  |   6 +-
+ .../java/com/prateektimer}/ui/theme/Type.kt   |   2 +-
+ core/ui/src/main/res/drawable/google_logo.xml |  18 ++
+ core/util/.gitignore                          |   1 +
+ core/util/build.gradle                        |  53 +++++
+ core/util/consumer-rules.pro                  |   0
+ core/util/proguard-rules.pro                  |  21 ++
+ .../util/ExampleInstrumentedTest.kt           |  24 +++
+ core/util/src/main/AndroidManifest.xml        |   4 +
+ .../java/com/prateektimer}/util/Constants.kt  |   2 +-
+ .../com/prateektimer}/util/UtilFunctions.kt   |   3 +-
+ .../java/com/prateektimer/util/model/Diary.kt |  19 ++
+ .../java/com/prateektimer/util/model/Mood.kt  |  93 +++++++++
+ .../prateektimer/util/model/RequestState.kt   |   8 +
+ core/util/src/main/res/drawable/angry.xml     |  12 ++
+ core/util/src/main/res/drawable/awful.xml     |  27 +++
+ core/util/src/main/res/drawable/bored.xml     |  12 ++
+ core/util/src/main/res/drawable/calm.xml      |  12 ++
+ core/util/src/main/res/drawable/depressed.xml |  12 ++
+ .../src/main/res/drawable/disappointed.xml    |  18 ++
+ core/util/src/main/res/drawable/happy.xml     |  21 ++
+ core/util/src/main/res/drawable/humorous.xml  |  21 ++
+ .../res/drawable/ic_launcher_background.xml   | 170 +++++++++++++++
+ .../res/drawable/ic_launcher_foreground.xml   |  30 +++
+ core/util/src/main/res/drawable/logo.xml      |  53 +++++
+ core/util/src/main/res/drawable/lonely.xml    |  36 ++++
+ .../util/src/main/res/drawable/mysterious.xml |  18 ++
+ core/util/src/main/res/drawable/neutral.xml   |  18 ++
+ core/util/src/main/res/drawable/romantic.xml  |  18 ++
+ core/util/src/main/res/drawable/shameful.xml  |  15 ++
+ core/util/src/main/res/drawable/surprised.xml |  24 +++
+ .../util/src/main/res/drawable/suspicious.xml |  18 ++
+ core/util/src/main/res/drawable/tense.xml     |  21 ++
+ .../com/prateektimer/util/ExampleUnitTest.kt  |  17 ++
+ gradle/libs.versions.toml                     |   9 +-
+ settings.gradle                               |   2 +
+ 162 files changed, 1263 insertions(+), 345 deletions(-)
+ create mode 100644 app/google-services.json
+ delete mode 100644 app/src/main/java/com/prateektimer/diaryapp/data/database/entity/ImageToDeleteDao.kt
+ delete mode 100644 app/src/main/java/com/prateektimer/diaryapp/data/database/entity/ImageToUpload.kt
+ delete mode 100644 app/src/main/java/com/prateektimer/diaryapp/data/database/entity/ImageToUploadDao.kt
+ delete mode 100644 app/src/main/java/com/prateektimer/diaryapp/data/database/entity/ImagesDatabase.kt
+ delete mode 100644 app/src/main/java/com/prateektimer/diaryapp/data/database/entity/ImagesToDelete.kt
+ delete mode 100644 app/src/main/java/com/prateektimer/diaryapp/data/repository/MongoDB.kt
+ delete mode 100644 app/src/main/java/com/prateektimer/diaryapp/data/repository/MongoRepository.kt
+ create mode 100644 app/src/main/res/drawable/angry.xml
+ create mode 100644 app/src/main/res/drawable/awful.xml
+ create mode 100644 app/src/main/res/drawable/bored.xml
+ create mode 100644 app/src/main/res/drawable/calm.xml
+ create mode 100644 app/src/main/res/drawable/depressed.xml
+ create mode 100644 app/src/main/res/drawable/disappointed.xml
+ create mode 100644 app/src/main/res/drawable/happy.xml
+ create mode 100644 app/src/main/res/drawable/humorous.xml
+ create mode 100644 app/src/main/res/drawable/lonely.xml
+ create mode 100644 app/src/main/res/drawable/mysterious.xml
+ create mode 100644 app/src/main/res/drawable/neutral.xml
+ create mode 100644 app/src/main/res/drawable/romantic.xml
+ create mode 100644 app/src/main/res/drawable/shameful.xml
+ create mode 100644 app/src/main/res/drawable/surprised.xml
+ create mode 100644 app/src/main/res/drawable/suspicious.xml
+ create mode 100644 app/src/main/res/drawable/tense.xml
+ create mode 100644 buildSrc/build/classes/kotlin/main/META-INF/buildSrc.kotlin_module
+ create mode 100644 buildSrc/build/classes/kotlin/main/ProjectConfig.class
+ create mode 100644 buildSrc/build/kotlin/buildSrcjar-classes.txt
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.keystream
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.keystream.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.values.at
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab_i
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab_i.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.keystream
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.keystream.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.values.at
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab_i
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab_i.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.values.at
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab.keystream
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab.keystream.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab.values.at
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab_i
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab_i.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.values.at
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.keystream
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.keystream.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.values.at
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab_i
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab_i.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.values.at
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab_i
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab_i.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/counters.tab
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.keystream
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.keystream.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.values.at
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab_i
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab_i.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.keystream
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.keystream.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.values.at
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab_i
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab_i.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab.keystream
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab.keystream.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab.values.at
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab_i
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab_i.len
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/cacheable/last-build.bin
+ create mode 100644 buildSrc/build/kotlin/compileKotlin/local-state/build-history.bin
+ create mode 100644 buildSrc/build/libs/buildSrc.jar
+ create mode 100644 buildSrc/build/tmp/jar/MANIFEST.MF
+ create mode 100644 core/ui/.gitignore
+ create mode 100644 core/ui/build.gradle
+ create mode 100644 core/ui/src/main/AndroidManifest.xml
+ rename {app/src/main/java/com/prateektimer/diaryapp/model => core/ui/src/main/java/com/prateektimer/ui}/GalleryState.kt (95%)
+ rename {app/src/main/java/com/prateektimer/diaryapp/presentation => core/ui/src/main/java/com/prateektimer/ui}/components/AlertDialog.kt (95%)
+ rename {app/src/main/java/com/prateektimer/diaryapp/presentation => core/ui/src/main/java/com/prateektimer/ui}/components/DiaryHolder.kt (98%)
+ rename {app/src/main/java/com/prateektimer/diaryapp/presentation => core/ui/src/main/java/com/prateektimer/ui}/components/Gallery.kt (96%)
+ rename {app/src/main/java/com/prateektimer/diaryapp/presentation => core/ui/src/main/java/com/prateektimer/ui}/components/GoogleButton.kt (97%)
+ rename {app/src/main/java/com/prateektimer/diaryapp => core/ui/src/main/java/com/prateektimer}/ui/theme/Color.kt (91%)
+ rename {app/src/main/java/com/prateektimer/diaryapp => core/ui/src/main/java/com/prateektimer}/ui/theme/Elevation.kt (82%)
+ rename {app/src/main/java/com/prateektimer/diaryapp => core/ui/src/main/java/com/prateektimer}/ui/theme/Theme.kt (92%)
+ rename {app/src/main/java/com/prateektimer/diaryapp => core/ui/src/main/java/com/prateektimer}/ui/theme/Type.kt (95%)
+ create mode 100644 core/ui/src/main/res/drawable/google_logo.xml
+ create mode 100644 core/util/.gitignore
+ create mode 100644 core/util/build.gradle
+ create mode 100644 core/util/consumer-rules.pro
+ create mode 100644 core/util/proguard-rules.pro
+ create mode 100644 core/util/src/androidTest/java/com/prateektimer/util/ExampleInstrumentedTest.kt
+ create mode 100644 core/util/src/main/AndroidManifest.xml
+ rename {app/src/main/java/com/prateektimer/diaryapp => core/util/src/main/java/com/prateektimer}/util/Constants.kt (90%)
+ rename {app/src/main/java/com/prateektimer/diaryapp => core/util/src/main/java/com/prateektimer}/util/UtilFunctions.kt (96%)
+ create mode 100644 core/util/src/main/java/com/prateektimer/util/model/Diary.kt
+ create mode 100644 core/util/src/main/java/com/prateektimer/util/model/Mood.kt
+ create mode 100644 core/util/src/main/java/com/prateektimer/util/model/RequestState.kt
+ create mode 100644 core/util/src/main/res/drawable/angry.xml
+ create mode 100644 core/util/src/main/res/drawable/awful.xml
+ create mode 100644 core/util/src/main/res/drawable/bored.xml
+ create mode 100644 core/util/src/main/res/drawable/calm.xml
+ create mode 100644 core/util/src/main/res/drawable/depressed.xml
+ create mode 100644 core/util/src/main/res/drawable/disappointed.xml
+ create mode 100644 core/util/src/main/res/drawable/happy.xml
+ create mode 100644 core/util/src/main/res/drawable/humorous.xml
+ create mode 100644 core/util/src/main/res/drawable/ic_launcher_background.xml
+ create mode 100644 core/util/src/main/res/drawable/ic_launcher_foreground.xml
+ create mode 100644 core/util/src/main/res/drawable/logo.xml
+ create mode 100644 core/util/src/main/res/drawable/lonely.xml
+ create mode 100644 core/util/src/main/res/drawable/mysterious.xml
+ create mode 100644 core/util/src/main/res/drawable/neutral.xml
+ create mode 100644 core/util/src/main/res/drawable/romantic.xml
+ create mode 100644 core/util/src/main/res/drawable/shameful.xml
+ create mode 100644 core/util/src/main/res/drawable/surprised.xml
+ create mode 100644 core/util/src/main/res/drawable/suspicious.xml
+ create mode 100644 core/util/src/main/res/drawable/tense.xml
+ create mode 100644 core/util/src/test/java/com/prateektimer/util/ExampleUnitTest.kt
+
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+index d1e2018..96b5b85 100644
+--- a/.idea/gradle.xml
++++ b/.idea/gradle.xml
+@@ -13,6 +13,9 @@
+             <option value="$PROJECT_DIR$" />
+             <option value="$PROJECT_DIR$/app" />
+             <option value="$PROJECT_DIR$/buildSrc" />
++            <option value="$PROJECT_DIR$/core" />
++            <option value="$PROJECT_DIR$/core/ui" />
++            <option value="$PROJECT_DIR$/core/util" />
+           </set>
+         </option>
+       </GradleProjectSettings>
+diff --git a/app/build.gradle b/app/build.gradle
+index 8689082..50a0c21 100644
+--- a/app/build.gradle
++++ b/app/build.gradle
+@@ -118,4 +118,7 @@ dependencies {
+ 
+     // Desugar JDK
+     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
++
++    implementation(project(":core:ui"))
++    implementation(project(":core:util"))
+ }
+\ No newline at end of file
+diff --git a/app/google-services.json b/app/google-services.json
+new file mode 100644
+index 0000000..e1a99af
+--- /dev/null
++++ b/app/google-services.json
+@@ -0,0 +1,39 @@
++{
++  "project_info": {
++    "project_number": "581166205945",
++    "project_id": "diaryapp-401815",
++    "storage_bucket": "diaryapp-401815.appspot.com"
++  },
++  "client": [
++    {
++      "client_info": {
++        "mobilesdk_app_id": "1:581166205945:android:91bd4bc38300e79ff98b28",
++        "android_client_info": {
++          "package_name": "com.prateektimer.diaryapp"
++        }
++      },
++      "oauth_client": [
++        {
++          "client_id": "581166205945-strv9b38tkfuj0bli28in3epq5n7ssgo.apps.googleusercontent.com",
++          "client_type": 3
++        }
++      ],
++      "api_key": [
++        {
++          "current_key": "AIzaSyDEOqP6jO2cfka1uFdAAifGGYS0nkG7H6Q"
++        }
++      ],
++      "services": {
++        "appinvite_service": {
++          "other_platform_oauth_client": [
++            {
++              "client_id": "581166205945-mtmmis7kqqldg9ho629m3kaoddh5b5mc.apps.googleusercontent.com",
++              "client_type": 3
++            }
++          ]
++        }
++      }
++    }
++  ],
++  "configuration_version": "1"
++}
+\ No newline at end of file
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/data/database/entity/ImageToDeleteDao.kt b/app/src/main/java/com/prateektimer/diaryapp/data/database/entity/ImageToDeleteDao.kt
+deleted file mode 100644
+index ee848af..0000000
+--- a/app/src/main/java/com/prateektimer/diaryapp/data/database/entity/ImageToDeleteDao.kt
++++ /dev/null
+@@ -1,19 +0,0 @@
+-package com.prateektimer.diaryapp.data.database.entity
+-
+-import androidx.room.Dao
+-import androidx.room.Insert
+-import androidx.room.OnConflictStrategy
+-import androidx.room.Query
+-
+-@Dao
+-interface ImageToDeleteDao {
+-
+-    @Query("SELECT * FROM image_to_delete_table ORDER BY id ASC")
+-    suspend fun getAllImages():List<ImagesToDelete>
+-
+-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+-    suspend fun addImageToDelete(imageToUpload: ImagesToDelete)
+-    @Query("DELETE FROM image_to_upload_table WHERE id=:imageId")
+-    suspend fun cleanupImage(imageId:Int)
+-
+-}
+\ No newline at end of file
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/data/database/entity/ImageToUpload.kt b/app/src/main/java/com/prateektimer/diaryapp/data/database/entity/ImageToUpload.kt
+deleted file mode 100644
+index f79fce7..0000000
+--- a/app/src/main/java/com/prateektimer/diaryapp/data/database/entity/ImageToUpload.kt
++++ /dev/null
+@@ -1,14 +0,0 @@
+-package com.prateektimer.diaryapp.data.database.entity
+-
+-import androidx.room.Entity
+-import androidx.room.PrimaryKey
+-import com.prateektimer.diaryapp.util.Constants.IMAGES_TO_UPLOAD_TABLE
+-
+-@Entity(tableName = IMAGES_TO_UPLOAD_TABLE)
+-data class ImageToUpload(
+-    @PrimaryKey(autoGenerate = true)
+-    val id:Int = 0,
+-    val remoteImagePath:String,
+-    val imageUri: String,
+-    val sessionUri: String
+-)
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/data/database/entity/ImageToUploadDao.kt b/app/src/main/java/com/prateektimer/diaryapp/data/database/entity/ImageToUploadDao.kt
+deleted file mode 100644
+index 62badfa..0000000
+--- a/app/src/main/java/com/prateektimer/diaryapp/data/database/entity/ImageToUploadDao.kt
++++ /dev/null
+@@ -1,18 +0,0 @@
+-package com.prateektimer.diaryapp.data.database.entity
+-
+-import androidx.room.Dao
+-import androidx.room.Insert
+-import androidx.room.OnConflictStrategy
+-import androidx.room.Query
+-
+-@Dao
+-interface ImageToUploadDao {
+-
+-    @Query("SELECT * FROM image_to_upload_table ORDER BY id ASC")
+-    suspend fun getAllImages():List<ImageToUpload>
+-
+-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+-    suspend fun addImagesToUpload(imageToUpload: ImageToUpload)
+-    @Query("DELETE FROM image_to_upload_table WHERE id=:imageId")
+-    suspend fun cleanupImage(imageId:Int)
+-}
+\ No newline at end of file
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/data/database/entity/ImagesDatabase.kt b/app/src/main/java/com/prateektimer/diaryapp/data/database/entity/ImagesDatabase.kt
+deleted file mode 100644
+index fb4d871..0000000
+--- a/app/src/main/java/com/prateektimer/diaryapp/data/database/entity/ImagesDatabase.kt
++++ /dev/null
+@@ -1,14 +0,0 @@
+-package com.prateektimer.diaryapp.data.database.entity
+-
+-import androidx.room.Database
+-import androidx.room.RoomDatabase
+-@Database(
+-    entities = [ImageToUpload::class, ImagesToDelete::class],
+-    version = 2,
+-    exportSchema = false
+-)
+-abstract class ImagesDatabase: RoomDatabase (){
+-
+-    abstract fun imagesToUploadDao(): ImageToUploadDao
+-    abstract fun imagesToDeleteDao(): ImageToDeleteDao
+-}
+\ No newline at end of file
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/data/database/entity/ImagesToDelete.kt b/app/src/main/java/com/prateektimer/diaryapp/data/database/entity/ImagesToDelete.kt
+deleted file mode 100644
+index c9f3cbe..0000000
+--- a/app/src/main/java/com/prateektimer/diaryapp/data/database/entity/ImagesToDelete.kt
++++ /dev/null
+@@ -1,12 +0,0 @@
+-package com.prateektimer.diaryapp.data.database.entity
+-
+-import androidx.room.Entity
+-import androidx.room.PrimaryKey
+-import com.prateektimer.diaryapp.util.Constants.IMAGE_TO_DELETE_TABLE
+-
+-@Entity(tableName = IMAGE_TO_DELETE_TABLE)
+-data class ImagesToDelete(
+-    @PrimaryKey(autoGenerate = true)
+-    val id : Int = 0,
+-    val remoteImagePath: String
+-    )
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/data/repository/MongoDB.kt b/app/src/main/java/com/prateektimer/diaryapp/data/repository/MongoDB.kt
+deleted file mode 100644
+index a0f132d..0000000
+--- a/app/src/main/java/com/prateektimer/diaryapp/data/repository/MongoDB.kt
++++ /dev/null
+@@ -1,194 +0,0 @@
+-package com.prateektimer.diaryapp.data.repository
+-
+-
+-import com.prateektimer.diaryapp.model.Diary
+-import com.prateektimer.diaryapp.util.Constants.APP_ID
+-import com.prateektimer.diaryapp.model.RequestState
+-import com.prateektimer.diaryapp.util.toInstant
+-import io.realm.kotlin.Realm
+-import io.realm.kotlin.ext.query
+-import io.realm.kotlin.mongodb.App
+-import io.realm.kotlin.mongodb.sync.SyncConfiguration
+-import io.realm.kotlin.query.Sort
+-import io.realm.kotlin.types.RealmInstant
+-import kotlinx.coroutines.flow.Flow
+-import kotlinx.coroutines.flow.flow
+-import kotlinx.coroutines.flow.map
+-import java.time.ZoneId
+-import org.mongodb.kbson.ObjectId
+-import java.time.ZonedDateTime
+-
+-object MongoDB : MongoRepository {
+-    private val app = App.create(APP_ID)
+-    private val user = app.currentUser
+-    private lateinit var realm: Realm
+-
+-    init {
+-        configureTheRealm()
+-    }
+-
+-    override fun configureTheRealm() {
+-        if (user != null) {
+-            val config = SyncConfiguration.Builder(user, setOf(Diary::class))
+-                .initialSubscriptions { sub ->
+-                    add(
+-                        query = sub.query<Diary>(query = "owner_id == $0", user.id),
+-                        name = "User's Diaries"
+-                    )
+-                }
+-               // .log(LogLevel.ALL)
+-                .build()
+-            realm = Realm.open(config)
+-        }
+-    }
+-
+-    override fun getAllDiaries(): Flow<Diaries> {
+-        return if (user != null) {
+-            try {
+-                realm.query<Diary>(query = "owner_id == $0", user.id)
+-                    .sort(property = "date", sortOrder = Sort.DESCENDING)
+-                    .asFlow()
+-                    .map { result ->
+-                         RequestState.Success(
+-                            data = result.list.groupBy {
+-                                it.date.toInstant()
+-                                    .atZone(ZoneId.systemDefault())
+-                                    .toLocalDate()
+-                            }
+-                        )
+-                    }
+-            } catch (e: Exception) {
+-                flow { emit(RequestState.Error(e)) }
+-            }
+-        } else {
+-            flow { emit(RequestState.Error(UserNotAuthenticatedException())) }
+-        }
+-    }
+-
+-    override fun getSelectedDiary(diaryId: ObjectId): Flow<RequestState<Diary>> {
+-       return if(user != null) {
+-          try{
+-               realm.query<Diary>(query = "_id == $0",diaryId).asFlow().map {
+-                   RequestState.Success(data = it.list.first())
+-               }
+-
+-          }
+-          catch (e: Exception){
+-              flow { emit(RequestState.Error(e)) }
+-          }
+-      }
+-        else{
+-            flow { emit(RequestState.Error(UserNotAuthenticatedException()))}
+-      }
+-    }
+-
+-    override suspend fun insertNewDiary(diary: Diary): RequestState<Diary> {
+-        return if(user != null) {
+-
+-           realm.write {
+-               try{
+-                   val addedDiary = copyToRealm(diary.apply { owner_id = user.id })
+-                   RequestState.Success(data = addedDiary)
+-               }
+-               catch (e: Exception){
+-                   RequestState.Error(e)
+-               }
+-           }
+-        }
+-        else{
+-            RequestState.Error(UserNotAuthenticatedException())
+-        }
+-    }
+-    override suspend fun updateDiary(diary: Diary): RequestState<Diary> {
+-        return if(user != null) {
+-
+-            realm.write {
+-               val queryDiary = query<Diary>(query =  "_id == $0", diary._id).first().find()
+-               if(queryDiary != null){
+-                   queryDiary.title = diary.title
+-                   queryDiary.description = diary.description
+-                   queryDiary.mood = diary.mood
+-                   queryDiary.date = diary.date
+-                   RequestState.Success(data = queryDiary)
+-
+-               }
+-                else{
+-                   RequestState.Error(error = Exception("Queries diary does not exist"))
+-               }
+-            }
+-        }
+-        else{
+-            RequestState.Error(UserNotAuthenticatedException())
+-        }
+-    }
+-
+-    override suspend fun deleteDiary(diaryId: ObjectId): RequestState<Diary> {
+-        return if(user != null) {
+-          realm.write {
+-              val diary =
+-                  query<Diary>(query = "_id == $0 AND owner_id == $1", diaryId, user.id)
+-                      .first().find()
+-              if(diary != null) {
+-                  try {
+-
+-                      delete(diary)
+-                      RequestState.Success(data = diary)
+-                  } catch (e: Exception) {
+-                      RequestState.Error(error = e)
+-                  }
+-              }
+-              else{
+-                  RequestState.Error(error = Exception("Queries diary does not exist"))
+-              }
+-          }
+-        }
+-        else{
+-            RequestState.Error(UserNotAuthenticatedException())
+-        }
+-    }
+-
+-    override suspend fun deleteAllDiaries(): RequestState<Boolean> {
+-        return if(user != null) {
+-            realm.write {
+-             val diaries = this.query<Diary>("owner_id == $0", user.id).find()
+-                try{
+-                    delete(diaries)
+-                    RequestState.Success(data = true)
+-                }
+-                catch (e: Exception){
+-                    RequestState.Error(e)
+-                }
+-            }
+-        }
+-        else{
+-            RequestState.Error(UserNotAuthenticatedException())
+-        }
+-
+-    }
+-
+-    override suspend fun getfilterDiaries(zonedDateTime: ZonedDateTime): Flow<Diaries> {
+-        return if (user != null) {
+-            try {
+-               realm.query<Diary>("owner_id == $0 AND date < $1 AND date > $2",
+-                   user.id,
+-                   RealmInstant.from(zonedDateTime.plusDays(1).toInstant().epochSecond, 0),
+-                   RealmInstant.from(zonedDateTime.minusDays(1).toInstant().epochSecond, 0)).asFlow().map {
+-                       result ->
+-                   RequestState.Success(
+-                       data = result.list.groupBy {
+-                           it.date.toInstant()
+-                               .atZone(ZoneId.systemDefault())
+-                               .toLocalDate()
+-                       }
+-                   )
+-               }
+-            } catch (e: Exception) {
+-                flow { emit(RequestState.Error(e)) }
+-            }
+-        } else {
+-            flow { emit(RequestState.Error(UserNotAuthenticatedException())) }
+-        }
+-    }
+-
+-}
+-    private class UserNotAuthenticatedException : Exception("User is not Logged in.")
+\ No newline at end of file
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/data/repository/MongoRepository.kt b/app/src/main/java/com/prateektimer/diaryapp/data/repository/MongoRepository.kt
+deleted file mode 100644
+index 952ebc6..0000000
+--- a/app/src/main/java/com/prateektimer/diaryapp/data/repository/MongoRepository.kt
++++ /dev/null
+@@ -1,22 +0,0 @@
+-package com.prateektimer.diaryapp.data.repository
+-
+-import com.prateektimer.diaryapp.model.Diary
+-import com.prateektimer.diaryapp.model.RequestState
+-import kotlinx.coroutines.flow.Flow
+-import org.mongodb.kbson.ObjectId
+-import java.time.LocalDate
+-import java.time.ZonedDateTime
+-
+-typealias Diaries = RequestState<Map<LocalDate, List<Diary>>>
+-interface MongoRepository {
+-
+-    fun configureTheRealm()
+-    fun getAllDiaries(): Flow<Diaries>
+-    fun getSelectedDiary(diaryId : ObjectId): Flow<RequestState<Diary>>
+-    suspend fun insertNewDiary(diary: Diary): RequestState<Diary>
+-    suspend fun updateDiary(diary: Diary): RequestState<Diary>
+-    suspend fun deleteDiary(diaryId: ObjectId): RequestState<Diary>
+-    suspend fun deleteAllDiaries(): RequestState<Boolean>
+-
+-    suspend fun getfilterDiaries(zonedDateTime: ZonedDateTime): Flow<Diaries>
+-}
+\ No newline at end of file
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/model/Diary.kt b/app/src/main/java/com/prateektimer/diaryapp/model/Diary.kt
+index 4ef1f7e..e2b801a 100644
+--- a/app/src/main/java/com/prateektimer/diaryapp/model/Diary.kt
++++ b/app/src/main/java/com/prateektimer/diaryapp/model/Diary.kt
+@@ -1,14 +1,13 @@
+ package com.prateektimer.diaryapp.model
+ 
+ 
+-import com.prateektimer.diaryapp.util.toRealmInstant
++import com.prateektimer.util.model.Mood
+ import io.realm.kotlin.ext.realmListOf
+ import io.realm.kotlin.types.RealmInstant
+ import io.realm.kotlin.types.RealmList
+ import io.realm.kotlin.types.RealmObject
+ import io.realm.kotlin.types.annotations.PrimaryKey
+ import org.mongodb.kbson.ObjectId
+-import java.time.Instant
+ 
+ class Diary : RealmObject {
+     @PrimaryKey
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/model/RequestState.kt b/app/src/main/java/com/prateektimer/diaryapp/model/RequestState.kt
+index 042141a..3cadda8 100644
+--- a/app/src/main/java/com/prateektimer/diaryapp/model/RequestState.kt
++++ b/app/src/main/java/com/prateektimer/diaryapp/model/RequestState.kt
+@@ -1,5 +1,7 @@
+ package com.prateektimer.diaryapp.model
+ 
++import com.prateektimer.util.model.RequestState
++
+ sealed class RequestState<out T> {
+     object Idle : RequestState<Nothing>()
+     object Loading : RequestState<Nothing>()
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/navigation/NavGraph.kt b/app/src/main/java/com/prateektimer/diaryapp/navigation/NavGraph.kt
+index 1396de7..4179200 100644
+--- a/app/src/main/java/com/prateektimer/diaryapp/navigation/NavGraph.kt
++++ b/app/src/main/java/com/prateektimer/diaryapp/navigation/NavGraph.kt
+@@ -25,10 +25,8 @@ import androidx.navigation.NavType
+ import androidx.navigation.compose.NavHost
+ import androidx.navigation.compose.composable
+ import androidx.navigation.navArgument
+-import com.prateektimer.diaryapp.model.GalleryImage
+-import com.prateektimer.diaryapp.model.Mood
+-import com.prateektimer.diaryapp.model.rememberGalleryState
+-import com.prateektimer.diaryapp.presentation.components.DisplayAlertDialog
++import com.prateektimer.util.model.Mood
++import com.prateektimer.ui.components.DisplayAlertDialog
+ import com.prateektimer.diaryapp.presentation.screens.auth.AuthenticationScreen
+ import com.prateektimer.diaryapp.presentation.screens.auth.AuthenticationViewModel
+ import com.prateektimer.diaryapp.presentation.screens.home.HomeScreen
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/auth/AuthenticationContent.kt b/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/auth/AuthenticationContent.kt
+index c499583..5a64a68 100644
+--- a/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/auth/AuthenticationContent.kt
++++ b/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/auth/AuthenticationContent.kt
+@@ -17,7 +17,7 @@ import androidx.compose.ui.res.painterResource
+ import androidx.compose.ui.res.stringResource
+ import androidx.compose.ui.unit.dp
+ import com.prateektimer.diaryapp.R
+-import com.prateektimer.diaryapp.presentation.components.GoogleButton
++import com.prateektimer.ui.components.GoogleButton
+ 
+ 
+ @Composable
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/home/HomeContent.kt b/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/home/HomeContent.kt
+index e895759..1be4bf7 100644
+--- a/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/home/HomeContent.kt
++++ b/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/home/HomeContent.kt
+@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.Column
+ import androidx.compose.foundation.layout.PaddingValues
+ import androidx.compose.foundation.layout.Row
+ import androidx.compose.foundation.layout.Spacer
+-import androidx.compose.foundation.layout.calculateEndPadding
+-import androidx.compose.foundation.layout.calculateStartPadding
+ import androidx.compose.foundation.layout.fillMaxSize
+ import androidx.compose.foundation.layout.fillMaxWidth
+ import androidx.compose.foundation.layout.navigationBarsPadding
+@@ -24,10 +22,9 @@ import androidx.compose.ui.Modifier
+ import androidx.compose.ui.text.TextStyle
+ import androidx.compose.ui.text.font.FontWeight
+ import androidx.compose.ui.tooling.preview.Preview
+-import androidx.compose.ui.unit.LayoutDirection
+ import androidx.compose.ui.unit.dp
+-import com.prateektimer.diaryapp.model.Diary
+-import com.prateektimer.diaryapp.presentation.components.DiaryHolder
++import com.prateektimer.util.model.Diary
++import com.prateektimer.ui.components.DiaryHolder
+ import java.time.LocalDate
+ 
+ @OptIn(ExperimentalFoundationApi::class)
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/home/HomeScreen.kt b/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/home/HomeScreen.kt
+index 4f2dc6d..9b70ffb 100644
+--- a/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/home/HomeScreen.kt
++++ b/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/home/HomeScreen.kt
+@@ -38,7 +38,7 @@ import androidx.compose.ui.res.painterResource
+ import androidx.compose.ui.unit.dp
+ import com.prateektimer.diaryapp.R
+ import com.prateektimer.diaryapp.data.repository.Diaries
+-import com.prateektimer.diaryapp.model.RequestState
++import com.prateektimer.util.model.RequestState
+ import java.time.ZonedDateTime
+ 
+ 
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/home/HomeViewModel.kt b/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/home/HomeViewModel.kt
+index 87b6c2f..c2f21a3 100644
+--- a/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/home/HomeViewModel.kt
++++ b/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/home/HomeViewModel.kt
+@@ -6,7 +6,6 @@ import androidx.compose.runtime.mutableStateOf
+ import androidx.compose.runtime.setValue
+ import androidx.lifecycle.ViewModel
+ import androidx.lifecycle.viewModelScope
+-import androidx.lifecycle.viewmodel.compose.viewModel
+ import com.google.firebase.auth.FirebaseAuth
+ import com.google.firebase.storage.FirebaseStorage
+ import com.prateektimer.diaryapp.connectivity.ConnectivityObserver
+@@ -15,7 +14,7 @@ import com.prateektimer.diaryapp.data.database.entity.ImageToDeleteDao
+ import com.prateektimer.diaryapp.data.database.entity.ImagesToDelete
+ import com.prateektimer.diaryapp.data.repository.Diaries
+ import com.prateektimer.diaryapp.data.repository.MongoDB
+-import com.prateektimer.diaryapp.model.RequestState
++import com.prateektimer.util.model.RequestState
+ import dagger.hilt.android.lifecycle.HiltViewModel
+ import kotlinx.coroutines.Dispatchers
+ import kotlinx.coroutines.Job
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/write/WriteContent.kt b/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/write/WriteContent.kt
+index 31dd934..e203ead 100644
+--- a/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/write/WriteContent.kt
++++ b/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/write/WriteContent.kt
+@@ -41,11 +41,11 @@ import androidx.compose.ui.text.input.ImeAction
+ import androidx.compose.ui.unit.dp
+ import coil.compose.AsyncImage
+ import coil.request.ImageRequest
+-import com.prateektimer.diaryapp.model.Diary
++import com.prateektimer.util.model.Diary
+ import com.prateektimer.diaryapp.model.GalleryImage
+ import com.prateektimer.diaryapp.model.GalleryState
+-import com.prateektimer.diaryapp.model.Mood
+-import com.prateektimer.diaryapp.presentation.components.GalleryUploader
++import com.prateektimer.util.model.Mood
++import com.prateektimer.ui.components.GalleryUploader
+ import io.realm.kotlin.ext.toRealmList
+ import kotlinx.coroutines.launch
+ 
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/write/WriteScreen.kt b/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/write/WriteScreen.kt
+index 020aa78..cdba68b 100644
+--- a/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/write/WriteScreen.kt
++++ b/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/write/WriteScreen.kt
+@@ -1,6 +1,5 @@
+ package com.prateektimer.diaryapp.presentation.screens.write
+ 
+-import android.annotation.SuppressLint
+ import android.net.Uri
+ import androidx.compose.animation.AnimatedVisibility
+ import androidx.compose.foundation.ExperimentalFoundationApi
+@@ -22,10 +21,10 @@ import androidx.compose.ui.unit.dp
+ import androidx.compose.ui.window.Dialog
+ import coil.compose.AsyncImage
+ import coil.request.ImageRequest
+-import com.prateektimer.diaryapp.model.Diary
++import com.prateektimer.util.model.Diary
+ import com.prateektimer.diaryapp.model.GalleryImage
+ import com.prateektimer.diaryapp.model.GalleryState
+-import com.prateektimer.diaryapp.model.Mood
++import com.prateektimer.util.model.Mood
+ import java.time.ZonedDateTime
+ 
+ @OptIn(ExperimentalFoundationApi::class)
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/write/WriteTopBar.kt b/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/write/WriteTopBar.kt
+index aad9e74..9c172f0 100644
+--- a/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/write/WriteTopBar.kt
++++ b/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/write/WriteTopBar.kt
+@@ -30,8 +30,8 @@ import com.maxkeppeler.sheets.calendar.models.CalendarConfig
+ import com.maxkeppeler.sheets.calendar.models.CalendarSelection
+ import com.maxkeppeler.sheets.clock.ClockDialog
+ import com.maxkeppeler.sheets.clock.models.ClockSelection
+-import com.prateektimer.diaryapp.model.Diary
+-import com.prateektimer.diaryapp.presentation.components.DisplayAlertDialog
++import com.prateektimer.util.model.Diary
++import com.prateektimer.ui.components.DisplayAlertDialog
+ import com.prateektimer.diaryapp.util.toInstant
+ import java.text.SimpleDateFormat
+ import java.time.LocalDate
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/write/WriteViewModel.kt b/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/write/WriteViewModel.kt
+index 10f5c08..96444c7 100644
+--- a/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/write/WriteViewModel.kt
++++ b/app/src/main/java/com/prateektimer/diaryapp/presentation/screens/write/WriteViewModel.kt
+@@ -16,12 +16,12 @@ import com.prateektimer.diaryapp.data.database.entity.ImageToUpload
+ import com.prateektimer.diaryapp.data.database.entity.ImageToUploadDao
+ import com.prateektimer.diaryapp.data.database.entity.ImagesToDelete
+ import com.prateektimer.diaryapp.data.repository.MongoDB
+-import com.prateektimer.diaryapp.model.Diary
++import com.prateektimer.util.model.Diary
+ import com.prateektimer.diaryapp.model.GalleryImage
+ import com.prateektimer.diaryapp.model.GalleryState
+-import com.prateektimer.diaryapp.model.Mood
++import com.prateektimer.util.model.Mood
+ import com.prateektimer.diaryapp.util.Constants.WRITE_SCREEN_ARGUMENT_KEY
+-import com.prateektimer.diaryapp.model.RequestState
++import com.prateektimer.util.model.RequestState
+ import com.prateektimer.diaryapp.util.fetchImagesFromFirebase
+ import com.prateektimer.diaryapp.util.toRealmInstant
+ import dagger.hilt.android.lifecycle.HiltViewModel
+diff --git a/app/src/main/res/drawable/angry.xml b/app/src/main/res/drawable/angry.xml
+new file mode 100644
+index 0000000..1e7c162
+--- /dev/null
++++ b/app/src/main/res/drawable/angry.xml
+@@ -0,0 +1,12 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M36,18C36,27.941 27.941,36 18,36C8.06,36 0,27.941 0,18C0,8.06 8.06,0 18,0C27.941,0 36,8.06 36,18Z"
++      android:fillColor="#DA2F47"/>
++  <path
++      android:pathData="M25.485,29.879C25.44,29.7 24.317,25.5 18,25.5C11.682,25.5 10.56,29.7 10.515,29.879C10.46,30.096 10.558,30.321 10.752,30.433C10.947,30.542 11.191,30.512 11.352,30.356C11.371,30.337 13.306,28.5 18,28.5C22.694,28.5 24.63,30.337 24.648,30.355C24.744,30.45 24.872,30.5 25,30.5C25.084,30.5 25.169,30.479 25.246,30.436C25.442,30.324 25.54,30.097 25.485,29.879ZM15.707,17.293C12.452,14.038 7.221,14 7,14C6.448,14 6.001,14.447 6.001,14.998C6,15.55 6.447,15.998 6.999,16C7.028,16 8.924,16.022 10.982,16.737C10.389,17.377 10,18.371 10,19.5C10,21.434 11.119,23 12.5,23C13.881,23 15,21.434 15,19.5C15,19.326 14.981,19.16 14.963,18.993C14.976,18.993 14.988,19 15,19C15.256,19 15.512,18.902 15.707,18.707C16.098,18.316 16.098,17.684 15.707,17.293ZM29,14C28.779,14 23.549,14.038 20.293,17.293C19.902,17.684 19.902,18.316 20.293,18.707C20.488,18.902 20.744,19 21,19C21.013,19 21.024,18.993 21.036,18.993C21.02,19.16 21,19.326 21,19.5C21,21.434 22.119,23 23.5,23C24.881,23 26,21.434 26,19.5C26,18.371 25.611,17.377 25.018,16.737C27.076,16.022 28.972,16 29.002,16C29.553,15.998 30,15.55 29.999,14.998C29.998,14.447 29.552,14 29,14Z"
++      android:fillColor="#292F33"/>
++</vector>
+diff --git a/app/src/main/res/drawable/awful.xml b/app/src/main/res/drawable/awful.xml
+new file mode 100644
+index 0000000..c040cb6
+--- /dev/null
++++ b/app/src/main/res/drawable/awful.xml
+@@ -0,0 +1,27 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="34dp"
++    android:height="36dp"
++    android:viewportWidth="34"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M34,17C34,26.389 26.389,34 17,34C7.612,34 0,26.389 0,17C0,7.612 7.612,0 17,0C26.389,0 34,7.612 34,17Z"
++      android:fillColor="#FFCB4C"/>
++  <path
++      android:pathData="M17,27.136C20.335,27.136 22.547,27.524 25.284,28.056C25.909,28.176 27.125,28.056 27.125,26.215C27.125,22.533 22.895,17.931 17,17.931C11.105,17.931 6.875,22.533 6.875,26.215C6.875,28.056 8.091,28.177 8.716,28.056C11.452,27.524 13.665,27.136 17,27.136ZM5.668,18.888C5.381,18.888 5.097,18.758 4.912,18.51C4.599,18.093 4.683,17.501 5.101,17.188C5.236,17.087 7.888,15.127 11.576,14.418C9.238,13.246 6.644,13.221 6.611,13.221C6.09,13.22 5.668,12.796 5.669,12.275C5.669,11.754 6.091,11.332 6.613,11.332C6.822,11.332 11.762,11.368 14.836,14.442C15.106,14.712 15.187,15.118 15.041,15.471C14.895,15.824 14.55,16.054 14.169,16.054C9.812,16.054 6.271,18.672 6.236,18.698C6.063,18.827 5.865,18.888 5.668,18.888ZM28.332,18.888C28.136,18.888 27.937,18.827 27.768,18.701C27.732,18.674 24.168,16.056 19.833,16.056C19.451,16.056 19.106,15.826 18.961,15.473C18.814,15.12 18.895,14.714 19.166,14.444C22.241,11.369 27.181,11.334 27.389,11.334C27.91,11.334 28.332,11.756 28.333,12.277C28.334,12.798 27.911,13.221 27.391,13.223C27.357,13.223 24.762,13.248 22.425,14.42C26.113,15.128 28.765,17.088 28.9,17.19C29.317,17.503 29.402,18.093 29.09,18.511C28.904,18.758 28.62,18.888 28.332,18.888Z"
++      android:fillColor="#65471B"/>
++  <path
++      android:pathData="M24.712,32.287V25.186C24.712,22.593 20.823,20.001 16.934,20.001C13.045,20.001 9.156,22.594 9.156,25.186V32.287C4.753,32.636 1.797,33.272 1.797,34C1.797,35.105 8.574,36 16.934,36C25.294,36 32.071,35.105 32.071,34C32.071,33.272 29.115,32.636 24.712,32.287Z"
++      android:fillColor="#77AF57"/>
++  <path
++      android:pathData="M14.875,24.463C15.557,24.463 16.11,23.91 16.11,23.228C16.11,22.546 15.557,21.993 14.875,21.993C14.193,21.993 13.64,22.546 13.64,23.228C13.64,23.91 14.193,24.463 14.875,24.463Z"
++      android:fillColor="#5D8F3F"/>
++  <path
++      android:pathData="M19.698,26.875C20.38,26.875 20.933,26.322 20.933,25.64C20.933,24.958 20.38,24.405 19.698,24.405C19.016,24.405 18.463,24.958 18.463,25.64C18.463,26.322 19.016,26.875 19.698,26.875Z"
++      android:fillColor="#5D8F3F"/>
++  <path
++      android:pathData="M21.452,30.712C21.561,30.039 21.104,29.404 20.431,29.295C19.758,29.186 19.123,29.643 19.014,30.316C18.905,30.99 19.362,31.624 20.035,31.733C20.708,31.843 21.343,31.385 21.452,30.712Z"
++      android:fillColor="#5D8F3F"/>
++  <path
++      android:pathData="M15.849,32.831C16.005,31.869 15.352,30.962 14.39,30.806C13.428,30.65 12.521,31.303 12.365,32.265C12.209,33.227 12.862,34.134 13.824,34.29C14.786,34.446 15.693,33.793 15.849,32.831Z"
++      android:fillColor="#5D8F3F"/>
++</vector>
+diff --git a/app/src/main/res/drawable/bored.xml b/app/src/main/res/drawable/bored.xml
+new file mode 100644
+index 0000000..9ba197e
+--- /dev/null
++++ b/app/src/main/res/drawable/bored.xml
+@@ -0,0 +1,12 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M36,18C36,27.941 27.941,36 18,36C8.06,36 0,27.941 0,18C0,8.06 8.06,0 18,0C27.941,0 36,8.06 36,18Z"
++      android:fillColor="#FFCC4D"/>
++  <path
++      android:pathData="M25.485,27.879C25.44,27.7 24.317,23.5 18,23.5C11.682,23.5 10.56,27.7 10.515,27.879C10.46,28.096 10.558,28.321 10.752,28.433C10.947,28.544 11.191,28.511 11.352,28.356C11.371,28.337 13.306,26.5 18,26.5C22.694,26.5 24.63,28.337 24.648,28.355C24.744,28.45 24.872,28.5 25,28.5C25.084,28.5 25.169,28.479 25.246,28.436C25.442,28.324 25.54,28.097 25.485,27.879ZM29.001,14C28.696,14 28.397,13.862 28.2,13.6C25.768,10.356 21.686,12.754 21.514,12.857C21.039,13.142 20.425,12.987 20.142,12.514C19.858,12.04 20.011,11.426 20.485,11.142C22.483,9.943 26.999,8.665 29.799,12.399C30.131,12.841 30.041,13.468 29.599,13.799C29.42,13.935 29.21,14 29.001,14ZM6.999,14C6.791,14 6.58,13.935 6.4,13.8C5.958,13.469 5.869,12.842 6.2,12.4C9.001,8.666 13.517,9.944 15.514,11.143C15.988,11.427 16.141,12.041 15.857,12.515C15.573,12.988 14.961,13.143 14.487,12.859C14.308,12.753 10.213,10.384 7.799,13.601C7.604,13.862 7.303,14 6.999,14ZM29,16C29,15.448 28.553,15 28,15H21C20.447,15 20,15.448 20,16C20,16.552 20.447,17 21,17H26.092C26.299,17.581 26.848,18 27.5,18C28.328,18 29,17.329 29,16.5C29,16.39 28.986,16.283 28.964,16.179C28.976,16.119 29,16.063 29,16ZM16,16C16,15.448 15.552,15 15,15H8C7.448,15 7,15.448 7,16C7,16.552 7.448,17 8,17H13.092C13.299,17.581 13.848,18 14.5,18C15.328,18 16,17.329 16,16.5C16,16.39 15.986,16.283 15.964,16.179C15.975,16.119 16,16.063 16,16Z"
++      android:fillColor="#664500"/>
++</vector>
+diff --git a/app/src/main/res/drawable/calm.xml b/app/src/main/res/drawable/calm.xml
+new file mode 100644
+index 0000000..ea53b4c
+--- /dev/null
++++ b/app/src/main/res/drawable/calm.xml
+@@ -0,0 +1,12 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M36,18C36,27.941 27.941,36 18,36C8.059,36 0,27.941 0,18C0,8.059 8.059,0 18,0C27.941,0 36,8.059 36,18Z"
++      android:fillColor="#FFCC4D"/>
++  <path
++      android:pathData="M24.327,23.622C24.174,23.49 23.959,23.463 23.776,23.553L19.776,25.553C17.905,26.488 13.049,26.5 13,26.5C12.724,26.5 12.5,26.724 12.5,27C12.5,27.185 12.601,27.347 12.75,27.433V27.434H12.751V27.435C12.822,27.475 12.904,27.498 12.991,27.5H19.999C22.657,27.5 24.088,25.315 24.474,24.158C24.538,23.966 24.48,23.755 24.327,23.622ZM31.001,16C30.696,16 30.397,15.862 30.2,15.6C27.559,12.079 24.139,12.001 23.994,12C23.444,11.994 23,11.544 23.003,10.995C23.006,10.444 23.45,10 24,10C24.184,10 28.537,10.05 31.8,14.4C32.132,14.842 32.042,15.469 31.6,15.8C31.42,15.935 31.21,16 31.001,16ZM4.999,16C4.791,16 4.58,15.935 4.4,15.8C3.958,15.469 3.869,14.842 4.2,14.4C7.462,10.05 11.816,10 12,10C12.552,10 13,10.448 13,11C13,11.551 12.555,11.998 12.004,12C11.848,12.002 8.435,12.086 5.799,15.6C5.604,15.862 5.303,16 4.999,16ZM15.897,17.396C15.92,17.344 15.956,17.3 15.97,17.242C16.104,16.706 15.778,16.163 15.243,16.029C15.063,15.984 10.776,14.949 7.446,17.167C6.987,17.473 6.863,18.094 7.169,18.554C7.361,18.844 7.678,19 8.001,19C8.191,19 8.384,18.945 8.555,18.832C9.647,18.103 10.917,17.837 12.023,17.771C12.014,17.847 12,17.922 12,18C12,19.104 12.896,20 14,20C15.104,20 16,19.104 16,18C16,17.788 15.958,17.588 15.897,17.396ZM27.896,17.395C27.919,17.343 27.955,17.3 27.969,17.243C28.104,16.707 27.778,16.164 27.242,16.03C27.062,15.985 22.776,14.95 19.445,17.168C18.985,17.474 18.861,18.095 19.168,18.555C19.36,18.844 19.678,19 20.001,19C20.191,19 20.384,18.945 20.555,18.832C21.647,18.103 22.916,17.838 24.024,17.772C24.015,17.848 24,17.922 24,18C24,19.104 24.896,20 26,20C27.104,20 28,19.104 28,18C28,17.788 27.958,17.587 27.896,17.395Z"
++      android:fillColor="#664500"/>
++</vector>
+diff --git a/app/src/main/res/drawable/depressed.xml b/app/src/main/res/drawable/depressed.xml
+new file mode 100644
+index 0000000..1303c98
+--- /dev/null
++++ b/app/src/main/res/drawable/depressed.xml
+@@ -0,0 +1,12 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M36,18C36,27.941 27.941,36 18,36C8.06,36 0,27.941 0,18C0,8.06 8.06,0 18,0C27.941,0 36,8.06 36,18Z"
++      android:fillColor="#FFCC4D"/>
++  <path
++      android:pathData="M17.312,17.612C17.136,17.469 16.885,17.465 16.702,17.598C16.69,17.607 15.442,18.5 13,18.5C10.559,18.5 9.31,17.607 9.3,17.6C9.117,17.463 8.865,17.467 8.689,17.609C8.511,17.751 8.451,17.995 8.543,18.203C8.603,18.338 10.043,21.5 13,21.5C15.958,21.5 17.397,18.338 17.457,18.203C17.549,17.996 17.489,17.754 17.312,17.612ZM27.312,17.612C27.136,17.469 26.886,17.464 26.702,17.598C26.69,17.607 25.441,18.5 23,18.5C20.56,18.5 19.31,17.607 19.3,17.6C19.117,17.463 18.866,17.467 18.689,17.609C18.511,17.751 18.451,17.995 18.543,18.203C18.603,18.338 20.043,21.5 23,21.5C25.958,21.5 27.397,18.338 27.457,18.203C27.549,17.996 27.489,17.754 27.312,17.612ZM22,28H14C13.448,28 13,27.553 13,27C13,26.447 13.448,26 14,26H22C22.553,26 23,26.447 23,27C23,27.553 22.553,28 22,28ZM6,14C5.448,14 5,13.552 5,13C5,12.449 5.445,12.002 5.996,12C6.152,11.998 9.565,11.914 12.201,8.4C12.532,7.96 13.158,7.868 13.601,8.2C14.043,8.531 14.132,9.158 13.801,9.6C10.538,13.95 6.184,14 6,14ZM30,14C29.816,14 25.463,13.95 22.2,9.6C21.868,9.158 21.958,8.531 22.4,8.2C22.841,7.867 23.467,7.958 23.799,8.4C26.44,11.921 29.86,11.999 30.005,12C30.555,12.006 30.999,12.456 30.996,13.005C30.994,13.556 30.55,14 30,14Z"
++      android:fillColor="#664500"/>
++</vector>
+diff --git a/app/src/main/res/drawable/disappointed.xml b/app/src/main/res/drawable/disappointed.xml
+new file mode 100644
+index 0000000..75cc0c7
+--- /dev/null
++++ b/app/src/main/res/drawable/disappointed.xml
+@@ -0,0 +1,18 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M36,18C36,27.941 27.941,36 18,36C8.059,36 0,27.941 0,18C0,8.059 8.059,0 18,0C27.941,0 36,8.059 36,18Z"
++      android:fillColor="#FFCC4D"/>
++  <path
++      android:pathData="M18,21.5C8.667,21.5 7.515,29.854 7.504,29.938C7.483,30.109 7.55,30.278 7.683,30.387C7.773,30.461 7.886,30.5 8,30.5C8.053,30.5 8.106,30.491 8.158,30.475C8.217,30.455 14.126,28.5 18,28.5C23.595,28.5 27.745,30.433 27.786,30.452C27.947,30.529 28.144,30.512 28.293,30.405C28.44,30.298 28.519,30.119 28.496,29.937C28.485,29.854 27.333,21.5 18,21.5ZM29,10C23.446,10 21.198,5.633 21.105,5.447C20.858,4.953 21.058,4.352 21.552,4.105C22.045,3.859 22.644,4.057 22.892,4.548C22.967,4.694 24.713,8 29,8C29.553,8 30,8.448 30,9C30,9.552 29.553,10 29,10ZM7,10C6.448,10 6,9.552 6,9C6,8.448 6.448,8 7,8C12.083,8 12.996,4.88 13.033,4.747C13.178,4.219 13.725,3.899 14.252,4.038C14.782,4.177 15.103,4.711 14.97,5.243C14.921,5.437 13.704,10 7,10Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M18,23C22,23 24,25 24,25H12C12,25 14,23 18,23Z"
++      android:fillColor="#CCD6DD"/>
++  <path
++      android:pathData="M6.001,19C5.697,19 5.397,18.862 5.2,18.6C4.868,18.159 4.958,17.532 5.4,17.201C5.543,17.094 8.351,15.018 12.256,14.268C9.781,13.027 7.034,13 6.999,13C6.447,12.998 6,12.55 6.001,11.998C6.001,11.447 6.448,11 7,11C7.221,11 12.452,11.038 15.707,14.293C15.993,14.579 16.079,15.009 15.924,15.383C15.769,15.756 15.404,16 15,16C10.387,16 6.637,18.772 6.6,18.8C6.42,18.935 6.209,19 6.001,19ZM29.999,18.999C29.791,18.999 29.581,18.935 29.401,18.801C29.363,18.772 25.59,16 21,16C20.596,16 20.23,15.756 20.076,15.383C19.921,15.009 20.007,14.579 20.293,14.293C23.549,11.038 28.779,11 29,11C29.552,11 29.998,11.447 29.999,11.998C30,12.55 29.553,12.998 29.002,13C28.966,13 26.219,13.027 23.744,14.268C27.649,15.018 30.457,17.094 30.599,17.201C31.04,17.532 31.13,18.157 30.8,18.599C30.604,18.86 30.304,18.999 29.999,18.999Z"
++      android:fillColor="#664500"/>
++</vector>
+diff --git a/app/src/main/res/drawable/happy.xml b/app/src/main/res/drawable/happy.xml
+new file mode 100644
+index 0000000..612cf1f
+--- /dev/null
++++ b/app/src/main/res/drawable/happy.xml
+@@ -0,0 +1,21 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M36,18C36,27.941 27.941,36 18,36C8.06,36 0,27.941 0,18C0,8.06 8.06,0 18,0C27.941,0 36,8.06 36,18Z"
++      android:fillColor="#FFCC4D"/>
++  <path
++      android:pathData="M11.5,18C12.881,18 14,15.538 14,12.5C14,9.462 12.881,7 11.5,7C10.119,7 9,9.462 9,12.5C9,15.538 10.119,18 11.5,18Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M24.5,18C25.881,18 27,15.538 27,12.5C27,9.462 25.881,7 24.5,7C23.119,7 22,9.462 22,12.5C22,15.538 23.119,18 24.5,18Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M18,22C14.377,22 11.973,21.578 9,21C8.321,20.869 7,21 7,23C7,27 11.595,32 18,32C24.404,32 29,27 29,23C29,21 27.679,20.868 27,21C24.027,21.578 21.623,22 18,22Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M9,23C9,23 12,24 18,24C24,24 27,23 27,23C27,23 25,27 18,27C11,27 9,23 9,23Z"
++      android:fillColor="#ffffff"/>
++</vector>
+diff --git a/app/src/main/res/drawable/humorous.xml b/app/src/main/res/drawable/humorous.xml
+new file mode 100644
+index 0000000..b02b8e0
+--- /dev/null
++++ b/app/src/main/res/drawable/humorous.xml
+@@ -0,0 +1,21 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M30.728,5.272C37.757,12.301 37.757,23.699 30.728,30.728C23.699,37.757 12.302,37.757 5.272,30.728C-1.757,23.699 -1.757,12.301 5.272,5.272C12.301,-1.757 23.698,-1.757 30.728,5.272Z"
++      android:fillColor="#FFCB4C"/>
++  <path
++      android:pathData="M19.279,19.28C15.785,22.774 13.06,24.684 9.634,26.994C8.853,27.523 7.706,28.923 9.635,30.853C13.492,34.71 22.746,35.1 28.922,28.924C35.099,22.747 34.71,13.494 30.851,9.636C28.922,7.706 27.521,8.854 26.993,9.636C24.685,13.059 22.774,15.785 19.279,19.28Z"
++      android:fillColor="#65471B"/>
++  <path
++      android:pathData="M11.564,28.923C11.564,28.923 15.422,26.994 21.208,21.207C26.995,15.421 28.923,11.564 28.923,11.564C28.923,11.564 30.851,17.351 24.101,24.101C17.351,30.852 11.564,28.923 11.564,28.923Z"
++      android:fillColor="#ffffff"/>
++  <path
++      android:pathData="M8.265,25.234C8.05,25.449 7.74,25.564 7.416,25.517C6.869,25.439 6.489,24.933 6.568,24.386C6.593,24.21 7.111,20.756 9.342,17.464C6.715,18.337 4.753,20.26 4.728,20.285C4.337,20.674 3.704,20.673 3.314,20.282C2.924,19.892 2.924,19.26 3.314,18.87C3.47,18.714 7.196,15.042 11.799,15.042C12.204,15.042 12.568,15.285 12.723,15.659C12.878,16.033 12.792,16.463 12.506,16.749C9.244,20.011 8.553,24.623 8.546,24.668C8.515,24.892 8.412,25.087 8.265,25.234ZM25.233,8.264C25.086,8.411 24.892,8.514 24.67,8.546C24.623,8.553 19.994,9.261 16.749,12.506C16.463,12.792 16.033,12.878 15.659,12.723C15.285,12.568 15.042,12.204 15.042,11.799C15.042,7.195 18.714,3.47 18.87,3.314C19.26,2.924 19.892,2.924 20.282,3.314C20.673,3.703 20.674,4.337 20.285,4.727C20.259,4.753 18.336,6.714 17.463,9.341C20.755,7.11 24.208,6.592 24.384,6.567C24.93,6.489 25.436,6.867 25.515,7.414C25.564,7.738 25.449,8.049 25.233,8.264Z"
++      android:fillColor="#65471B"/>
++  <path
++      android:pathData="M30.101,12.055C32.842,12.389 35.335,10.437 35.668,7.695C36.002,4.954 34.051,2.461 31.309,2.127C28.568,1.794 20.9,4.89 20.779,5.883C20.658,6.875 27.36,11.72 30.101,12.055ZM12.157,29.999C12.491,32.74 10.539,35.233 7.797,35.566C5.056,35.9 2.563,33.949 2.229,31.207C1.895,28.465 4.992,20.797 5.985,20.676C6.977,20.556 11.822,27.258 12.157,29.999Z"
++      android:fillColor="#64AADD"/>
++</vector>
+diff --git a/app/src/main/res/drawable/lonely.xml b/app/src/main/res/drawable/lonely.xml
+new file mode 100644
+index 0000000..1b96bd1
+--- /dev/null
++++ b/app/src/main/res/drawable/lonely.xml
+@@ -0,0 +1,36 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M18,36C27.941,36 36,27.941 36,18C36,8.059 27.941,0 18,0C8.059,0 0,8.059 0,18C0,27.941 8.059,36 18,36Z"
++      android:fillColor="#FFCC4D"/>
++  <path
++      android:pathData="M20.996,27C20.893,27 20.79,26.984 20.687,26.951C18.927,26.38 17.072,26.38 15.312,26.951C14.788,27.12 14.223,26.834 14.052,26.309C13.881,25.784 14.169,25.22 14.695,25.049C16.857,24.347 19.142,24.347 21.304,25.049C21.829,25.22 22.117,25.784 21.947,26.309C21.81,26.73 21.418,27 20.996,27Z"
++      android:fillColor="#65471B"/>
++  <path
++      android:pathData="M30.335,12.068C29.432,14.813 26.85,16.783 23.841,16.783C23.697,16.783 23.552,16.778 23.406,16.769C21.929,16.676 20.564,16.114 19.456,15.185C19.492,15.68 19.532,16.182 19.592,16.725C19.744,18.113 20.476,19.207 21.708,19.888C22.528,20.342 23.508,20.576 24.521,20.64C26.255,20.749 28.091,20.36 29.394,19.731C30.771,19.066 31.666,17.869 31.85,16.446C32.033,15.031 31.496,13.522 30.335,12.068Z"
++      android:fillColor="#ffffff"/>
++  <path
++      android:pathData="M21.351,7.583C20.054,8.133 19.404,9.884 19.374,12.872L19.413,12.94C20.31,14.259 21.786,15.164 23.501,15.272C23.615,15.279 23.729,15.283 23.842,15.283C26.476,15.283 28.691,13.346 29.095,10.759C28.98,10.654 28.874,10.547 28.752,10.443C25.037,7.273 22.285,7.186 21.351,7.583Z"
++      android:fillColor="#65471B"/>
++  <path
++      android:pathData="M23.841,16.783C26.85,16.783 29.432,14.813 30.335,12.068C29.981,11.625 29.564,11.188 29.094,10.759C28.69,13.346 26.475,15.283 23.841,15.283C23.728,15.283 23.614,15.279 23.5,15.272C21.785,15.164 20.309,14.259 19.412,12.94L19.373,12.872C19.366,13.573 19.394,14.345 19.456,15.185C20.564,16.114 21.929,16.676 23.406,16.769C23.552,16.779 23.697,16.783 23.841,16.783Z"
++      android:fillColor="#F4900C"/>
++  <path
++      android:pathData="M21.413,11.812C22.024,11.812 22.52,11.316 22.52,10.705C22.52,10.094 22.024,9.598 21.413,9.598C20.802,9.598 20.306,10.094 20.306,10.705C20.306,11.316 20.802,11.812 21.413,11.812Z"
++      android:fillColor="#ffffff"/>
++  <path
++      android:pathData="M12.159,16.783C9.15,16.783 6.568,14.813 5.665,12.068C4.504,13.522 3.968,15.031 4.15,16.445C4.335,17.868 5.229,19.066 6.606,19.73C7.909,20.359 9.744,20.748 11.479,20.639C12.492,20.575 13.472,20.342 14.292,19.887C15.523,19.206 16.255,18.112 16.408,16.724C16.468,16.182 16.508,15.682 16.544,15.188C15.441,16.111 14.074,16.675 12.594,16.768C12.448,16.779 12.303,16.783 12.159,16.783Z"
++      android:fillColor="#ffffff"/>
++  <path
++      android:pathData="M12.159,15.283C12.272,15.283 12.386,15.279 12.5,15.272C14.215,15.164 15.691,14.259 16.588,12.94L16.627,12.872C16.596,9.884 15.947,8.133 14.65,7.583C13.716,7.186 10.963,7.273 7.249,10.442C7.127,10.546 7.022,10.653 6.906,10.758C7.31,13.346 9.525,15.283 12.159,15.283Z"
++      android:fillColor="#65471B"/>
++  <path
++      android:pathData="M16.626,12.872L16.587,12.94C15.69,14.259 14.214,15.164 12.499,15.272C12.385,15.279 12.271,15.283 12.158,15.283C9.524,15.283 7.309,13.346 6.905,10.759C6.435,11.188 6.018,11.625 5.664,12.068C6.567,14.813 9.149,16.783 12.158,16.783C12.302,16.783 12.447,16.778 12.593,16.769C14.073,16.676 15.44,16.112 16.543,15.189C16.605,14.348 16.634,13.575 16.626,12.872Z"
++      android:fillColor="#F4900C"/>
++  <path
++      android:pathData="M9.781,11.81C10.391,11.772 10.855,11.246 10.816,10.636C10.778,10.026 10.252,9.562 9.642,9.6C9.032,9.638 8.568,10.164 8.606,10.774C8.645,11.384 9.171,11.848 9.781,11.81Z"
++      android:fillColor="#ffffff"/>
++</vector>
+diff --git a/app/src/main/res/drawable/mysterious.xml b/app/src/main/res/drawable/mysterious.xml
+new file mode 100644
+index 0000000..6adf894
+--- /dev/null
++++ b/app/src/main/res/drawable/mysterious.xml
+@@ -0,0 +1,18 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="34dp"
++    android:height="36dp"
++    android:viewportWidth="34"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M34,17C34,26.389 26.389,34 17,34C7.611,34 0,26.389 0,17C0,7.611 7.611,0 17,0C26.389,0 34,7.611 34,17Z"
++      android:fillColor="#FFCB4C"/>
++  <path
++      android:pathData="M16.812,25.055C19.055,25.055 20.874,24.191 20.874,23.125C20.874,22.059 19.055,21.195 16.812,21.195C14.569,21.195 12.75,22.059 12.75,23.125C12.75,24.191 14.569,25.055 16.812,25.055Z"
++      android:fillColor="#65471B"/>
++  <path
++      android:pathData="M24.35,25.981L24.317,25.961C23.478,25.446 22.37,25.711 21.855,26.55L21.704,26.795C21.162,26.233 20.454,25.821 19.636,25.654L18.237,25.368L19.509,19.144C19.706,18.179 19.078,17.229 18.114,17.032L18.076,17.024C17.111,16.827 16.161,17.455 15.964,18.419L14.291,26.602L14.276,26.676L13.963,28.207L13.962,28.217L12.834,33.75C12.614,34.828 13.104,36 14.729,36H18C20.804,36 21.635,34.99 22.198,32.907L24.939,28.444C25.453,27.605 25.189,26.497 24.35,25.981Z"
++      android:fillColor="#F19020"/>
++  <path
++      android:pathData="M21.409,30.743C21.389,30.743 21.367,30.741 21.345,30.737C21.161,30.703 21.04,30.525 21.076,30.34C21.135,30.028 21.074,29.753 20.889,29.501C20.299,28.693 18.6,28.326 17.995,28.253C17.809,28.231 17.676,28.061 17.699,27.876C17.721,27.69 17.883,27.555 18.076,27.58C18.177,27.591 20.55,27.89 21.436,29.101C21.734,29.508 21.837,29.969 21.742,30.469C21.711,30.63 21.569,30.743 21.409,30.743ZM18.15,35.473C17.897,35.473 17.62,35.442 17.317,35.371C16.707,35.227 16.277,34.872 16.137,34.396C16.019,33.995 16.127,33.571 16.426,33.261C16.814,32.859 17.429,32.727 18.121,32.903C18.302,32.949 18.412,33.134 18.366,33.316C18.32,33.496 18.137,33.607 17.953,33.561C17.508,33.447 17.128,33.511 16.915,33.732C16.787,33.864 16.74,34.041 16.788,34.205C16.857,34.441 17.107,34.626 17.473,34.711C18.653,34.988 19.306,34.525 19.647,34.086C20.155,33.433 20.215,32.548 20.034,32.201C19.612,31.389 17.985,31.209 17.394,31.208C17.207,31.208 17.055,31.056 17.055,30.869C17.055,30.682 17.207,30.53 17.394,30.53C17.497,30.53 19.936,30.545 20.636,31.889C20.941,32.474 20.854,33.64 20.182,34.503C19.874,34.897 19.239,35.473 18.15,35.473ZM13.222,13.222C13.222,14.613 12.376,15.741 11.333,15.741C10.29,15.741 9.444,14.614 9.444,13.222C9.444,11.831 10.289,10.703 11.333,10.703C12.376,10.704 13.222,11.831 13.222,13.222ZM28.886,10.271C29.108,10.271 29.331,10.202 29.523,10.058C29.993,9.706 30.087,9.04 29.735,8.571C26.269,3.949 21.643,3.896 21.448,3.896C20.861,3.896 20.386,4.372 20.386,4.959C20.386,5.544 20.859,6.019 21.444,6.021C21.61,6.023 25.236,6.112 28.036,9.846C28.244,10.124 28.563,10.271 28.886,10.271ZM20.778,13.222C20.778,14.613 21.624,15.741 22.667,15.741C23.71,15.741 24.556,14.614 24.556,13.222C24.556,11.831 23.711,10.703 22.667,10.703C21.623,10.704 20.778,11.831 20.778,13.222ZM5.114,10.271C4.892,10.271 4.669,10.202 4.477,10.058C4.008,9.706 3.913,9.04 4.265,8.571C7.731,3.949 12.357,3.896 12.552,3.896C13.139,3.896 13.614,4.372 13.614,4.959C13.614,5.544 13.141,6.019 12.556,6.021C12.39,6.023 8.764,6.112 5.964,9.846C5.756,10.124 5.437,10.271 5.114,10.271Z"
++      android:fillColor="#65471B"/>
++</vector>
+diff --git a/app/src/main/res/drawable/neutral.xml b/app/src/main/res/drawable/neutral.xml
+new file mode 100644
+index 0000000..08dea5f
+--- /dev/null
++++ b/app/src/main/res/drawable/neutral.xml
+@@ -0,0 +1,18 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M36,18C36,27.941 27.941,36 18,36C8.06,36 0,27.941 0,18C0,8.06 8.06,0 18,0C27.941,0 36,8.06 36,18Z"
++      android:fillColor="#FFCC4D"/>
++  <path
++      android:pathData="M11.5,20C12.881,20 14,18.433 14,16.5C14,14.567 12.881,13 11.5,13C10.119,13 9,14.567 9,16.5C9,18.433 10.119,20 11.5,20Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M24.5,20C25.881,20 27,18.433 27,16.5C27,14.567 25.881,13 24.5,13C23.119,13 22,14.567 22,16.5C22,18.433 23.119,20 24.5,20Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M25,26H11C10.448,26 10,25.553 10,25C10,24.447 10.448,24 11,24H25C25.553,24 26,24.447 26,25C26,25.553 25.553,26 25,26Z"
++      android:fillColor="#664500"/>
++</vector>
+diff --git a/app/src/main/res/drawable/romantic.xml b/app/src/main/res/drawable/romantic.xml
+new file mode 100644
+index 0000000..4bd268b
+--- /dev/null
++++ b/app/src/main/res/drawable/romantic.xml
+@@ -0,0 +1,18 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M18,36C27.941,36 36,27.941 36,18C36,8.059 27.941,0 18,0C8.059,0 0,8.059 0,18C0,27.941 8.059,36 18,36Z"
++      android:fillColor="#FFCC4D"/>
++  <path
++      android:pathData="M16,16.958C15.581,16.958 15.191,16.693 15.051,16.274C14.848,15.675 14.033,13.958 13,13.958C11.938,13.958 11.112,15.785 10.949,16.274C10.774,16.797 10.211,17.082 9.684,16.906C9.16,16.732 8.877,16.165 9.052,15.641C9.177,15.264 10.356,11.957 13.001,11.957C15.646,11.957 16.824,15.264 16.95,15.641C17.125,16.165 16.842,16.732 16.318,16.906C16.212,16.942 16.105,16.958 16,16.958ZM26,16.958C25.581,16.958 25.191,16.693 25.052,16.274C24.849,15.675 24.033,13.958 23,13.958C21.938,13.958 21.111,15.785 20.948,16.274C20.773,16.797 20.212,17.082 19.683,16.906C19.16,16.732 18.876,16.165 19.051,15.641C19.176,15.264 20.355,11.957 22.999,11.957C25.643,11.957 26.822,15.264 26.947,15.641C27.122,16.165 26.839,16.732 26.315,16.906C26.211,16.942 26.105,16.958 26,16.958ZM27.335,20.691C27.157,20.53 26.891,20.52 26.7,20.662C26.661,20.691 22.778,23.562 18,23.562C13.234,23.562 9.338,20.691 9.3,20.662C9.109,20.52 8.843,20.532 8.665,20.691C8.488,20.851 8.448,21.115 8.571,21.319C8.7,21.534 11.788,26.562 18,26.562C24.212,26.562 27.301,21.534 27.429,21.319C27.552,21.114 27.513,20.852 27.335,20.691Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M21.229,3.947C21.229,4.187 21.259,4.419 21.311,4.643C21.736,7.286 24.675,10.074 26.781,10.84C28.446,10.235 30.627,8.364 31.679,6.301C29.59,3.861 26.86,1.987 23.75,0.939C22.318,1.196 21.229,2.441 21.229,3.947ZM13.743,29.078C13.8,28.836 13.833,28.584 13.833,28.324C13.833,26.491 12.347,25.005 10.514,25.005C9.401,25.005 8.42,25.554 7.817,26.394C7.215,25.555 6.233,25.005 5.12,25.005C3.879,25.005 2.809,25.694 2.24,26.703C4.064,29.998 6.89,32.66 10.308,34.277C11.945,32.926 13.439,30.97 13.743,29.078ZM34.301,25.642C34.019,24.692 33.149,23.995 32.107,23.995C31.336,23.995 30.656,24.375 30.239,24.957C29.822,24.375 29.142,23.995 28.371,23.995C27.101,23.995 26.072,25.024 26.072,26.294C26.072,26.474 26.095,26.648 26.134,26.816C26.441,28.721 28.482,30.712 30.043,31.377C31.819,29.777 33.274,27.83 34.301,25.642Z"
++      android:fillColor="#FFAC33"/>
++  <path
++      android:pathData="M33.625,3.269C33.625,1.577 32.253,0.206 30.562,0.206C29.535,0.206 28.629,0.713 28.073,1.488C27.517,0.713 26.611,0.206 25.584,0.206C23.892,0.206 22.521,1.577 22.521,3.269C22.521,3.509 22.551,3.741 22.603,3.965C23.029,6.608 25.967,9.396 28.073,10.162C30.179,9.396 33.117,6.608 33.542,3.966C33.595,3.741 33.625,3.509 33.625,3.269ZM12.208,28.408C12.208,26.575 10.722,25.089 8.889,25.089C7.776,25.089 6.795,25.638 6.192,26.478C5.59,25.638 4.608,25.089 3.495,25.089C1.662,25.089 0.176,26.575 0.176,28.408C0.176,28.668 0.209,28.919 0.265,29.162C0.726,32.025 3.909,35.046 6.191,35.876C8.473,35.047 11.656,32.026 12.117,29.163C12.175,28.919 12.208,28.667 12.208,28.408ZM35.948,26.127C35.948,24.857 34.919,23.828 33.649,23.828C32.878,23.828 32.198,24.208 31.781,24.79C31.364,24.208 30.684,23.828 29.913,23.828C28.643,23.828 27.614,24.857 27.614,26.127C27.614,26.307 27.637,26.481 27.676,26.649C27.995,28.632 30.2,30.725 31.781,31.299C33.361,30.725 35.567,28.632 35.885,26.649C35.925,26.481 35.948,26.307 35.948,26.127Z"
++      android:fillColor="#DD2E44"/>
++</vector>
+diff --git a/app/src/main/res/drawable/shameful.xml b/app/src/main/res/drawable/shameful.xml
+new file mode 100644
+index 0000000..cf6ae00
+--- /dev/null
++++ b/app/src/main/res/drawable/shameful.xml
+@@ -0,0 +1,15 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="35dp"
++    android:height="32dp"
++    android:viewportWidth="35"
++    android:viewportHeight="32">
++  <path
++      android:pathData="M16,32C24.837,32 32,24.837 32,16C32,7.163 24.837,0 16,0C7.163,0 0,7.163 0,16C0,24.837 7.163,32 16,32Z"
++      android:fillColor="#FFCC4D"/>
++  <path
++      android:pathData="M11.471,11.529C11.471,13.235 10.484,14.617 9.265,14.617C8.046,14.617 7.059,13.235 7.059,11.529C7.059,9.824 8.046,8.441 9.265,8.441C10.483,8.441 11.471,9.824 11.471,11.529ZM23,11.529C23,13.235 22.013,14.617 20.794,14.617C19.576,14.617 18.588,13.235 18.588,11.529C18.588,9.824 19.576,8.441 20.794,8.441C22.013,8.441 23,9.824 23,11.529ZM10.118,27.382C11.883,22.97 21.589,22.97 21.589,24.735C21.588,25.618 14.529,23.853 10.118,27.382Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M32.262,15.5H17C15.489,15.5 14.266,16.844 14.266,18.5C14.266,20.157 15.49,21.5 17,21.5H32.262C33.775,21.5 35,20.157 35,18.5C35,16.844 33.774,15.5 32.262,15.5Z"
++      android:fillColor="#F4900C"/>
++</vector>
+diff --git a/app/src/main/res/drawable/surprised.xml b/app/src/main/res/drawable/surprised.xml
+new file mode 100644
+index 0000000..a05ca5c
+--- /dev/null
++++ b/app/src/main/res/drawable/surprised.xml
+@@ -0,0 +1,24 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M36,18C36,27.941 27.941,36 18,36C8.06,36 0,27.941 0,18C0,8.06 8.06,0 18,0C27.941,0 36,8.06 36,18Z"
++      android:fillColor="#FFCC4D"/>
++  <path
++      android:pathData="M18,33C20.761,33 23,30.314 23,27C23,23.686 20.761,21 18,21C15.239,21 13,23.686 13,27C13,30.314 15.239,33 18,33Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M5.999,11C5.791,11 5.58,10.935 5.4,10.8C4.958,10.469 4.869,9.842 5.2,9.4C8.462,5.05 12.816,5 13,5C13.552,5 14,5.448 14,6C14,6.551 13.555,6.998 13.004,7C12.849,7.002 9.436,7.086 6.8,10.6C6.604,10.862 6.303,11 5.999,11ZM30.001,11C29.696,11 29.397,10.862 29.2,10.6C26.56,7.079 23.139,7.002 22.994,7C22.444,6.994 22,6.544 22.003,5.995C22.006,5.444 22.45,5 23,5C23.184,5 27.537,5.05 30.8,9.4C31.132,9.842 31.042,10.469 30.6,10.8C30.42,10.935 30.21,11 30.001,11Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M18,23C16.343,23 15,24.79 15,27H21C21,24.79 19.657,23 18,23Z"
++      android:fillColor="#F5F8FA"/>
++  <path
++      android:pathData="M12,18C13.381,18 14.5,16.433 14.5,14.5C14.5,12.567 13.381,11 12,11C10.619,11 9.5,12.567 9.5,14.5C9.5,16.433 10.619,18 12,18Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M24,18C25.381,18 26.5,16.433 26.5,14.5C26.5,12.567 25.381,11 24,11C22.619,11 21.5,12.567 21.5,14.5C21.5,16.433 22.619,18 24,18Z"
++      android:fillColor="#664500"/>
++</vector>
+diff --git a/app/src/main/res/drawable/suspicious.xml b/app/src/main/res/drawable/suspicious.xml
+new file mode 100644
+index 0000000..07a2544
+--- /dev/null
++++ b/app/src/main/res/drawable/suspicious.xml
+@@ -0,0 +1,18 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M36,18C36,27.941 27.941,36 18,36C8.059,36 0,27.941 0,18C0,8.059 8.059,0 18,0C27.941,0 36,8.059 36,18Z"
++      android:fillColor="#FFCC4D"/>
++  <path
++      android:pathData="M12,19.25C13.381,19.25 14.5,18.019 14.5,16.5C14.5,14.981 13.381,13.75 12,13.75C10.619,13.75 9.5,14.981 9.5,16.5C9.5,18.019 10.619,19.25 12,19.25Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M24,20C25.381,20 26.5,18.433 26.5,16.5C26.5,14.567 25.381,13 24,13C22.619,13 21.5,14.567 21.5,16.5C21.5,18.433 22.619,20 24,20Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M7.102,12.559C7.351,12.735 7.676,12.795 7.987,12.694C12.174,11.339 15.014,13.248 15.133,13.33C15.586,13.642 16.208,13.531 16.523,13.08C16.838,12.629 16.731,12.009 16.282,11.692C16.132,11.586 12.546,9.117 7.372,10.791C6.846,10.961 6.558,11.525 6.729,12.05C6.797,12.264 6.932,12.438 7.102,12.559ZM25,26H11C10.448,26 10,25.553 10,25C10,24.447 10.448,24 11,24H25C25.553,24 26,24.447 26,25C26,25.553 25.553,26 25,26ZM30.001,10.408C29.633,10.408 29.27,10.247 29.022,9.937C27.627,8.186 24.723,6.65 23.708,6.65C23.066,6.65 21.783,7.561 21.104,8.218C20.608,8.7 19.816,8.685 19.337,8.19C18.857,7.695 18.868,6.905 19.361,6.424C19.752,6.044 21.797,4.149 23.708,4.149C25.713,4.149 29.246,6.205 30.978,8.378C31.409,8.918 31.319,9.704 30.78,10.134C30.549,10.319 30.273,10.408 30.001,10.408Z"
++      android:fillColor="#664500"/>
++</vector>
+diff --git a/app/src/main/res/drawable/tense.xml b/app/src/main/res/drawable/tense.xml
+new file mode 100644
+index 0000000..97e1de8
+--- /dev/null
++++ b/app/src/main/res/drawable/tense.xml
+@@ -0,0 +1,21 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M36,18C36,27.941 27.941,36 18,36C8.06,36 0,27.941 0,18C0,8.06 8.06,0 18,0C27.941,0 36,8.06 36,18Z"
++      android:fillColor="#FFCC4D"/>
++  <path
++      android:pathData="M12,17C13.381,17 14.5,15.433 14.5,13.5C14.5,11.567 13.381,10 12,10C10.619,10 9.5,11.567 9.5,13.5C9.5,15.433 10.619,17 12,17Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M24,17C25.381,17 26.5,15.433 26.5,13.5C26.5,11.567 25.381,10 24,10C22.619,10 21.5,11.567 21.5,13.5C21.5,15.433 22.619,17 24,17Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M25,21C27.209,21 29,22.791 29,25C29,27.209 27.209,29 25,29H11C8.791,29 7,27.209 7,25C7,22.791 8.791,21 11,21H25Z"
++      android:fillColor="#ffffff"/>
++  <path
++      android:pathData="M25,20H11C8.243,20 6,22.243 6,25C6,27.757 8.243,30 11,30H25C27.757,30 30,27.757 30,25C30,22.243 27.757,20 25,20ZM25,22C26.483,22 27.71,23.084 27.949,24.5H24.5V22H25ZM23.5,22V24.5H20.5V22H23.5ZM19.5,22V24.5H16.5V22H19.5ZM15.5,22V24.5H12.5V22H15.5ZM11,22H11.5V24.5H8.051C8.29,23.084 9.517,22 11,22ZM11,28C9.517,28 8.29,26.916 8.051,25.5H11.5V28H11ZM12.5,28V25.5H15.5V28H12.5ZM16.5,28V25.5H19.5V28H16.5ZM20.5,28V25.5H23.5V28H20.5ZM25,28H24.5V25.5H27.949C27.71,26.916 26.483,28 25,28Z"
++      android:fillColor="#664500"/>
++</vector>
+diff --git a/buildSrc/build/classes/kotlin/main/META-INF/buildSrc.kotlin_module b/buildSrc/build/classes/kotlin/main/META-INF/buildSrc.kotlin_module
+new file mode 100644
+index 0000000000000000000000000000000000000000..3aa63618ce3a770e72020d4f312e3de7744d8bea
+GIT binary patch
+literal 24
+YcmZQzU|?ooU|<Ad4j={tB?c`900FE3SpWb4
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/classes/kotlin/main/ProjectConfig.class b/buildSrc/build/classes/kotlin/main/ProjectConfig.class
+new file mode 100644
+index 0000000000000000000000000000000000000000..b6ec5fac53b5616f6aef7648d72816975c0bb9d9
+GIT binary patch
+literal 935
+zcmZWn-%k@k5dL=CUav=i0}<NdFT@{!+5$1Yh$cuhxujG>Nu%Lu+pcxXb<f;w36DG&
+z{t%yhH9nANVhFzZM;T`e5h~4PX1;G{zn#v^??2yv0(gdHhS4{1)Rir>5$X4;lLce&
+zyJAmNLZLgA*G+qtMT)^$Q(Bql45@|1MjjbB9@5A%q|FDFFpO7+l%6uUYprl_#{;*C
+zZcwXluh%wS<}nH{N8}j8d^L(Ym98|+SSX!Tgw~M}Mnx3YB2(*!AxU|ysP|EYvfkch
+zU_pwipQDm`N)uyIfgxu^+>vIG;>&#_bwVl)8C%CNSv~(-brUPyA>GVM`EmJ)iz35B
+zbvH6pZ)H;&(H2I~G4JhJab}Hc4d`{MfbT1dsC~S>!tm+%pycra_qcz2;BnUmu4hAk
+zj9|+Bb;t|H2djLUy~w)!<g>$lzBT5jN_;u}_T+HeGL%nLhA3y4%3jWL|D#U6I5}I(
+zDzg>3&AtlT^|(c&9GXda*D%a(^|etw8R$KgsAeeF&pS@*KzooFp-n@CeM!UJh}z`F
+zt4hmSzt@!UwxBz<ol#4K4G}Ag&q%Kx_2ZU&MU!GEo;}pK^bA&L_GxNh21UCHRP!Ps
+zhrCa|hzU$myhJg_6~a>&@KwUo7qC5_L4h()^GicooOoJQQhPvZ74p;~WR{NLejUg^
+zBx{dt;~tUCpC%wjWzo<v^6&BtN!j1X5Ab(K$bZAQm9RCI2X=w<fq(>N>CJ09NCmha
+p;6{L(xJ4o60^G*@4p@RaxVr-{vERJ}PJ)R+Ff*`I38oX={|m{~yuJVc
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/buildSrcjar-classes.txt b/buildSrc/build/kotlin/buildSrcjar-classes.txt
+new file mode 100644
+index 0000000..d867065
+--- /dev/null
++++ b/buildSrc/build/kotlin/buildSrcjar-classes.txt
+@@ -0,0 +1 @@
++C:\Users\pbana\Documents\DiaryApp2\buildSrc\build\classes\kotlin\main\ProjectConfig.class
+\ No newline at end of file
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab
+new file mode 100644
+index 0000000000000000000000000000000000000000..f2275dc8f99153aab5fc091b17afd7a0aa4d497d
+GIT binary patch
+literal 4096
+zcmbR3vzw2Zfq{V$h~Yp0!s-B04M6-K2tXn*HJng3j1QCJ0x^I9SsWsQpS1Z0F(1FG
+sQQ6TD7!85Z5Eu=C(GVC7fzc2c4S~@R7!85Z5Eu=C(GVC70dhkC04&xD82|tP
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.keystream b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.keystream
+new file mode 100644
+index 0000000000000000000000000000000000000000..80af6fa768668246e6adb3e2dfb0d095b5116726
+GIT binary patch
+literal 4096
+zcmeIu!3lsM7=Y1+@fa;(9qN)u#~(tZLL&u}=5G$+dn3GF8M`i%-u7{}O5Wn-aUn@`
+mpA%DZJbcwTo#7hp+JONE7+`<_1{h#~0R|XgfB^<t9QXmnBoG4t
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.keystream.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.keystream.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..8aefb3a016d42d70f0e8d2ac993e527fd650eb36
+GIT binary patch
+literal 8
+LcmZQz00UhB05t$E
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..2a17e6e5bd9e7704741c2a3ae485eb2d2e302b87
+GIT binary patch
+literal 8
+LcmZQz0D}$y0FVHQ
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.values.at b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.values.at
+new file mode 100644
+index 0000000000000000000000000000000000000000..76dc84368e9c72e7409d0fda5ed7291c189585bc
+GIT binary patch
+literal 585
+zcmdOA@JLNeNi9+cN=?o$N>OmjFH#6dEh^3|E=kQR@klJr@J%cTOUx-v4KB$qN=#2}
+zVX#&S2=e!Gbq<Ml@eERlNh;0ENr_3$Nh~f-Esn{~FUiTwi^)v{5&=c|S*gh-&iQ$1
+rndy3974F39^>qz#)b;dpgBTxNl&l9aIX*W(r8H;M6`)WaRAB)CFCW%y
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab_i b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab_i
+new file mode 100644
+index 0000000000000000000000000000000000000000..fa4106774ba4811505b3303afe5a5a8a155d3608
+GIT binary patch
+literal 32768
+zcmeIuK@9*P5CpL$2*3y;aez#0fB@e2>KK@$Y3UIG0t5&UAV7cs0RjXF5FkK+009C7
+z2$Tz~cbsRB^06TS0t5&UAV7cs0RjXF5FkK+009C72oNAZfB*pk1PBlyK!5-N0t5&U
+zAV7cs0RjXF5FkK+009C72oNAZfB*pk1PBlyK!5-N0t5&UAV7cs0RjXF5FkK+009C7
+e2oNAZfB*pk1PBlyK!5-N0t5&UAV7e?SKtDnB?2}8
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab_i.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab_i.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..131e265740f37d77b7c4a3676d2a7704ca3e4a29
+GIT binary patch
+literal 8
+McmZQz0D%Su009U9fdBvi
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab
+new file mode 100644
+index 0000000000000000000000000000000000000000..709063a3781a67eed1653820555f5327b2f502f0
+GIT binary patch
+literal 4096
+zcmbR3vzw2Zfq{V$h~Yp0!s-B04M6-K2tXn*HEd8ej1QCJ0x^I9SsWsQpF9dRAHS+m
+r+0hUf4S~@R7!85Z5Eu=C(GVC7fzc2c4S~@R7!85Z5Eu;sazg+BR>2CO
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.keystream b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.keystream
+new file mode 100644
+index 0000000000000000000000000000000000000000..348d407868ef6732145ba2580200be733fdeb8d4
+GIT binary patch
+literal 4096
+zcmeIuK@9*9002M*q*6c!!+5Zn{?o(mB3#U8&suKUtBoEoV8DO@0|pEjFkrxd0Rsj;
+F9C(mv1v>x$
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.keystream.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.keystream.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..46715fa2fd463d2538b1aa407ae094d66dfb3832
+GIT binary patch
+literal 8
+LcmZQz00TY%02Tlb
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..2a17e6e5bd9e7704741c2a3ae485eb2d2e302b87
+GIT binary patch
+literal 8
+LcmZQz0D}$y0FVHQ
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.values.at b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.values.at
+new file mode 100644
+index 0000000000000000000000000000000000000000..8f2832759fbe28d93f7213ae9b17f0d61001a3bb
+GIT binary patch
+literal 61
+zcmdOA@JLNeNi9+cN=?o$N>OmjFH#6dEh^3|E=kQR@klJr@J%cTOUx-v4KB$qN=#2>
+IWMF_J0DvbF2mk;8
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab_i b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab_i
+new file mode 100644
+index 0000000000000000000000000000000000000000..fb5408a963af8184be18b8558a1c937eb1242b08
+GIT binary patch
+literal 32768
+zcmeIuQ4s(T6h*;nL{>l#5d=|-6h7YUX>c|zJt9DW009C72oNAZfB*pk1PBlyK!5-N
+z0t5&UAV7cs0RjXF5FkK+009C72oNAZfB*pk1PBl)BQW2|8vB$PGD3g=0RjXF5FkK+
+z009C72oNAZfB*pk1PBlyK!5-N0t5&UAV7cs0RjXF5FkK+009C72oNAZfB*pk1PBly
+cK!5-N0t5&UAV7cs0RjXF5FkK+0D(^e7w??|1poj5
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab_i.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab_i.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..131e265740f37d77b7c4a3676d2a7704ca3e4a29
+GIT binary patch
+literal 8
+McmZQz0D%Su009U9fdBvi
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab
+new file mode 100644
+index 0000000000000000000000000000000000000000..21f7ccdaf7c607f007f31a80859b9ca8397cfc15
+GIT binary patch
+literal 4096
+zcmbR3vzw2Zfq{V$h~Yp0!s-B04M6-K2tXn*HJng3j1QCJ1u=jCSsWsQpLB$pk6+cO
+r>}Uv#hQMeDjE2By2#kinXb6mkz-S1JhQMeDjE2By2#kgRxgh`mxY-IK
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream
+new file mode 100644
+index 0000000000000000000000000000000000000000..348d407868ef6732145ba2580200be733fdeb8d4
+GIT binary patch
+literal 4096
+zcmeIuK@9*9002M*q*6c!!+5Zn{?o(mB3#U8&suKUtBoEoV8DO@0|pEjFkrxd0Rsj;
+F9C(mv1v>x$
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..46715fa2fd463d2538b1aa407ae094d66dfb3832
+GIT binary patch
+literal 8
+LcmZQz00TY%02Tlb
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..2a17e6e5bd9e7704741c2a3ae485eb2d2e302b87
+GIT binary patch
+literal 8
+LcmZQz0D}$y0FVHQ
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.values.at b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.values.at
+new file mode 100644
+index 0000000000000000000000000000000000000000..d90e9ac6add54c9aeacb2ac9856a3149f46fd545
+GIT binary patch
+literal 237
+zcmdOA@JLNeNi9+cN=?o$N>OmjFH#6dEh^3|E=kQR@klJr@J%cTOUx-v4KB$qN=#4H
+zWzbOx2=e!Gbq<Ml@eERlDK1Km$xY16i^)nXON<F9%FjwoE^*G!OUq2x%PtvI$^kSd
+BQosNJ
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i
+new file mode 100644
+index 0000000000000000000000000000000000000000..fb5408a963af8184be18b8558a1c937eb1242b08
+GIT binary patch
+literal 32768
+zcmeIuQ4s(T6h*;nL{>l#5d=|-6h7YUX>c|zJt9DW009C72oNAZfB*pk1PBlyK!5-N
+z0t5&UAV7cs0RjXF5FkK+009C72oNAZfB*pk1PBl)BQW2|8vB$PGD3g=0RjXF5FkK+
+z009C72oNAZfB*pk1PBlyK!5-N0t5&UAV7cs0RjXF5FkK+009C72oNAZfB*pk1PBly
+cK!5-N0t5&UAV7cs0RjXF5FkK+0D(^e7w??|1poj5
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..131e265740f37d77b7c4a3676d2a7704ca3e4a29
+GIT binary patch
+literal 8
+McmZQz0D%Su009U9fdBvi
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab
+new file mode 100644
+index 0000000000000000000000000000000000000000..19fd4f53b3d32bfa353bce01e974b1552858cc6e
+GIT binary patch
+literal 4096
+zcmbR3vzw2Zfq{V$h~Yp0!s-B04M6-K2tXn*HEd8ej1QAz2Qh#ESsWsQpS1Z0F(1FG
+sQQ6TD7!85Z5Eu=C(GVC7fzc2c4S~@R7!85Z5Eu=C(GVC70dhkC0M17W6951J
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab.keystream b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab.keystream
+new file mode 100644
+index 0000000000000000000000000000000000000000..348d407868ef6732145ba2580200be733fdeb8d4
+GIT binary patch
+literal 4096
+zcmeIuK@9*9002M*q*6c!!+5Zn{?o(mB3#U8&suKUtBoEoV8DO@0|pEjFkrxd0Rsj;
+F9C(mv1v>x$
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab.keystream.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab.keystream.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..46715fa2fd463d2538b1aa407ae094d66dfb3832
+GIT binary patch
+literal 8
+LcmZQz00TY%02Tlb
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..2a17e6e5bd9e7704741c2a3ae485eb2d2e302b87
+GIT binary patch
+literal 8
+LcmZQz0D}$y0FVHQ
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab.values.at b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab.values.at
+new file mode 100644
+index 0000000000000000000000000000000000000000..bcf14358ce07e24804b5f948c459c8d30ae2c11a
+GIT binary patch
+literal 585
+zcmdT>K?=e^44i`sdh+OT^#O_?K0$gB#6s^&H`K-2E!h=(fDd=}AU%pV4GbYO84{8W
+z3b9VqoTU!x%ps^biAEojbg8iMa<qMA+q;x0sBPp4#)z1qM!*d{JX#1!I9#*1A|@0(
+zx`AAfoFc(O(XcxWQtqFVdXN-)BAtP`Vx{jYPaI>5HFm`Q^A^jW*y2BLk#G0yM_w%v
+BU8w*7
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab_i b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab_i
+new file mode 100644
+index 0000000000000000000000000000000000000000..fb5408a963af8184be18b8558a1c937eb1242b08
+GIT binary patch
+literal 32768
+zcmeIuQ4s(T6h*;nL{>l#5d=|-6h7YUX>c|zJt9DW009C72oNAZfB*pk1PBlyK!5-N
+z0t5&UAV7cs0RjXF5FkK+009C72oNAZfB*pk1PBl)BQW2|8vB$PGD3g=0RjXF5FkK+
+z009C72oNAZfB*pk1PBlyK!5-N0t5&UAV7cs0RjXF5FkK+009C72oNAZfB*pk1PBly
+cK!5-N0t5&UAV7cs0RjXF5FkK+0D(^e7w??|1poj5
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab_i.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/constants.tab_i.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..131e265740f37d77b7c4a3676d2a7704ca3e4a29
+GIT binary patch
+literal 8
+McmZQz0D%Su009U9fdBvi
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab
+new file mode 100644
+index 0000000000000000000000000000000000000000..2830027a434f9a38a8db7c29b525351c45b88067
+GIT binary patch
+literal 4096
+zcmbR3vzw2Zfq{V$h~Yp0!s-B04M6-K2tXn*H8AxsK1_}U!~g<hafk?h(h+JtepREg
+qqaiRF0;3@?8UmvsFd71*Aut*OqaiRF0;3@?8UmvsFd72nh5!J}t_l+X
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream
+new file mode 100644
+index 0000000000000000000000000000000000000000..348d407868ef6732145ba2580200be733fdeb8d4
+GIT binary patch
+literal 4096
+zcmeIuK@9*9002M*q*6c!!+5Zn{?o(mB3#U8&suKUtBoEoV8DO@0|pEjFkrxd0Rsj;
+F9C(mv1v>x$
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..46715fa2fd463d2538b1aa407ae094d66dfb3832
+GIT binary patch
+literal 8
+LcmZQz00TY%02Tlb
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..2a17e6e5bd9e7704741c2a3ae485eb2d2e302b87
+GIT binary patch
+literal 8
+LcmZQz0D}$y0FVHQ
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.values.at b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.values.at
+new file mode 100644
+index 0000000000000000000000000000000000000000..d90e9ac6add54c9aeacb2ac9856a3149f46fd545
+GIT binary patch
+literal 237
+zcmdOA@JLNeNi9+cN=?o$N>OmjFH#6dEh^3|E=kQR@klJr@J%cTOUx-v4KB$qN=#4H
+zWzbOx2=e!Gbq<Ml@eERlDK1Km$xY16i^)nXON<F9%FjwoE^*G!OUq2x%PtvI$^kSd
+BQosNJ
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i
+new file mode 100644
+index 0000000000000000000000000000000000000000..fb5408a963af8184be18b8558a1c937eb1242b08
+GIT binary patch
+literal 32768
+zcmeIuQ4s(T6h*;nL{>l#5d=|-6h7YUX>c|zJt9DW009C72oNAZfB*pk1PBlyK!5-N
+z0t5&UAV7cs0RjXF5FkK+009C72oNAZfB*pk1PBl)BQW2|8vB$PGD3g=0RjXF5FkK+
+z009C72oNAZfB*pk1PBlyK!5-N0t5&UAV7cs0RjXF5FkK+009C72oNAZfB*pk1PBly
+cK!5-N0t5&UAV7cs0RjXF5FkK+0D(^e7w??|1poj5
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..131e265740f37d77b7c4a3676d2a7704ca3e4a29
+GIT binary patch
+literal 8
+McmZQz0D%Su009U9fdBvi
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab
+new file mode 100644
+index 0000000000000000000000000000000000000000..7abb3b31f12c3a98a9fcb5589fe62d2791e826b8
+GIT binary patch
+literal 4096
+zcmbR3vzw2Nfq{Vuh~Yp0!kPf28i4pe5P(ErYJ`AnMkoe}g8)cQ6wHFiL77BRZ~pxM
+z&j(Z~38abAFsf)Y1V%$(Gz3ONU^E0qLtr!nMnhmU1V%$(Gz3ONU^E0qLx7|Z001Ot
+B4hjGO
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.keystream b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.keystream
+new file mode 100644
+index 0000000000000000000000000000000000000000..257a1437ff0114d2c9dcc273a4bcf46d92f606b7
+GIT binary patch
+literal 4096
+zcmeIuQ4N4F3`J243@I})132J=6;c>|2`T>ZLGF=o%JS&6Et_KZW3HESc&xYjJ8S|2
+X3^2d|0}L?000Rs#zyJdb{9)h&I$#Rz
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.keystream.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.keystream.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..a930d6b3c49e3ed8f18f22ab58f3c09f10908093
+GIT binary patch
+literal 8
+LcmZQz00UV703`q(
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..01bdaa1da7d937c7e7d98e54ba912f88ab95c7f2
+GIT binary patch
+literal 8
+LcmZQz0D}nt0GI%g
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.values.at b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.values.at
+new file mode 100644
+index 0000000000000000000000000000000000000000..d20d72bc3e74a6a36076b1ab5b2ae80f020010db
+GIT binary patch
+literal 1033
+zcmeH_u};G<5QeW8NL>%bW7H`yl`d4QY#^ZyAXN>DSl#4E4XGVDuEZ1YAWS?7Gmpf%
+zQ^g~op7iVP`){y+*;lY2U6apOR5@Sg_s-`_^1bN;*|5<4=23U0Zg*4!=XFCr3B>9q
+z5;K&jK%$6UNS@S~DG}e8!8OhYw?l!SDJoozRWiZ($@9k(vjpZ-=JbGvfA->#ztRz(
+zDdFs4>D?<;;m+9?)7-F`OfO52mD_fvrJ{agOVK-DzBkU6F^RM6rCVd;b`-R4D8x~$
+hcc!fiU!C(FAY;XB1D0Uz>jGx`eoTFQ>;L`3e*s%BzT5x+
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab_i b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab_i
+new file mode 100644
+index 0000000000000000000000000000000000000000..50bdab417cd6bdcfcc8fd717467fac12ef27072b
+GIT binary patch
+literal 32768
+zcmeIuF%f_;5CFj+A{hfI@em0Sl9GuU8VcS9KYI>t<A@d_K!5-N0t5&UAV7cs0RjXF
+z5FkK+009C72oNAZfB*pk1PBlyK!5-N0t5&UAV7cs0RjXF5GW(i^JJWJl^HTZfB*pk
+z1PBlyK!5-N0t5&UAV7cs0RjXF5FkK+009C72oNAZfB*pk1PBlyK!5-N0t5&UAV7cs
+q0Rp83uDpBq{gj?GM}PnU0t5&UAV7cs0RjXF5FkK+009EO5%>V6<_94F
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab_i.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab_i.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..131e265740f37d77b7c4a3676d2a7704ca3e4a29
+GIT binary patch
+literal 8
+McmZQz0D%Su009U9fdBvi
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab
+new file mode 100644
+index 0000000000000000000000000000000000000000..b5c988cc01b77b53025b0672f46aeafd11aa3090
+GIT binary patch
+literal 4096
+zcmbR3vzw2Zfq{V$h~Yp0!s-B04M6-K2tXn*HT+OEj1QB8YJ;l-i4y|~q2?2#c2v!1
+p2#kinXb6mkz-S1JhQMeDjE2By2#kinXb6mkz-S1Jh5+dy001sI3R?gG
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream
+new file mode 100644
+index 0000000000000000000000000000000000000000..80af6fa768668246e6adb3e2dfb0d095b5116726
+GIT binary patch
+literal 4096
+zcmeIu!3lsM7=Y1+@fa;(9qN)u#~(tZLL&u}=5G$+dn3GF8M`i%-u7{}O5Wn-aUn@`
+mpA%DZJbcwTo#7hp+JONE7+`<_1{h#~0R|XgfB^<t9QXmnBoG4t
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..8aefb3a016d42d70f0e8d2ac993e527fd650eb36
+GIT binary patch
+literal 8
+LcmZQz00UhB05t$E
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..2a17e6e5bd9e7704741c2a3ae485eb2d2e302b87
+GIT binary patch
+literal 8
+LcmZQz0D}$y0FVHQ
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.values.at b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.values.at
+new file mode 100644
+index 0000000000000000000000000000000000000000..fe2e584e00898f027c38aeb7fb600ef9eef78c31
+GIT binary patch
+literal 173
+zcmdOA@JLNeNi9+cN=?o$N>OmjFH#6dEh^3|E=kQR@klJr@J%cTOUx-v4KB$qN=#3c
+kW#A1c%FjwoE^*G!OUq2>)632;$;r%%&&^LM&7rL{0O=JzC;$Ke
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab_i b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab_i
+new file mode 100644
+index 0000000000000000000000000000000000000000..fa4106774ba4811505b3303afe5a5a8a155d3608
+GIT binary patch
+literal 32768
+zcmeIuK@9*P5CpL$2*3y;aez#0fB@e2>KK@$Y3UIG0t5&UAV7cs0RjXF5FkK+009C7
+z2$Tz~cbsRB^06TS0t5&UAV7cs0RjXF5FkK+009C72oNAZfB*pk1PBlyK!5-N0t5&U
+zAV7cs0RjXF5FkK+009C72oNAZfB*pk1PBlyK!5-N0t5&UAV7cs0RjXF5FkK+009C7
+e2oNAZfB*pk1PBlyK!5-N0t5&UAV7e?SKtDnB?2}8
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab_i.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab_i.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..131e265740f37d77b7c4a3676d2a7704ca3e4a29
+GIT binary patch
+literal 8
+McmZQz0D%Su009U9fdBvi
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/counters.tab b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/counters.tab
+new file mode 100644
+index 0000000..26d3b09
+--- /dev/null
++++ b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/counters.tab
+@@ -0,0 +1,2 @@
++4
++0
+\ No newline at end of file
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab
+new file mode 100644
+index 0000000000000000000000000000000000000000..563e1e24582df0b20d4fc5240065d2a718ff5ab6
+GIT binary patch
+literal 4096
+zcmbR3vzw2Zfq{V$h~Yp0!s-B04M6-K2tXn*H9Sx@j1QCJ1u=jCSsWsQpWFjAAHS+m
+r+0hUf4S~@R7!85Z5Eu=C(GVC7fzc2c4S~@R7!85Z5Eu;sazg+BSxE|@
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.keystream b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.keystream
+new file mode 100644
+index 0000000000000000000000000000000000000000..80af6fa768668246e6adb3e2dfb0d095b5116726
+GIT binary patch
+literal 4096
+zcmeIu!3lsM7=Y1+@fa;(9qN)u#~(tZLL&u}=5G$+dn3GF8M`i%-u7{}O5Wn-aUn@`
+mpA%DZJbcwTo#7hp+JONE7+`<_1{h#~0R|XgfB^<t9QXmnBoG4t
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.keystream.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.keystream.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..8aefb3a016d42d70f0e8d2ac993e527fd650eb36
+GIT binary patch
+literal 8
+LcmZQz00UhB05t$E
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..2a17e6e5bd9e7704741c2a3ae485eb2d2e302b87
+GIT binary patch
+literal 8
+LcmZQz0D}$y0FVHQ
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.values.at b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.values.at
+new file mode 100644
+index 0000000000000000000000000000000000000000..3e23c2afbb0619148c732de9f2b30b545a113e89
+GIT binary patch
+literal 73
+zcmdOA@JLNeNi9+cN=?o$N>OmjFH#6dEh^3|E=kQR@klJr@J%cTOUx-v4KB$qN=#2>
+PVE_Rz$p|Kyz$7yOSymDn
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab_i b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab_i
+new file mode 100644
+index 0000000000000000000000000000000000000000..e93ca88c2802c57df8c832088ed7406c474d32b4
+GIT binary patch
+literal 32768
+zcmeIuF%1A95Cp*^I716T2U<}A622vwt+$%A^oRff0t5&UAV7cs0RjXF5FkK+009C7
+z2oNAZfB*pk1PBlyK!89|V83t8af-W*009C72oNAZfB*pk1PBlyK!5-N0t5&UAV7cs
+z0RjXF5FkK+009C72oNAZfB*pk1PBlyK!5-N0t5&UAV7cs0RjXF5FkK+009C72oNAZ
+cfB*pk1PBlyK!5-N0t5&UAV7cs0RrC$T-Eyma{vGU
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab_i.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/file-to-id.tab_i.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..131e265740f37d77b7c4a3676d2a7704ca3e4a29
+GIT binary patch
+literal 8
+McmZQz0D%Su009U9fdBvi
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab
+new file mode 100644
+index 0000000000000000000000000000000000000000..565d8a6d857064478cce5c47861fe6a7479a12d4
+GIT binary patch
+literal 4096
+zcmeH@yA6Oa3`EUGqC>1i&rsQehCLWA+<^sjS>T=ITpY(&ynQ?8AtE}}tL3>JvZAVz
+zEJhzv{;&TXzfJe_%PQHo%=yl;_vy}C)wgz;LjVF0fB*y_009U<00Izz00bb=CU5}{
+C5ErZf
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.keystream b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.keystream
+new file mode 100644
+index 0000000000000000000000000000000000000000..6e7a9264288f38ee8207472c5349625584ec1699
+GIT binary patch
+literal 4096
+qcmeIu0Sy2E2m_$&`**g7g9v1{!GHk+1`HT5V8DO@0|pEjcs+1$@&E?_
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.keystream.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.keystream.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..eb529631c5a3c8b3de17f3b5aa25a95498f74e2e
+GIT binary patch
+literal 8
+LcmZQz00R~P01N;H
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..93a595bd1bbabaf1bd4ee4909ac49e65e67fa3f4
+GIT binary patch
+literal 8
+LcmZQz0D}bp0H^?=
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.values.at b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.values.at
+new file mode 100644
+index 0000000000000000000000000000000000000000..d90e9ac6add54c9aeacb2ac9856a3149f46fd545
+GIT binary patch
+literal 237
+zcmdOA@JLNeNi9+cN=?o$N>OmjFH#6dEh^3|E=kQR@klJr@J%cTOUx-v4KB$qN=#4H
+zWzbOx2=e!Gbq<Ml@eERlDK1Km$xY16i^)nXON<F9%FjwoE^*G!OUq2x%PtvI$^kSd
+BQosNJ
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab_i b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab_i
+new file mode 100644
+index 0000000000000000000000000000000000000000..6936967cac95840ed14e6716e9ae347c2f5793da
+GIT binary patch
+literal 32768
+zcmeIuu?YYm3`N1H%UfDHuD{e3<N^;8NOd)8)HO4EODpxX)ANwq5FkK+009C72oNAZ
+zfB*pk1PBlyK!5-N0t5&UAV7cs0RjXF5FkK+009C72oNAZfB*pk1PBlyK!5-N0t5&U
+zAV7cs0RjXF5FkK+009C72oNAZfB*pk1PBlyK!5-N0t5&UAV7cs0RjXF5FkK+009C7
+f2oNAZfB*pk1PBlyK!5-N0t5&UAV7csf!_oUV?F`B
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab_i.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/id-to-file.tab_i.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..131e265740f37d77b7c4a3676d2a7704ca3e4a29
+GIT binary patch
+literal 8
+McmZQz0D%Su009U9fdBvi
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab
+new file mode 100644
+index 0000000000000000000000000000000000000000..94ec4502e10a2a60a7992b5fdba5e6bf35e446a7
+GIT binary patch
+literal 4096
+zcmbR3vzw0r2$(?x3<y9NGk{bB5dQ}PkO)i-Cy>nu#UODI0Le*!Sr9oWlPGEi(0q`Y
+zlYq1kknVxnN0jDKMWZ1w8UmvsFd71*Aut*OqaiRF0;3@?8UmvsFd71*Aut*O1VaD-
+D^s^Dl
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab.keystream b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab.keystream
+new file mode 100644
+index 0000000000000000000000000000000000000000..c6059b279f91dea75b273be6de4d3624d8e482c7
+GIT binary patch
+literal 4096
+zcmZQPzPfle0}wDWFv_3b^HP$Laf+3XA&3DI9R;HyFd71*Aut*OqaiRF0;3@?8Umvs
+UFd71*Aut*OqaiRF0>dB#09fG&JOBUy
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab.keystream.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab.keystream.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..38069dbfc2c082ce4d7626ff386bc8b2ff0beff1
+GIT binary patch
+literal 8
+LcmZQz00U_N03!e#
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..a9f80ae0249093f1db8b14f71053acce35747e3d
+GIT binary patch
+literal 8
+LcmZQz0D~C-0H6Sw
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab.values.at b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab.values.at
+new file mode 100644
+index 0000000000000000000000000000000000000000..67ce9f7d92026dd4226a50bfc3016658090cee20
+GIT binary patch
+literal 121
+zcmdOA@JLNeNi9+cN=?o$N>OmjFH#6dEh^3|E=kQR@klJr@J%cTOUx-v4KB$qN=#2>
+ZVE_RXQV1x($bwEXfklu>X0Qm91OU`E66gQ`
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab_i b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab_i
+new file mode 100644
+index 0000000000000000000000000000000000000000..2fc0663daff6f36546c6d6b7057ac0da6cb898f8
+GIT binary patch
+literal 32768
+zcmeIuu?c`M6a>&fN;~&(87H!|bQ34A5!^?xNvD5^NK(8T;O=-Sr<{ZU0RjXF5FkK+
+z009C72oNAZfB*pk1PBlyK%kny7ESkD_G*QS2oNAZfB*pk1PBlyK!5-N0t5&UAV8oi
+zfhFEt?>TjK${7L#2oNAZfB*pk1eyq}u{u7((PZ2x0RjXF5FkK+009C72oNAZfB*pk
+z1PBlyK!5-N0t5&UAV7cs0RjXF5FkK+009C72oNAZfB*pk1PBlyK!5-N0t5&UAV7cs
+I0Rq1Wd`Qm;2mk;8
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab_i.len b/buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab_i.len
+new file mode 100644
+index 0000000000000000000000000000000000000000..131e265740f37d77b7c4a3676d2a7704ca3e4a29
+GIT binary patch
+literal 8
+McmZQz0D%Su009U9fdBvi
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/cacheable/last-build.bin b/buildSrc/build/kotlin/compileKotlin/cacheable/last-build.bin
+new file mode 100644
+index 0000000000000000000000000000000000000000..878bae47aaeeba4dad62d28be30286964c49adfd
+GIT binary patch
+literal 18
+YcmZ4UmVvdLhk=2yd!~t-76T9f05InR>i_@%
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/kotlin/compileKotlin/local-state/build-history.bin b/buildSrc/build/kotlin/compileKotlin/local-state/build-history.bin
+new file mode 100644
+index 0000000000000000000000000000000000000000..b5f3533f012e30848657559bab076e10606bef21
+GIT binary patch
+literal 339
+zcmZ4UmVvd3fq~JB0RmWn?CzOD7uBJB5Cs%aWk1RYWHB)a+5|iL>N@-T1&0KMI*0fN
+z*)i}26y;~7CYLzp=cQ$)GjJv6=N4q<qz0#Cqe}se!Vm%)uEpg*JHt)fv_OV46X9~s
+PlEk9))DkQXC&^C$&Td^!
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/libs/buildSrc.jar b/buildSrc/build/libs/buildSrc.jar
+new file mode 100644
+index 0000000000000000000000000000000000000000..5a13c99a88af7bb7220f7349ca13cdce89eb0afd
+GIT binary patch
+literal 1132
+zcmWIWW@Zs#VBp|j@J>q!X8-~w5CH_7K<w)p;;8HC=cdoh5CB)mn3xj2sh;VbG*E#g
+z5CgR%6#6>)dAhj<hv@mbefB+b+Q(a0?;@|auGYCT=Qjr#Trqy|^wCo$B*Q?q7W~#q
+z5C$3|0mSmih9#9|=A;A{CF^D9m*iyT#pmXyl;)%+CnO}K0WnJwADc!%(uE`jH1ndT
+z&NvzY^u}^#1_qG10Y&*)smUeI`FUxX>3YdIiN(dKL9zbAjv}_kx!Z3qJ<!CV`=j*-
+z;|g7Y$K4rCE|Yz;OsAMg&0F?1f_>ZOv~sVCCkH<`*L<4#!(maU;*V$jM)x8+B5vHh
+zv-9~K<MMa+toQ$~`Oo=4a+*Zj{bLum<;?!-Q6F&EMxuGYZkem8$gb$x%bPaZ81bB2
+zb?KB%`iV38Cfz3vew^SsPchqWRZHR)vk5OXn|I&hyKF1BLv)wp-i<rM;_D-i80=x1
+zsLWHmRpVXQ_NAFeon9`{+S1o!pry25Zf2D|kLJ|teO2>AG^FRsvWcav_!X(Oa=D42
+z*i;EFw<EEcL7n>Fd#-S%W}dpC$MbmW=lfYRA~K_s@^*gO@#%=`%)~X@ge6yP{}m;5
+zQP3@5#`m(^qO{&@-WMfa=f6*Jy<&GSGVMpr9{aZ+g}(2o-}Aoky4AY$*!q@)V}DBz
+zcpv|*UDLVu#O^;&x)0axGklc3>}SxoyC)AWOZD&%>C;G`a4J4*r}&D=>-`R1+jJ<W
+zHE;F$Lw?G6!SZZrK{pL~jHPRHL;TsQ!c|v^p4$4k?{cX^YEp}tui!UT-g4Vl9@a5S
+zQ}^D_K3NfbLGJds6}pF(bxb{)zT|qxufphkL1I(R^JT?Zv7I*gtz&A?zG*L4$Y&<S
+z_OSWajE))j{ZslW6VBoPr+vN9ygdT*ojUgf+t^O%zC7FeBC}JdwSD!wM}l__oBa9U
+zlOz4TBj;mC1JhJj=i?XlpABBJ?feD)58vH2>JGn1^ePAmviASk*zm-7%7a^CMvUv&
+zcL+XE%bVDJlVQ8zcGhVR_}=9m^nO#W-#9rzr*v76^~40DgMar2cr!AIFyqcpz|;r?
+z0t{~*K{PyjA#1~yy+DdVU`eAUkc4YP%52CcV9Qfr?O+qikWIjz!_W;w&rk@%jscli
+YvR8mND;r1=3lOq1GBEf9b0Px+0F0lU@c;k-
+
+literal 0
+HcmV?d00001
+
+diff --git a/buildSrc/build/tmp/jar/MANIFEST.MF b/buildSrc/build/tmp/jar/MANIFEST.MF
+new file mode 100644
+index 0000000..59499bc
+--- /dev/null
++++ b/buildSrc/build/tmp/jar/MANIFEST.MF
+@@ -0,0 +1,2 @@
++Manifest-Version: 1.0
++
+diff --git a/buildSrc/src/main/java/ProjectConfig.kt b/buildSrc/src/main/java/ProjectConfig.kt
+index 374a7b4..cc8a1f7 100644
+--- a/buildSrc/src/main/java/ProjectConfig.kt
++++ b/buildSrc/src/main/java/ProjectConfig.kt
+@@ -1,6 +1,6 @@
+ object ProjectConfig {
+-    const val compileSdk = 34
++    const val compileSdk = 33
+     const val minSdk = 24
+-    const val targetSdk = 34
++    const val targetSdk = 33
+     const val extensionVersion = "1.4.6"
+ }
+\ No newline at end of file
+diff --git a/core/ui/.gitignore b/core/ui/.gitignore
+new file mode 100644
+index 0000000..42afabf
+--- /dev/null
++++ b/core/ui/.gitignore
+@@ -0,0 +1 @@
++/build
+\ No newline at end of file
+diff --git a/core/ui/build.gradle b/core/ui/build.gradle
+new file mode 100644
+index 0000000..870d989
+--- /dev/null
++++ b/core/ui/build.gradle
+@@ -0,0 +1,45 @@
++plugins {
++    id 'com.android.library'
++    id 'org.jetbrains.kotlin.android'
++    id 'io.realm.kotlin'
++}
++
++android {
++    namespace 'com.prateektimer.ui'
++    compileSdk ProjectConfig.compileSdk
++
++    defaultConfig {
++        minSdk ProjectConfig.minSdk
++
++        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
++        consumerProguardFiles "consumer-rules.pro"
++    }
++
++    buildTypes {
++        release {
++            minifyEnabled false
++            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
++        }
++    }
++    compileOptions {
++        sourceCompatibility JavaVersion.VERSION_17
++        targetCompatibility JavaVersion.VERSION_17
++    }
++    kotlinOptions {
++       targetCompatibility = JavaVersion.VERSION_17
++    }
++    buildFeatures {
++        compose true
++    }
++    composeOptions {
++        kotlinCompilerExtensionVersion ProjectConfig.extensionVersion
++    }
++}
++
++dependencies {
++    implementation libs.activity.compose
++    implementation libs.material3.compose
++    implementation libs.compose.tooling.preview
++    implementation libs.realm.sync
++    implementation libs.coroutines.core
++}
+\ No newline at end of file
+diff --git a/core/ui/src/main/AndroidManifest.xml b/core/ui/src/main/AndroidManifest.xml
+new file mode 100644
+index 0000000..a5918e6
+--- /dev/null
++++ b/core/ui/src/main/AndroidManifest.xml
+@@ -0,0 +1,4 @@
++<?xml version="1.0" encoding="utf-8"?>
++<manifest xmlns:android="http://schemas.android.com/apk/res/android">
++
++</manifest>
+\ No newline at end of file
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/model/GalleryState.kt b/core/ui/src/main/java/com/prateektimer/ui/GalleryState.kt
+similarity index 95%
+rename from app/src/main/java/com/prateektimer/diaryapp/model/GalleryState.kt
+rename to core/ui/src/main/java/com/prateektimer/ui/GalleryState.kt
+index f5f7a57..776fde9 100644
+--- a/app/src/main/java/com/prateektimer/diaryapp/model/GalleryState.kt
++++ b/core/ui/src/main/java/com/prateektimer/ui/GalleryState.kt
+@@ -1,4 +1,4 @@
+-package com.prateektimer.diaryapp.model
++package com.prateektimer.ui
+ 
+ import android.net.Uri
+ import androidx.compose.runtime.Composable
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/presentation/components/AlertDialog.kt b/core/ui/src/main/java/com/prateektimer/ui/components/AlertDialog.kt
+similarity index 95%
+rename from app/src/main/java/com/prateektimer/diaryapp/presentation/components/AlertDialog.kt
+rename to core/ui/src/main/java/com/prateektimer/ui/components/AlertDialog.kt
+index 3607977..97d7479 100644
+--- a/app/src/main/java/com/prateektimer/diaryapp/presentation/components/AlertDialog.kt
++++ b/core/ui/src/main/java/com/prateektimer/ui/components/AlertDialog.kt
+@@ -1,4 +1,4 @@
+-package com.prateektimer.diaryapp.presentation.components
++package com.prateektimer.ui.components
+ import androidx.compose.material3.*
+ import androidx.compose.runtime.Composable
+ import androidx.compose.ui.text.font.FontWeight
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/presentation/components/DiaryHolder.kt b/core/ui/src/main/java/com/prateektimer/ui/components/DiaryHolder.kt
+similarity index 98%
+rename from app/src/main/java/com/prateektimer/diaryapp/presentation/components/DiaryHolder.kt
+rename to core/ui/src/main/java/com/prateektimer/ui/components/DiaryHolder.kt
+index 2526f9f..689cf20 100644
+--- a/app/src/main/java/com/prateektimer/diaryapp/presentation/components/DiaryHolder.kt
++++ b/core/ui/src/main/java/com/prateektimer/ui/components/DiaryHolder.kt
+@@ -1,4 +1,4 @@
+-package com.prateektimer.diaryapp.presentation.components
++package com.prateektimer.ui.components
+ 
+ 
+ import android.net.Uri
+@@ -49,7 +49,7 @@ import com.prateektimer.diaryapp.model.Mood
+ import com.prateektimer.diaryapp.ui.theme.Elevation
+ import com.prateektimer.diaryapp.util.fetchImagesFromFirebase
+ import com.prateektimer.diaryapp.util.toInstant
+-import com.prateektimer.diaryapp.util.toRealmInstant
++import com.prateektimer.ui.theme.Elevation
+ import io.realm.kotlin.ext.realmListOf
+ import java.text.SimpleDateFormat
+ import java.time.Instant
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/presentation/components/Gallery.kt b/core/ui/src/main/java/com/prateektimer/ui/components/Gallery.kt
+similarity index 96%
+rename from app/src/main/java/com/prateektimer/diaryapp/presentation/components/Gallery.kt
+rename to core/ui/src/main/java/com/prateektimer/ui/components/Gallery.kt
+index debe7a6..71ada9c 100644
+--- a/app/src/main/java/com/prateektimer/diaryapp/presentation/components/Gallery.kt
++++ b/core/ui/src/main/java/com/prateektimer/ui/components/Gallery.kt
+@@ -1,4 +1,4 @@
+-package com.prateektimer.diaryapp.presentation.components
++package com.prateektimer.ui.components
+ 
+ import android.net.Uri
+ import androidx.activity.compose.rememberLauncherForActivityResult
+@@ -24,9 +24,9 @@ import androidx.compose.ui.unit.Dp
+ import androidx.compose.ui.unit.dp
+ import coil.compose.AsyncImage
+ import coil.request.ImageRequest
+-import com.prateektimer.diaryapp.model.GalleryImage
+-import com.prateektimer.diaryapp.model.GalleryState
+-import com.prateektimer.diaryapp.ui.theme.Elevation
++import com.prateektimer.ui.GalleryImage
++import com.prateektimer.ui.GalleryState
++import com.prateektimer.ui.theme.Elevation
+ import kotlin.math.max
+ 
+ 
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/presentation/components/GoogleButton.kt b/core/ui/src/main/java/com/prateektimer/ui/components/GoogleButton.kt
+similarity index 97%
+rename from app/src/main/java/com/prateektimer/diaryapp/presentation/components/GoogleButton.kt
+rename to core/ui/src/main/java/com/prateektimer/ui/components/GoogleButton.kt
+index 709bed6..321d27e 100644
+--- a/app/src/main/java/com/prateektimer/diaryapp/presentation/components/GoogleButton.kt
++++ b/core/ui/src/main/java/com/prateektimer/ui/components/GoogleButton.kt
+@@ -1,4 +1,4 @@
+-package com.prateektimer.diaryapp.presentation.components
++package com.prateektimer.ui.components
+ 
+ import androidx.compose.animation.animateContentSize
+ import androidx.compose.animation.core.LinearOutSlowInEasing
+@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.Dp
+ import androidx.compose.ui.unit.dp
+ import androidx.compose.material3.MaterialTheme
+ import androidx.compose.material3.Surface
+-import com.prateektimer.diaryapp.R
++import com.prateektimer.ui.R
+ 
+ @Composable
+ fun GoogleButton(
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/ui/theme/Color.kt b/core/ui/src/main/java/com/prateektimer/ui/theme/Color.kt
+similarity index 91%
+rename from app/src/main/java/com/prateektimer/diaryapp/ui/theme/Color.kt
+rename to core/ui/src/main/java/com/prateektimer/ui/theme/Color.kt
+index 5e4db34..8e6e6b1 100644
+--- a/app/src/main/java/com/prateektimer/diaryapp/ui/theme/Color.kt
++++ b/core/ui/src/main/java/com/prateektimer/ui/theme/Color.kt
+@@ -1,4 +1,4 @@
+-package com.prateektimer.diaryapp.ui.theme
++package com.prateektimer.ui.theme
+ 
+ import androidx.compose.ui.graphics.Color
+ 
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/ui/theme/Elevation.kt b/core/ui/src/main/java/com/prateektimer/ui/theme/Elevation.kt
+similarity index 82%
+rename from app/src/main/java/com/prateektimer/diaryapp/ui/theme/Elevation.kt
+rename to core/ui/src/main/java/com/prateektimer/ui/theme/Elevation.kt
+index 6afce4d..2347912 100644
+--- a/app/src/main/java/com/prateektimer/diaryapp/ui/theme/Elevation.kt
++++ b/core/ui/src/main/java/com/prateektimer/ui/theme/Elevation.kt
+@@ -1,4 +1,4 @@
+-package com.prateektimer.diaryapp.ui.theme
++package com.prateektimer.ui.theme
+ 
+ import androidx.compose.ui.unit.dp
+ 
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/ui/theme/Theme.kt b/core/ui/src/main/java/com/prateektimer/ui/theme/Theme.kt
+similarity index 92%
+rename from app/src/main/java/com/prateektimer/diaryapp/ui/theme/Theme.kt
+rename to core/ui/src/main/java/com/prateektimer/ui/theme/Theme.kt
+index 353fd0f..0f786c7 100644
+--- a/app/src/main/java/com/prateektimer/diaryapp/ui/theme/Theme.kt
++++ b/core/ui/src/main/java/com/prateektimer/ui/theme/Theme.kt
+@@ -1,20 +1,18 @@
+-package com.prateektimer.diaryapp.ui.theme
++package com.prateektimer.ui.theme
+ 
+ import android.app.Activity
+ import android.os.Build
+ import androidx.compose.foundation.isSystemInDarkTheme
+ import androidx.compose.material3.MaterialTheme
+ import androidx.compose.material3.darkColorScheme
+-import androidx.compose.material3.dynamicDarkColorScheme
+-import androidx.compose.material3.dynamicLightColorScheme
+ import androidx.compose.material3.lightColorScheme
+ import androidx.compose.runtime.Composable
+ import androidx.compose.runtime.SideEffect
+ import androidx.compose.ui.graphics.toArgb
+-import androidx.compose.ui.platform.LocalContext
+ import androidx.compose.ui.platform.LocalView
+ import androidx.core.view.WindowCompat
+ import androidx.compose.ui.graphics.Color
++
+ private val DarkColorScheme = darkColorScheme(
+     primary = Purple80,
+     secondary = PurpleGrey80,
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/ui/theme/Type.kt b/core/ui/src/main/java/com/prateektimer/ui/theme/Type.kt
+similarity index 95%
+rename from app/src/main/java/com/prateektimer/diaryapp/ui/theme/Type.kt
+rename to core/ui/src/main/java/com/prateektimer/ui/theme/Type.kt
+index 2d3984a..3907547 100644
+--- a/app/src/main/java/com/prateektimer/diaryapp/ui/theme/Type.kt
++++ b/core/ui/src/main/java/com/prateektimer/ui/theme/Type.kt
+@@ -1,4 +1,4 @@
+-package com.prateektimer.diaryapp.ui.theme
++package com.prateektimer.ui.theme
+ 
+ import androidx.compose.material3.Typography
+ import androidx.compose.ui.text.TextStyle
+diff --git a/core/ui/src/main/res/drawable/google_logo.xml b/core/ui/src/main/res/drawable/google_logo.xml
+new file mode 100644
+index 0000000..1b001db
+--- /dev/null
++++ b/core/ui/src/main/res/drawable/google_logo.xml
+@@ -0,0 +1,18 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="24dp"
++    android:height="24dp"
++    android:viewportWidth="24"
++    android:viewportHeight="24">
++  <path
++      android:pathData="M21.752,12.224a11.544,11.544 0,0 0,-0.158 -1.885h-9.382v3.745h5.372a4.626,4.626 0,0 1,-1.993 2.972v2.491h3.2A9.742,9.742 0,0 0,21.752 12.224Z"
++      android:fillColor="#4285f4"/>
++  <path
++      android:pathData="M12.212,21.963a9.491,9.491 0,0 0,6.584 -2.416l-3.2,-2.491a6.011,6.011 0,0 1,-3.379 0.963,5.95 5.95,0 0,1 -5.588,-4.118h-3.3v2.566A9.949,9.949 0,0 0,12.212 21.963Z"
++      android:fillColor="#34a853"/>
++  <path
++      android:pathData="M6.624,13.901a5.781,5.781 0,0 1,-0.316 -1.9,6.007 6.007,0 0,1 0.316,-1.9L6.624,7.533h-3.3a9.848,9.848 0,0 0,-1.071 4.467,9.848 9.848,0 0,0 1.071,4.467Z"
++      android:fillColor="#fbbc05"/>
++  <path
++      android:pathData="M12.212,5.98a5.406,5.406 0,0 1,3.819 1.495l2.84,-2.84a9.526,9.526 0,0 0,-6.659 -2.6,9.949 9.949,0 0,0 -8.893,5.5l3.3,2.566A5.95,5.95 0,0 1,12.212 5.98Z"
++      android:fillColor="#ea4335"/>
++</vector>
+diff --git a/core/util/.gitignore b/core/util/.gitignore
+new file mode 100644
+index 0000000..42afabf
+--- /dev/null
++++ b/core/util/.gitignore
+@@ -0,0 +1 @@
++/build
+\ No newline at end of file
+diff --git a/core/util/build.gradle b/core/util/build.gradle
+new file mode 100644
+index 0000000..2e26b62
+--- /dev/null
++++ b/core/util/build.gradle
+@@ -0,0 +1,53 @@
++plugins {
++    id 'com.android.library'
++    id 'org.jetbrains.kotlin.android'
++    id 'io.realm.kotlin'
++    id 'com.google.devtools.ksp'
++}
++
++android {
++    namespace 'com.prateektimer.util'
++    compileSdk ProjectConfig.compileSdk
++
++    defaultConfig {
++        minSdk ProjectConfig.minSdk
++
++        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
++        consumerProguardFiles "consumer-rules.pro"
++    }
++
++    buildTypes {
++        release {
++            minifyEnabled false
++            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
++        }
++    }
++    compileOptions {
++        sourceCompatibility JavaVersion.VERSION_17
++        targetCompatibility JavaVersion.VERSION_17
++        coreLibraryDesugaringEnabled true
++    }
++    kotlinOptions {
++       targetCompatibility = JavaVersion.VERSION_17
++    }
++    buildFeatures {
++        compose true
++    }
++    composeOptions {
++        kotlinCompilerExtensionVersion ProjectConfig.extensionVersion
++    }
++}
++
++dependencies {
++    implementation libs.compose.tooling.preview
++    implementation libs.core.ktx
++    implementation libs.firebase.storage
++    implementation libs.realm.sync
++    implementation libs.coroutines.core
++    implementation libs.activity.compose
++    implementation libs.material3.compose
++    implementation libs.coil
++
++    implementation(project(":core:ui"))
++
++}
+\ No newline at end of file
+diff --git a/core/util/consumer-rules.pro b/core/util/consumer-rules.pro
+new file mode 100644
+index 0000000..e69de29
+diff --git a/core/util/proguard-rules.pro b/core/util/proguard-rules.pro
+new file mode 100644
+index 0000000..481bb43
+--- /dev/null
++++ b/core/util/proguard-rules.pro
+@@ -0,0 +1,21 @@
++# Add project specific ProGuard rules here.
++# You can control the set of applied configuration files using the
++# proguardFiles setting in build.gradle.
++#
++# For more details, see
++#   http://developer.android.com/guide/developing/tools/proguard.html
++
++# If your project uses WebView with JS, uncomment the following
++# and specify the fully qualified class name to the JavaScript interface
++# class:
++#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
++#   public *;
++#}
++
++# Uncomment this to preserve the line number information for
++# debugging stack traces.
++#-keepattributes SourceFile,LineNumberTable
++
++# If you keep the line number information, uncomment this to
++# hide the original source file name.
++#-renamesourcefileattribute SourceFile
+\ No newline at end of file
+diff --git a/core/util/src/androidTest/java/com/prateektimer/util/ExampleInstrumentedTest.kt b/core/util/src/androidTest/java/com/prateektimer/util/ExampleInstrumentedTest.kt
+new file mode 100644
+index 0000000..a554ea0
+--- /dev/null
++++ b/core/util/src/androidTest/java/com/prateektimer/util/ExampleInstrumentedTest.kt
+@@ -0,0 +1,24 @@
++package com.prateektimer.util
++
++import androidx.test.platform.app.InstrumentationRegistry
++import androidx.test.ext.junit.runners.AndroidJUnit4
++
++import org.junit.Test
++import org.junit.runner.RunWith
++
++import org.junit.Assert.*
++
++/**
++ * Instrumented test, which will execute on an Android device.
++ *
++ * See [testing documentation](http://d.android.com/tools/testing).
++ */
++@RunWith(AndroidJUnit4::class)
++class ExampleInstrumentedTest {
++    @Test
++    fun useAppContext() {
++        // Context of the app under test.
++        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
++        assertEquals("com.prateektimer.util.test", appContext.packageName)
++    }
++}
+\ No newline at end of file
+diff --git a/core/util/src/main/AndroidManifest.xml b/core/util/src/main/AndroidManifest.xml
+new file mode 100644
+index 0000000..a5918e6
+--- /dev/null
++++ b/core/util/src/main/AndroidManifest.xml
+@@ -0,0 +1,4 @@
++<?xml version="1.0" encoding="utf-8"?>
++<manifest xmlns:android="http://schemas.android.com/apk/res/android">
++
++</manifest>
+\ No newline at end of file
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/util/Constants.kt b/core/util/src/main/java/com/prateektimer/util/Constants.kt
+similarity index 90%
+rename from app/src/main/java/com/prateektimer/diaryapp/util/Constants.kt
+rename to core/util/src/main/java/com/prateektimer/util/Constants.kt
+index 9cd37b0..fbebd29 100644
+--- a/app/src/main/java/com/prateektimer/diaryapp/util/Constants.kt
++++ b/core/util/src/main/java/com/prateektimer/util/Constants.kt
+@@ -1,4 +1,4 @@
+-package com.prateektimer.diaryapp.util
++package com.prateektimer.util
+ 
+ object Constants {
+ 
+diff --git a/app/src/main/java/com/prateektimer/diaryapp/util/UtilFunctions.kt b/core/util/src/main/java/com/prateektimer/util/UtilFunctions.kt
+similarity index 96%
+rename from app/src/main/java/com/prateektimer/diaryapp/util/UtilFunctions.kt
+rename to core/util/src/main/java/com/prateektimer/util/UtilFunctions.kt
+index 3741e6f..f203b08 100644
+--- a/app/src/main/java/com/prateektimer/diaryapp/util/UtilFunctions.kt
++++ b/core/util/src/main/java/com/prateektimer/util/UtilFunctions.kt
+@@ -1,8 +1,7 @@
+-package com.prateektimer.diaryapp.util
++package com.prateektimer.util
+ 
+ import android.net.Uri
+ import android.util.Log
+-import androidx.compose.runtime.staticCompositionLocalOf
+ import androidx.core.net.toUri
+ import com.google.firebase.storage.FirebaseStorage
+ import com.google.firebase.storage.ktx.storageMetadata
+diff --git a/core/util/src/main/java/com/prateektimer/util/model/Diary.kt b/core/util/src/main/java/com/prateektimer/util/model/Diary.kt
+new file mode 100644
+index 0000000..cbb9535
+--- /dev/null
++++ b/core/util/src/main/java/com/prateektimer/util/model/Diary.kt
+@@ -0,0 +1,19 @@
++package com.prateektimer.util.model
++
++
++import io.realm.kotlin.ext.realmListOf
++import io.realm.kotlin.types.RealmInstant
++import io.realm.kotlin.types.RealmList
++import io.realm.kotlin.types.RealmObject
++import io.realm.kotlin.types.annotations.PrimaryKey
++import org.mongodb.kbson.ObjectId
++class Diary : RealmObject {
++    @PrimaryKey
++    var _id: ObjectId = ObjectId()
++    var owner_id: String = ""
++    var mood: String = Mood.Neutral.name
++    var title: String = ""
++    var description: String = ""
++    var images: RealmList<String> = realmListOf()
++    var date: RealmInstant = RealmInstant.now()//Instant.now().toRealmInstant()
++}
+\ No newline at end of file
+diff --git a/core/util/src/main/java/com/prateektimer/util/model/Mood.kt b/core/util/src/main/java/com/prateektimer/util/model/Mood.kt
+new file mode 100644
+index 0000000..d83f7fb
+--- /dev/null
++++ b/core/util/src/main/java/com/prateektimer/util/model/Mood.kt
+@@ -0,0 +1,93 @@
++package com.prateektimer.util.model
++
++import androidx.compose.ui.graphics.Color
++import com.prateektimer.ui.theme.*
++import com.prateektimer.util.R
++
++
++enum class Mood(
++    val icon: Int,
++    val contentColor: Color,
++    val containerColor: Color
++) {
++    Neutral(
++        icon = R.drawable.neutral,
++        contentColor = Color.Black,
++        containerColor = NeutralColor
++    ),
++    Happy(
++        icon = R.drawable.happy,
++        contentColor = Color.Black,
++        containerColor = HappyColor
++    ),
++    Angry(
++        icon = R.drawable.angry,
++        contentColor = Color.White,
++        containerColor = AngryColor
++    ),
++    Bored(
++        icon = R.drawable.bored,
++        contentColor = Color.Black,
++        containerColor = BoredColor
++    ),
++    Calm(
++        icon = R.drawable.calm,
++        contentColor = Color.Black,
++        containerColor = CalmColor
++    ),
++    Depressed(
++        icon = R.drawable.depressed,
++        contentColor = Color.Black,
++        containerColor = DepressedColor
++    ),
++    Disappointed(
++        icon = R.drawable.disappointed,
++        contentColor = Color.White,
++        containerColor = DisappointedColor
++    ),
++    Humorous(
++        icon = R.drawable.humorous,
++        contentColor = Color.Black,
++        containerColor = HumorousColor
++    ),
++    Lonely(
++        icon = R.drawable.lonely,
++        contentColor = Color.White,
++        containerColor = LonelyColor
++    ),
++    Mysterious(
++        icon = R.drawable.mysterious,
++        contentColor = Color.Black,
++        containerColor = MysteriousColor
++    ),
++    Romantic(
++        icon = R.drawable.romantic,
++        contentColor = Color.White,
++        containerColor = RomanticColor
++    ),
++    Shameful(
++        icon = R.drawable.shameful,
++        contentColor = Color.White,
++        containerColor = ShamefulColor
++    ),
++    Awful(
++        icon = R.drawable.awful,
++        contentColor = Color.Black,
++        containerColor = AwfulColor
++    ),
++    Surprised(
++        icon = R.drawable.surprised,
++        contentColor = Color.Black,
++        containerColor = SurprisedColor
++    ),
++    Suspicious(
++        icon = R.drawable.suspicious,
++        contentColor = Color.Black,
++        containerColor = SuspiciousColor
++    ),
++    Tense(
++        icon = R.drawable.tense,
++        contentColor = Color.Black,
++        containerColor = TenseColor
++    )
++}
+\ No newline at end of file
+diff --git a/core/util/src/main/java/com/prateektimer/util/model/RequestState.kt b/core/util/src/main/java/com/prateektimer/util/model/RequestState.kt
+new file mode 100644
+index 0000000..b894bd3
+--- /dev/null
++++ b/core/util/src/main/java/com/prateektimer/util/model/RequestState.kt
+@@ -0,0 +1,8 @@
++package com.prateektimer.util.model
++
++sealed class RequestState<out T> {
++    object Idle : RequestState<Nothing>()
++    object Loading : RequestState<Nothing>()
++    data class Success<T>(val data: T) : RequestState<T>()
++    data class Error(val error: Throwable) : RequestState<Nothing>()
++}
+\ No newline at end of file
+diff --git a/core/util/src/main/res/drawable/angry.xml b/core/util/src/main/res/drawable/angry.xml
+new file mode 100644
+index 0000000..1e7c162
+--- /dev/null
++++ b/core/util/src/main/res/drawable/angry.xml
+@@ -0,0 +1,12 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M36,18C36,27.941 27.941,36 18,36C8.06,36 0,27.941 0,18C0,8.06 8.06,0 18,0C27.941,0 36,8.06 36,18Z"
++      android:fillColor="#DA2F47"/>
++  <path
++      android:pathData="M25.485,29.879C25.44,29.7 24.317,25.5 18,25.5C11.682,25.5 10.56,29.7 10.515,29.879C10.46,30.096 10.558,30.321 10.752,30.433C10.947,30.542 11.191,30.512 11.352,30.356C11.371,30.337 13.306,28.5 18,28.5C22.694,28.5 24.63,30.337 24.648,30.355C24.744,30.45 24.872,30.5 25,30.5C25.084,30.5 25.169,30.479 25.246,30.436C25.442,30.324 25.54,30.097 25.485,29.879ZM15.707,17.293C12.452,14.038 7.221,14 7,14C6.448,14 6.001,14.447 6.001,14.998C6,15.55 6.447,15.998 6.999,16C7.028,16 8.924,16.022 10.982,16.737C10.389,17.377 10,18.371 10,19.5C10,21.434 11.119,23 12.5,23C13.881,23 15,21.434 15,19.5C15,19.326 14.981,19.16 14.963,18.993C14.976,18.993 14.988,19 15,19C15.256,19 15.512,18.902 15.707,18.707C16.098,18.316 16.098,17.684 15.707,17.293ZM29,14C28.779,14 23.549,14.038 20.293,17.293C19.902,17.684 19.902,18.316 20.293,18.707C20.488,18.902 20.744,19 21,19C21.013,19 21.024,18.993 21.036,18.993C21.02,19.16 21,19.326 21,19.5C21,21.434 22.119,23 23.5,23C24.881,23 26,21.434 26,19.5C26,18.371 25.611,17.377 25.018,16.737C27.076,16.022 28.972,16 29.002,16C29.553,15.998 30,15.55 29.999,14.998C29.998,14.447 29.552,14 29,14Z"
++      android:fillColor="#292F33"/>
++</vector>
+diff --git a/core/util/src/main/res/drawable/awful.xml b/core/util/src/main/res/drawable/awful.xml
+new file mode 100644
+index 0000000..c040cb6
+--- /dev/null
++++ b/core/util/src/main/res/drawable/awful.xml
+@@ -0,0 +1,27 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="34dp"
++    android:height="36dp"
++    android:viewportWidth="34"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M34,17C34,26.389 26.389,34 17,34C7.612,34 0,26.389 0,17C0,7.612 7.612,0 17,0C26.389,0 34,7.612 34,17Z"
++      android:fillColor="#FFCB4C"/>
++  <path
++      android:pathData="M17,27.136C20.335,27.136 22.547,27.524 25.284,28.056C25.909,28.176 27.125,28.056 27.125,26.215C27.125,22.533 22.895,17.931 17,17.931C11.105,17.931 6.875,22.533 6.875,26.215C6.875,28.056 8.091,28.177 8.716,28.056C11.452,27.524 13.665,27.136 17,27.136ZM5.668,18.888C5.381,18.888 5.097,18.758 4.912,18.51C4.599,18.093 4.683,17.501 5.101,17.188C5.236,17.087 7.888,15.127 11.576,14.418C9.238,13.246 6.644,13.221 6.611,13.221C6.09,13.22 5.668,12.796 5.669,12.275C5.669,11.754 6.091,11.332 6.613,11.332C6.822,11.332 11.762,11.368 14.836,14.442C15.106,14.712 15.187,15.118 15.041,15.471C14.895,15.824 14.55,16.054 14.169,16.054C9.812,16.054 6.271,18.672 6.236,18.698C6.063,18.827 5.865,18.888 5.668,18.888ZM28.332,18.888C28.136,18.888 27.937,18.827 27.768,18.701C27.732,18.674 24.168,16.056 19.833,16.056C19.451,16.056 19.106,15.826 18.961,15.473C18.814,15.12 18.895,14.714 19.166,14.444C22.241,11.369 27.181,11.334 27.389,11.334C27.91,11.334 28.332,11.756 28.333,12.277C28.334,12.798 27.911,13.221 27.391,13.223C27.357,13.223 24.762,13.248 22.425,14.42C26.113,15.128 28.765,17.088 28.9,17.19C29.317,17.503 29.402,18.093 29.09,18.511C28.904,18.758 28.62,18.888 28.332,18.888Z"
++      android:fillColor="#65471B"/>
++  <path
++      android:pathData="M24.712,32.287V25.186C24.712,22.593 20.823,20.001 16.934,20.001C13.045,20.001 9.156,22.594 9.156,25.186V32.287C4.753,32.636 1.797,33.272 1.797,34C1.797,35.105 8.574,36 16.934,36C25.294,36 32.071,35.105 32.071,34C32.071,33.272 29.115,32.636 24.712,32.287Z"
++      android:fillColor="#77AF57"/>
++  <path
++      android:pathData="M14.875,24.463C15.557,24.463 16.11,23.91 16.11,23.228C16.11,22.546 15.557,21.993 14.875,21.993C14.193,21.993 13.64,22.546 13.64,23.228C13.64,23.91 14.193,24.463 14.875,24.463Z"
++      android:fillColor="#5D8F3F"/>
++  <path
++      android:pathData="M19.698,26.875C20.38,26.875 20.933,26.322 20.933,25.64C20.933,24.958 20.38,24.405 19.698,24.405C19.016,24.405 18.463,24.958 18.463,25.64C18.463,26.322 19.016,26.875 19.698,26.875Z"
++      android:fillColor="#5D8F3F"/>
++  <path
++      android:pathData="M21.452,30.712C21.561,30.039 21.104,29.404 20.431,29.295C19.758,29.186 19.123,29.643 19.014,30.316C18.905,30.99 19.362,31.624 20.035,31.733C20.708,31.843 21.343,31.385 21.452,30.712Z"
++      android:fillColor="#5D8F3F"/>
++  <path
++      android:pathData="M15.849,32.831C16.005,31.869 15.352,30.962 14.39,30.806C13.428,30.65 12.521,31.303 12.365,32.265C12.209,33.227 12.862,34.134 13.824,34.29C14.786,34.446 15.693,33.793 15.849,32.831Z"
++      android:fillColor="#5D8F3F"/>
++</vector>
+diff --git a/core/util/src/main/res/drawable/bored.xml b/core/util/src/main/res/drawable/bored.xml
+new file mode 100644
+index 0000000..9ba197e
+--- /dev/null
++++ b/core/util/src/main/res/drawable/bored.xml
+@@ -0,0 +1,12 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M36,18C36,27.941 27.941,36 18,36C8.06,36 0,27.941 0,18C0,8.06 8.06,0 18,0C27.941,0 36,8.06 36,18Z"
++      android:fillColor="#FFCC4D"/>
++  <path
++      android:pathData="M25.485,27.879C25.44,27.7 24.317,23.5 18,23.5C11.682,23.5 10.56,27.7 10.515,27.879C10.46,28.096 10.558,28.321 10.752,28.433C10.947,28.544 11.191,28.511 11.352,28.356C11.371,28.337 13.306,26.5 18,26.5C22.694,26.5 24.63,28.337 24.648,28.355C24.744,28.45 24.872,28.5 25,28.5C25.084,28.5 25.169,28.479 25.246,28.436C25.442,28.324 25.54,28.097 25.485,27.879ZM29.001,14C28.696,14 28.397,13.862 28.2,13.6C25.768,10.356 21.686,12.754 21.514,12.857C21.039,13.142 20.425,12.987 20.142,12.514C19.858,12.04 20.011,11.426 20.485,11.142C22.483,9.943 26.999,8.665 29.799,12.399C30.131,12.841 30.041,13.468 29.599,13.799C29.42,13.935 29.21,14 29.001,14ZM6.999,14C6.791,14 6.58,13.935 6.4,13.8C5.958,13.469 5.869,12.842 6.2,12.4C9.001,8.666 13.517,9.944 15.514,11.143C15.988,11.427 16.141,12.041 15.857,12.515C15.573,12.988 14.961,13.143 14.487,12.859C14.308,12.753 10.213,10.384 7.799,13.601C7.604,13.862 7.303,14 6.999,14ZM29,16C29,15.448 28.553,15 28,15H21C20.447,15 20,15.448 20,16C20,16.552 20.447,17 21,17H26.092C26.299,17.581 26.848,18 27.5,18C28.328,18 29,17.329 29,16.5C29,16.39 28.986,16.283 28.964,16.179C28.976,16.119 29,16.063 29,16ZM16,16C16,15.448 15.552,15 15,15H8C7.448,15 7,15.448 7,16C7,16.552 7.448,17 8,17H13.092C13.299,17.581 13.848,18 14.5,18C15.328,18 16,17.329 16,16.5C16,16.39 15.986,16.283 15.964,16.179C15.975,16.119 16,16.063 16,16Z"
++      android:fillColor="#664500"/>
++</vector>
+diff --git a/core/util/src/main/res/drawable/calm.xml b/core/util/src/main/res/drawable/calm.xml
+new file mode 100644
+index 0000000..ea53b4c
+--- /dev/null
++++ b/core/util/src/main/res/drawable/calm.xml
+@@ -0,0 +1,12 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M36,18C36,27.941 27.941,36 18,36C8.059,36 0,27.941 0,18C0,8.059 8.059,0 18,0C27.941,0 36,8.059 36,18Z"
++      android:fillColor="#FFCC4D"/>
++  <path
++      android:pathData="M24.327,23.622C24.174,23.49 23.959,23.463 23.776,23.553L19.776,25.553C17.905,26.488 13.049,26.5 13,26.5C12.724,26.5 12.5,26.724 12.5,27C12.5,27.185 12.601,27.347 12.75,27.433V27.434H12.751V27.435C12.822,27.475 12.904,27.498 12.991,27.5H19.999C22.657,27.5 24.088,25.315 24.474,24.158C24.538,23.966 24.48,23.755 24.327,23.622ZM31.001,16C30.696,16 30.397,15.862 30.2,15.6C27.559,12.079 24.139,12.001 23.994,12C23.444,11.994 23,11.544 23.003,10.995C23.006,10.444 23.45,10 24,10C24.184,10 28.537,10.05 31.8,14.4C32.132,14.842 32.042,15.469 31.6,15.8C31.42,15.935 31.21,16 31.001,16ZM4.999,16C4.791,16 4.58,15.935 4.4,15.8C3.958,15.469 3.869,14.842 4.2,14.4C7.462,10.05 11.816,10 12,10C12.552,10 13,10.448 13,11C13,11.551 12.555,11.998 12.004,12C11.848,12.002 8.435,12.086 5.799,15.6C5.604,15.862 5.303,16 4.999,16ZM15.897,17.396C15.92,17.344 15.956,17.3 15.97,17.242C16.104,16.706 15.778,16.163 15.243,16.029C15.063,15.984 10.776,14.949 7.446,17.167C6.987,17.473 6.863,18.094 7.169,18.554C7.361,18.844 7.678,19 8.001,19C8.191,19 8.384,18.945 8.555,18.832C9.647,18.103 10.917,17.837 12.023,17.771C12.014,17.847 12,17.922 12,18C12,19.104 12.896,20 14,20C15.104,20 16,19.104 16,18C16,17.788 15.958,17.588 15.897,17.396ZM27.896,17.395C27.919,17.343 27.955,17.3 27.969,17.243C28.104,16.707 27.778,16.164 27.242,16.03C27.062,15.985 22.776,14.95 19.445,17.168C18.985,17.474 18.861,18.095 19.168,18.555C19.36,18.844 19.678,19 20.001,19C20.191,19 20.384,18.945 20.555,18.832C21.647,18.103 22.916,17.838 24.024,17.772C24.015,17.848 24,17.922 24,18C24,19.104 24.896,20 26,20C27.104,20 28,19.104 28,18C28,17.788 27.958,17.587 27.896,17.395Z"
++      android:fillColor="#664500"/>
++</vector>
+diff --git a/core/util/src/main/res/drawable/depressed.xml b/core/util/src/main/res/drawable/depressed.xml
+new file mode 100644
+index 0000000..1303c98
+--- /dev/null
++++ b/core/util/src/main/res/drawable/depressed.xml
+@@ -0,0 +1,12 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M36,18C36,27.941 27.941,36 18,36C8.06,36 0,27.941 0,18C0,8.06 8.06,0 18,0C27.941,0 36,8.06 36,18Z"
++      android:fillColor="#FFCC4D"/>
++  <path
++      android:pathData="M17.312,17.612C17.136,17.469 16.885,17.465 16.702,17.598C16.69,17.607 15.442,18.5 13,18.5C10.559,18.5 9.31,17.607 9.3,17.6C9.117,17.463 8.865,17.467 8.689,17.609C8.511,17.751 8.451,17.995 8.543,18.203C8.603,18.338 10.043,21.5 13,21.5C15.958,21.5 17.397,18.338 17.457,18.203C17.549,17.996 17.489,17.754 17.312,17.612ZM27.312,17.612C27.136,17.469 26.886,17.464 26.702,17.598C26.69,17.607 25.441,18.5 23,18.5C20.56,18.5 19.31,17.607 19.3,17.6C19.117,17.463 18.866,17.467 18.689,17.609C18.511,17.751 18.451,17.995 18.543,18.203C18.603,18.338 20.043,21.5 23,21.5C25.958,21.5 27.397,18.338 27.457,18.203C27.549,17.996 27.489,17.754 27.312,17.612ZM22,28H14C13.448,28 13,27.553 13,27C13,26.447 13.448,26 14,26H22C22.553,26 23,26.447 23,27C23,27.553 22.553,28 22,28ZM6,14C5.448,14 5,13.552 5,13C5,12.449 5.445,12.002 5.996,12C6.152,11.998 9.565,11.914 12.201,8.4C12.532,7.96 13.158,7.868 13.601,8.2C14.043,8.531 14.132,9.158 13.801,9.6C10.538,13.95 6.184,14 6,14ZM30,14C29.816,14 25.463,13.95 22.2,9.6C21.868,9.158 21.958,8.531 22.4,8.2C22.841,7.867 23.467,7.958 23.799,8.4C26.44,11.921 29.86,11.999 30.005,12C30.555,12.006 30.999,12.456 30.996,13.005C30.994,13.556 30.55,14 30,14Z"
++      android:fillColor="#664500"/>
++</vector>
+diff --git a/core/util/src/main/res/drawable/disappointed.xml b/core/util/src/main/res/drawable/disappointed.xml
+new file mode 100644
+index 0000000..75cc0c7
+--- /dev/null
++++ b/core/util/src/main/res/drawable/disappointed.xml
+@@ -0,0 +1,18 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M36,18C36,27.941 27.941,36 18,36C8.059,36 0,27.941 0,18C0,8.059 8.059,0 18,0C27.941,0 36,8.059 36,18Z"
++      android:fillColor="#FFCC4D"/>
++  <path
++      android:pathData="M18,21.5C8.667,21.5 7.515,29.854 7.504,29.938C7.483,30.109 7.55,30.278 7.683,30.387C7.773,30.461 7.886,30.5 8,30.5C8.053,30.5 8.106,30.491 8.158,30.475C8.217,30.455 14.126,28.5 18,28.5C23.595,28.5 27.745,30.433 27.786,30.452C27.947,30.529 28.144,30.512 28.293,30.405C28.44,30.298 28.519,30.119 28.496,29.937C28.485,29.854 27.333,21.5 18,21.5ZM29,10C23.446,10 21.198,5.633 21.105,5.447C20.858,4.953 21.058,4.352 21.552,4.105C22.045,3.859 22.644,4.057 22.892,4.548C22.967,4.694 24.713,8 29,8C29.553,8 30,8.448 30,9C30,9.552 29.553,10 29,10ZM7,10C6.448,10 6,9.552 6,9C6,8.448 6.448,8 7,8C12.083,8 12.996,4.88 13.033,4.747C13.178,4.219 13.725,3.899 14.252,4.038C14.782,4.177 15.103,4.711 14.97,5.243C14.921,5.437 13.704,10 7,10Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M18,23C22,23 24,25 24,25H12C12,25 14,23 18,23Z"
++      android:fillColor="#CCD6DD"/>
++  <path
++      android:pathData="M6.001,19C5.697,19 5.397,18.862 5.2,18.6C4.868,18.159 4.958,17.532 5.4,17.201C5.543,17.094 8.351,15.018 12.256,14.268C9.781,13.027 7.034,13 6.999,13C6.447,12.998 6,12.55 6.001,11.998C6.001,11.447 6.448,11 7,11C7.221,11 12.452,11.038 15.707,14.293C15.993,14.579 16.079,15.009 15.924,15.383C15.769,15.756 15.404,16 15,16C10.387,16 6.637,18.772 6.6,18.8C6.42,18.935 6.209,19 6.001,19ZM29.999,18.999C29.791,18.999 29.581,18.935 29.401,18.801C29.363,18.772 25.59,16 21,16C20.596,16 20.23,15.756 20.076,15.383C19.921,15.009 20.007,14.579 20.293,14.293C23.549,11.038 28.779,11 29,11C29.552,11 29.998,11.447 29.999,11.998C30,12.55 29.553,12.998 29.002,13C28.966,13 26.219,13.027 23.744,14.268C27.649,15.018 30.457,17.094 30.599,17.201C31.04,17.532 31.13,18.157 30.8,18.599C30.604,18.86 30.304,18.999 29.999,18.999Z"
++      android:fillColor="#664500"/>
++</vector>
+diff --git a/core/util/src/main/res/drawable/happy.xml b/core/util/src/main/res/drawable/happy.xml
+new file mode 100644
+index 0000000..612cf1f
+--- /dev/null
++++ b/core/util/src/main/res/drawable/happy.xml
+@@ -0,0 +1,21 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M36,18C36,27.941 27.941,36 18,36C8.06,36 0,27.941 0,18C0,8.06 8.06,0 18,0C27.941,0 36,8.06 36,18Z"
++      android:fillColor="#FFCC4D"/>
++  <path
++      android:pathData="M11.5,18C12.881,18 14,15.538 14,12.5C14,9.462 12.881,7 11.5,7C10.119,7 9,9.462 9,12.5C9,15.538 10.119,18 11.5,18Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M24.5,18C25.881,18 27,15.538 27,12.5C27,9.462 25.881,7 24.5,7C23.119,7 22,9.462 22,12.5C22,15.538 23.119,18 24.5,18Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M18,22C14.377,22 11.973,21.578 9,21C8.321,20.869 7,21 7,23C7,27 11.595,32 18,32C24.404,32 29,27 29,23C29,21 27.679,20.868 27,21C24.027,21.578 21.623,22 18,22Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M9,23C9,23 12,24 18,24C24,24 27,23 27,23C27,23 25,27 18,27C11,27 9,23 9,23Z"
++      android:fillColor="#ffffff"/>
++</vector>
+diff --git a/core/util/src/main/res/drawable/humorous.xml b/core/util/src/main/res/drawable/humorous.xml
+new file mode 100644
+index 0000000..b02b8e0
+--- /dev/null
++++ b/core/util/src/main/res/drawable/humorous.xml
+@@ -0,0 +1,21 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M30.728,5.272C37.757,12.301 37.757,23.699 30.728,30.728C23.699,37.757 12.302,37.757 5.272,30.728C-1.757,23.699 -1.757,12.301 5.272,5.272C12.301,-1.757 23.698,-1.757 30.728,5.272Z"
++      android:fillColor="#FFCB4C"/>
++  <path
++      android:pathData="M19.279,19.28C15.785,22.774 13.06,24.684 9.634,26.994C8.853,27.523 7.706,28.923 9.635,30.853C13.492,34.71 22.746,35.1 28.922,28.924C35.099,22.747 34.71,13.494 30.851,9.636C28.922,7.706 27.521,8.854 26.993,9.636C24.685,13.059 22.774,15.785 19.279,19.28Z"
++      android:fillColor="#65471B"/>
++  <path
++      android:pathData="M11.564,28.923C11.564,28.923 15.422,26.994 21.208,21.207C26.995,15.421 28.923,11.564 28.923,11.564C28.923,11.564 30.851,17.351 24.101,24.101C17.351,30.852 11.564,28.923 11.564,28.923Z"
++      android:fillColor="#ffffff"/>
++  <path
++      android:pathData="M8.265,25.234C8.05,25.449 7.74,25.564 7.416,25.517C6.869,25.439 6.489,24.933 6.568,24.386C6.593,24.21 7.111,20.756 9.342,17.464C6.715,18.337 4.753,20.26 4.728,20.285C4.337,20.674 3.704,20.673 3.314,20.282C2.924,19.892 2.924,19.26 3.314,18.87C3.47,18.714 7.196,15.042 11.799,15.042C12.204,15.042 12.568,15.285 12.723,15.659C12.878,16.033 12.792,16.463 12.506,16.749C9.244,20.011 8.553,24.623 8.546,24.668C8.515,24.892 8.412,25.087 8.265,25.234ZM25.233,8.264C25.086,8.411 24.892,8.514 24.67,8.546C24.623,8.553 19.994,9.261 16.749,12.506C16.463,12.792 16.033,12.878 15.659,12.723C15.285,12.568 15.042,12.204 15.042,11.799C15.042,7.195 18.714,3.47 18.87,3.314C19.26,2.924 19.892,2.924 20.282,3.314C20.673,3.703 20.674,4.337 20.285,4.727C20.259,4.753 18.336,6.714 17.463,9.341C20.755,7.11 24.208,6.592 24.384,6.567C24.93,6.489 25.436,6.867 25.515,7.414C25.564,7.738 25.449,8.049 25.233,8.264Z"
++      android:fillColor="#65471B"/>
++  <path
++      android:pathData="M30.101,12.055C32.842,12.389 35.335,10.437 35.668,7.695C36.002,4.954 34.051,2.461 31.309,2.127C28.568,1.794 20.9,4.89 20.779,5.883C20.658,6.875 27.36,11.72 30.101,12.055ZM12.157,29.999C12.491,32.74 10.539,35.233 7.797,35.566C5.056,35.9 2.563,33.949 2.229,31.207C1.895,28.465 4.992,20.797 5.985,20.676C6.977,20.556 11.822,27.258 12.157,29.999Z"
++      android:fillColor="#64AADD"/>
++</vector>
+diff --git a/core/util/src/main/res/drawable/ic_launcher_background.xml b/core/util/src/main/res/drawable/ic_launcher_background.xml
+new file mode 100644
+index 0000000..07d5da9
+--- /dev/null
++++ b/core/util/src/main/res/drawable/ic_launcher_background.xml
+@@ -0,0 +1,170 @@
++<?xml version="1.0" encoding="utf-8"?>
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="108dp"
++    android:height="108dp"
++    android:viewportWidth="108"
++    android:viewportHeight="108">
++    <path
++        android:fillColor="#3DDC84"
++        android:pathData="M0,0h108v108h-108z" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M9,0L9,108"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M19,0L19,108"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M29,0L29,108"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M39,0L39,108"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M49,0L49,108"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M59,0L59,108"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M69,0L69,108"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M79,0L79,108"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M89,0L89,108"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M99,0L99,108"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M0,9L108,9"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M0,19L108,19"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M0,29L108,29"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M0,39L108,39"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M0,49L108,49"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M0,59L108,59"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M0,69L108,69"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M0,79L108,79"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M0,89L108,89"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M0,99L108,99"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M19,29L89,29"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M19,39L89,39"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M19,49L89,49"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M19,59L89,59"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M19,69L89,69"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M19,79L89,79"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M29,19L29,89"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M39,19L39,89"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M49,19L49,89"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M59,19L59,89"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M69,19L69,89"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++    <path
++        android:fillColor="#00000000"
++        android:pathData="M79,19L79,89"
++        android:strokeWidth="0.8"
++        android:strokeColor="#33FFFFFF" />
++</vector>
+diff --git a/core/util/src/main/res/drawable/ic_launcher_foreground.xml b/core/util/src/main/res/drawable/ic_launcher_foreground.xml
+new file mode 100644
+index 0000000..2b068d1
+--- /dev/null
++++ b/core/util/src/main/res/drawable/ic_launcher_foreground.xml
+@@ -0,0 +1,30 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:aapt="http://schemas.android.com/aapt"
++    android:width="108dp"
++    android:height="108dp"
++    android:viewportWidth="108"
++    android:viewportHeight="108">
++    <path android:pathData="M31,63.928c0,0 6.4,-11 12.1,-13.1c7.2,-2.6 26,-1.4 26,-1.4l38.1,38.1L107,108.928l-32,-1L31,63.928z">
++        <aapt:attr name="android:fillColor">
++            <gradient
++                android:endX="85.84757"
++                android:endY="92.4963"
++                android:startX="42.9492"
++                android:startY="49.59793"
++                android:type="linear">
++                <item
++                    android:color="#44000000"
++                    android:offset="0.0" />
++                <item
++                    android:color="#00000000"
++                    android:offset="1.0" />
++            </gradient>
++        </aapt:attr>
++    </path>
++    <path
++        android:fillColor="#FFFFFF"
++        android:fillType="nonZero"
++        android:pathData="M65.3,45.828l3.8,-6.6c0.2,-0.4 0.1,-0.9 -0.3,-1.1c-0.4,-0.2 -0.9,-0.1 -1.1,0.3l-3.9,6.7c-6.3,-2.8 -13.4,-2.8 -19.7,0l-3.9,-6.7c-0.2,-0.4 -0.7,-0.5 -1.1,-0.3C38.8,38.328 38.7,38.828 38.9,39.228l3.8,6.6C36.2,49.428 31.7,56.028 31,63.928h46C76.3,56.028 71.8,49.428 65.3,45.828zM43.4,57.328c-0.8,0 -1.5,-0.5 -1.8,-1.2c-0.3,-0.7 -0.1,-1.5 0.4,-2.1c0.5,-0.5 1.4,-0.7 2.1,-0.4c0.7,0.3 1.2,1 1.2,1.8C45.3,56.528 44.5,57.328 43.4,57.328L43.4,57.328zM64.6,57.328c-0.8,0 -1.5,-0.5 -1.8,-1.2s-0.1,-1.5 0.4,-2.1c0.5,-0.5 1.4,-0.7 2.1,-0.4c0.7,0.3 1.2,1 1.2,1.8C66.5,56.528 65.6,57.328 64.6,57.328L64.6,57.328z"
++        android:strokeWidth="1"
++        android:strokeColor="#00000000" />
++</vector>
+\ No newline at end of file
+diff --git a/core/util/src/main/res/drawable/logo.xml b/core/util/src/main/res/drawable/logo.xml
+new file mode 100644
+index 0000000..210e1db
+--- /dev/null
++++ b/core/util/src/main/res/drawable/logo.xml
+@@ -0,0 +1,53 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:width="240dp"
++    android:height="240dp"
++    android:viewportWidth="240"
++    android:viewportHeight="240"
++    tools:ignore="VectorRaster">
++  <path
++      android:pathData="M175.54,166.71H64.46C62.55,166.71 61,165.16 61,163.25V75.68C61,73.77 62.55,72.22 64.46,72.22H175.54C177.45,72.22 179,73.77 179,75.68V163.25C179,165.16 177.45,166.71 175.54,166.71Z"
++      android:fillColor="#8BB9FF"/>
++  <path
++      android:pathData="M175.54,72.22H120V166.71H175.54C177.45,166.71 179,165.16 179,163.25V75.68C179,73.77 177.45,72.22 175.54,72.22Z"
++      android:fillColor="#7D81E7"/>
++  <path
++      android:pathData="M97.75,179.75L94.65,176.02L91.54,179.75C89.47,182.23 85.43,180.77 85.43,177.54V150.58H103.87V177.54C103.87,180.77 99.82,182.23 97.75,179.75V179.75Z"
++      android:fillColor="#FF8659"/>
++  <path
++      android:pathData="M75.06,139.05V149.43C75.06,151.34 76.61,152.88 78.52,152.88H107.08C111.13,152.88 114.88,154.89 117.12,158.26C117.76,159.22 118.84,159.8 120,159.8C121.16,159.8 122.24,159.22 122.88,158.26C125.12,154.89 128.87,152.88 132.92,152.88H161.48C163.39,152.88 164.94,151.34 164.94,149.43V139.05L120,132.14L75.06,139.05Z"
++      android:fillColor="#E2DFF4"/>
++  <path
++      android:pathData="M120,132.14V159.8C121.16,159.8 122.24,159.22 122.88,158.26C125.12,154.89 128.87,152.88 132.92,152.88H161.48C163.39,152.88 164.94,151.34 164.94,149.43V139.05L120,132.14Z"
++      android:fillColor="#BEBCDD"/>
++  <path
++      android:pathData="M120,145.97C118.84,145.97 117.76,145.39 117.12,144.43C114.89,141.07 111.11,139.05 107.08,139.05H75.06V66.46C75.06,64.55 76.61,63 78.52,63H107.08C111.94,63 116.53,64.84 120,68.07C123.47,64.84 128.06,63 132.92,63H161.48C163.39,63 164.94,64.55 164.94,66.46V139.05H132.92C128.88,139.05 125.11,141.07 122.88,144.43C122.24,145.39 121.16,145.97 120,145.97Z"
++      android:fillColor="#F9F9F9"/>
++  <path
++      android:pathData="M161.48,63H132.92C128.06,63 123.47,64.84 120,68.07V145.97C121.16,145.97 122.24,145.39 122.88,144.43C125.11,141.07 128.88,139.05 132.92,139.05H164.94V66.46C164.94,64.55 163.39,63 161.48,63Z"
++      android:fillColor="#E2DFF4"/>
++  <path
++      android:pathData="M152.27,80.29H131.52C129.61,80.29 128.07,78.74 128.07,76.83C128.07,74.92 129.61,73.37 131.52,73.37H152.27C154.18,73.37 155.72,74.92 155.72,76.83C155.72,78.74 154.18,80.29 152.27,80.29Z"
++      android:fillColor="#616173"/>
++  <path
++      android:pathData="M152.27,96.42H131.52C129.61,96.42 128.07,94.87 128.07,92.96C128.07,91.05 129.61,89.5 131.52,89.5H152.27C154.18,89.5 155.72,91.05 155.72,92.96C155.72,94.87 154.18,96.42 152.27,96.42Z"
++      android:fillColor="#616173"/>
++  <path
++      android:pathData="M152.27,112.55H131.52C129.61,112.55 128.07,111 128.07,109.09C128.07,107.18 129.61,105.64 131.52,105.64H152.27C154.18,105.64 155.72,107.18 155.72,109.09C155.72,111 154.18,112.55 152.27,112.55Z"
++      android:fillColor="#616173"/>
++  <path
++      android:pathData="M152.27,128.68H131.52C129.61,128.68 128.07,127.14 128.07,125.23C128.07,123.32 129.61,121.77 131.52,121.77H152.27C154.18,121.77 155.72,123.32 155.72,125.23C155.72,127.14 154.18,128.68 152.27,128.68Z"
++      android:fillColor="#616173"/>
++  <path
++      android:pathData="M108.48,80.29H87.73C85.83,80.29 84.28,78.74 84.28,76.83C84.28,74.92 85.83,73.37 87.73,73.37H108.48C110.39,73.37 111.93,74.92 111.93,76.83C111.93,78.74 110.39,80.29 108.48,80.29Z"
++      android:fillColor="#7A7A93"/>
++  <path
++      android:pathData="M108.48,96.42H87.73C85.83,96.42 84.28,94.87 84.28,92.96C84.28,91.05 85.83,89.5 87.73,89.5H108.48C110.39,89.5 111.93,91.05 111.93,92.96C111.93,94.87 110.39,96.42 108.48,96.42Z"
++      android:fillColor="#7A7A93"/>
++  <path
++      android:pathData="M108.48,112.55H87.73C85.83,112.55 84.28,111 84.28,109.09C84.28,107.18 85.83,105.64 87.73,105.64H108.48C110.39,105.64 111.93,107.18 111.93,109.09C111.93,111 110.39,112.55 108.48,112.55Z"
++      android:fillColor="#7A7A93"/>
++  <path
++      android:pathData="M108.48,128.68H87.73C85.83,128.68 84.28,127.14 84.28,125.23C84.28,123.32 85.83,121.77 87.73,121.77H108.48C110.39,121.77 111.93,123.32 111.93,125.23C111.93,127.14 110.39,128.68 108.48,128.68Z"
++      android:fillColor="#7A7A93"/>
++</vector>
+diff --git a/core/util/src/main/res/drawable/lonely.xml b/core/util/src/main/res/drawable/lonely.xml
+new file mode 100644
+index 0000000..1b96bd1
+--- /dev/null
++++ b/core/util/src/main/res/drawable/lonely.xml
+@@ -0,0 +1,36 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M18,36C27.941,36 36,27.941 36,18C36,8.059 27.941,0 18,0C8.059,0 0,8.059 0,18C0,27.941 8.059,36 18,36Z"
++      android:fillColor="#FFCC4D"/>
++  <path
++      android:pathData="M20.996,27C20.893,27 20.79,26.984 20.687,26.951C18.927,26.38 17.072,26.38 15.312,26.951C14.788,27.12 14.223,26.834 14.052,26.309C13.881,25.784 14.169,25.22 14.695,25.049C16.857,24.347 19.142,24.347 21.304,25.049C21.829,25.22 22.117,25.784 21.947,26.309C21.81,26.73 21.418,27 20.996,27Z"
++      android:fillColor="#65471B"/>
++  <path
++      android:pathData="M30.335,12.068C29.432,14.813 26.85,16.783 23.841,16.783C23.697,16.783 23.552,16.778 23.406,16.769C21.929,16.676 20.564,16.114 19.456,15.185C19.492,15.68 19.532,16.182 19.592,16.725C19.744,18.113 20.476,19.207 21.708,19.888C22.528,20.342 23.508,20.576 24.521,20.64C26.255,20.749 28.091,20.36 29.394,19.731C30.771,19.066 31.666,17.869 31.85,16.446C32.033,15.031 31.496,13.522 30.335,12.068Z"
++      android:fillColor="#ffffff"/>
++  <path
++      android:pathData="M21.351,7.583C20.054,8.133 19.404,9.884 19.374,12.872L19.413,12.94C20.31,14.259 21.786,15.164 23.501,15.272C23.615,15.279 23.729,15.283 23.842,15.283C26.476,15.283 28.691,13.346 29.095,10.759C28.98,10.654 28.874,10.547 28.752,10.443C25.037,7.273 22.285,7.186 21.351,7.583Z"
++      android:fillColor="#65471B"/>
++  <path
++      android:pathData="M23.841,16.783C26.85,16.783 29.432,14.813 30.335,12.068C29.981,11.625 29.564,11.188 29.094,10.759C28.69,13.346 26.475,15.283 23.841,15.283C23.728,15.283 23.614,15.279 23.5,15.272C21.785,15.164 20.309,14.259 19.412,12.94L19.373,12.872C19.366,13.573 19.394,14.345 19.456,15.185C20.564,16.114 21.929,16.676 23.406,16.769C23.552,16.779 23.697,16.783 23.841,16.783Z"
++      android:fillColor="#F4900C"/>
++  <path
++      android:pathData="M21.413,11.812C22.024,11.812 22.52,11.316 22.52,10.705C22.52,10.094 22.024,9.598 21.413,9.598C20.802,9.598 20.306,10.094 20.306,10.705C20.306,11.316 20.802,11.812 21.413,11.812Z"
++      android:fillColor="#ffffff"/>
++  <path
++      android:pathData="M12.159,16.783C9.15,16.783 6.568,14.813 5.665,12.068C4.504,13.522 3.968,15.031 4.15,16.445C4.335,17.868 5.229,19.066 6.606,19.73C7.909,20.359 9.744,20.748 11.479,20.639C12.492,20.575 13.472,20.342 14.292,19.887C15.523,19.206 16.255,18.112 16.408,16.724C16.468,16.182 16.508,15.682 16.544,15.188C15.441,16.111 14.074,16.675 12.594,16.768C12.448,16.779 12.303,16.783 12.159,16.783Z"
++      android:fillColor="#ffffff"/>
++  <path
++      android:pathData="M12.159,15.283C12.272,15.283 12.386,15.279 12.5,15.272C14.215,15.164 15.691,14.259 16.588,12.94L16.627,12.872C16.596,9.884 15.947,8.133 14.65,7.583C13.716,7.186 10.963,7.273 7.249,10.442C7.127,10.546 7.022,10.653 6.906,10.758C7.31,13.346 9.525,15.283 12.159,15.283Z"
++      android:fillColor="#65471B"/>
++  <path
++      android:pathData="M16.626,12.872L16.587,12.94C15.69,14.259 14.214,15.164 12.499,15.272C12.385,15.279 12.271,15.283 12.158,15.283C9.524,15.283 7.309,13.346 6.905,10.759C6.435,11.188 6.018,11.625 5.664,12.068C6.567,14.813 9.149,16.783 12.158,16.783C12.302,16.783 12.447,16.778 12.593,16.769C14.073,16.676 15.44,16.112 16.543,15.189C16.605,14.348 16.634,13.575 16.626,12.872Z"
++      android:fillColor="#F4900C"/>
++  <path
++      android:pathData="M9.781,11.81C10.391,11.772 10.855,11.246 10.816,10.636C10.778,10.026 10.252,9.562 9.642,9.6C9.032,9.638 8.568,10.164 8.606,10.774C8.645,11.384 9.171,11.848 9.781,11.81Z"
++      android:fillColor="#ffffff"/>
++</vector>
+diff --git a/core/util/src/main/res/drawable/mysterious.xml b/core/util/src/main/res/drawable/mysterious.xml
+new file mode 100644
+index 0000000..6adf894
+--- /dev/null
++++ b/core/util/src/main/res/drawable/mysterious.xml
+@@ -0,0 +1,18 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="34dp"
++    android:height="36dp"
++    android:viewportWidth="34"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M34,17C34,26.389 26.389,34 17,34C7.611,34 0,26.389 0,17C0,7.611 7.611,0 17,0C26.389,0 34,7.611 34,17Z"
++      android:fillColor="#FFCB4C"/>
++  <path
++      android:pathData="M16.812,25.055C19.055,25.055 20.874,24.191 20.874,23.125C20.874,22.059 19.055,21.195 16.812,21.195C14.569,21.195 12.75,22.059 12.75,23.125C12.75,24.191 14.569,25.055 16.812,25.055Z"
++      android:fillColor="#65471B"/>
++  <path
++      android:pathData="M24.35,25.981L24.317,25.961C23.478,25.446 22.37,25.711 21.855,26.55L21.704,26.795C21.162,26.233 20.454,25.821 19.636,25.654L18.237,25.368L19.509,19.144C19.706,18.179 19.078,17.229 18.114,17.032L18.076,17.024C17.111,16.827 16.161,17.455 15.964,18.419L14.291,26.602L14.276,26.676L13.963,28.207L13.962,28.217L12.834,33.75C12.614,34.828 13.104,36 14.729,36H18C20.804,36 21.635,34.99 22.198,32.907L24.939,28.444C25.453,27.605 25.189,26.497 24.35,25.981Z"
++      android:fillColor="#F19020"/>
++  <path
++      android:pathData="M21.409,30.743C21.389,30.743 21.367,30.741 21.345,30.737C21.161,30.703 21.04,30.525 21.076,30.34C21.135,30.028 21.074,29.753 20.889,29.501C20.299,28.693 18.6,28.326 17.995,28.253C17.809,28.231 17.676,28.061 17.699,27.876C17.721,27.69 17.883,27.555 18.076,27.58C18.177,27.591 20.55,27.89 21.436,29.101C21.734,29.508 21.837,29.969 21.742,30.469C21.711,30.63 21.569,30.743 21.409,30.743ZM18.15,35.473C17.897,35.473 17.62,35.442 17.317,35.371C16.707,35.227 16.277,34.872 16.137,34.396C16.019,33.995 16.127,33.571 16.426,33.261C16.814,32.859 17.429,32.727 18.121,32.903C18.302,32.949 18.412,33.134 18.366,33.316C18.32,33.496 18.137,33.607 17.953,33.561C17.508,33.447 17.128,33.511 16.915,33.732C16.787,33.864 16.74,34.041 16.788,34.205C16.857,34.441 17.107,34.626 17.473,34.711C18.653,34.988 19.306,34.525 19.647,34.086C20.155,33.433 20.215,32.548 20.034,32.201C19.612,31.389 17.985,31.209 17.394,31.208C17.207,31.208 17.055,31.056 17.055,30.869C17.055,30.682 17.207,30.53 17.394,30.53C17.497,30.53 19.936,30.545 20.636,31.889C20.941,32.474 20.854,33.64 20.182,34.503C19.874,34.897 19.239,35.473 18.15,35.473ZM13.222,13.222C13.222,14.613 12.376,15.741 11.333,15.741C10.29,15.741 9.444,14.614 9.444,13.222C9.444,11.831 10.289,10.703 11.333,10.703C12.376,10.704 13.222,11.831 13.222,13.222ZM28.886,10.271C29.108,10.271 29.331,10.202 29.523,10.058C29.993,9.706 30.087,9.04 29.735,8.571C26.269,3.949 21.643,3.896 21.448,3.896C20.861,3.896 20.386,4.372 20.386,4.959C20.386,5.544 20.859,6.019 21.444,6.021C21.61,6.023 25.236,6.112 28.036,9.846C28.244,10.124 28.563,10.271 28.886,10.271ZM20.778,13.222C20.778,14.613 21.624,15.741 22.667,15.741C23.71,15.741 24.556,14.614 24.556,13.222C24.556,11.831 23.711,10.703 22.667,10.703C21.623,10.704 20.778,11.831 20.778,13.222ZM5.114,10.271C4.892,10.271 4.669,10.202 4.477,10.058C4.008,9.706 3.913,9.04 4.265,8.571C7.731,3.949 12.357,3.896 12.552,3.896C13.139,3.896 13.614,4.372 13.614,4.959C13.614,5.544 13.141,6.019 12.556,6.021C12.39,6.023 8.764,6.112 5.964,9.846C5.756,10.124 5.437,10.271 5.114,10.271Z"
++      android:fillColor="#65471B"/>
++</vector>
+diff --git a/core/util/src/main/res/drawable/neutral.xml b/core/util/src/main/res/drawable/neutral.xml
+new file mode 100644
+index 0000000..08dea5f
+--- /dev/null
++++ b/core/util/src/main/res/drawable/neutral.xml
+@@ -0,0 +1,18 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M36,18C36,27.941 27.941,36 18,36C8.06,36 0,27.941 0,18C0,8.06 8.06,0 18,0C27.941,0 36,8.06 36,18Z"
++      android:fillColor="#FFCC4D"/>
++  <path
++      android:pathData="M11.5,20C12.881,20 14,18.433 14,16.5C14,14.567 12.881,13 11.5,13C10.119,13 9,14.567 9,16.5C9,18.433 10.119,20 11.5,20Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M24.5,20C25.881,20 27,18.433 27,16.5C27,14.567 25.881,13 24.5,13C23.119,13 22,14.567 22,16.5C22,18.433 23.119,20 24.5,20Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M25,26H11C10.448,26 10,25.553 10,25C10,24.447 10.448,24 11,24H25C25.553,24 26,24.447 26,25C26,25.553 25.553,26 25,26Z"
++      android:fillColor="#664500"/>
++</vector>
+diff --git a/core/util/src/main/res/drawable/romantic.xml b/core/util/src/main/res/drawable/romantic.xml
+new file mode 100644
+index 0000000..4bd268b
+--- /dev/null
++++ b/core/util/src/main/res/drawable/romantic.xml
+@@ -0,0 +1,18 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M18,36C27.941,36 36,27.941 36,18C36,8.059 27.941,0 18,0C8.059,0 0,8.059 0,18C0,27.941 8.059,36 18,36Z"
++      android:fillColor="#FFCC4D"/>
++  <path
++      android:pathData="M16,16.958C15.581,16.958 15.191,16.693 15.051,16.274C14.848,15.675 14.033,13.958 13,13.958C11.938,13.958 11.112,15.785 10.949,16.274C10.774,16.797 10.211,17.082 9.684,16.906C9.16,16.732 8.877,16.165 9.052,15.641C9.177,15.264 10.356,11.957 13.001,11.957C15.646,11.957 16.824,15.264 16.95,15.641C17.125,16.165 16.842,16.732 16.318,16.906C16.212,16.942 16.105,16.958 16,16.958ZM26,16.958C25.581,16.958 25.191,16.693 25.052,16.274C24.849,15.675 24.033,13.958 23,13.958C21.938,13.958 21.111,15.785 20.948,16.274C20.773,16.797 20.212,17.082 19.683,16.906C19.16,16.732 18.876,16.165 19.051,15.641C19.176,15.264 20.355,11.957 22.999,11.957C25.643,11.957 26.822,15.264 26.947,15.641C27.122,16.165 26.839,16.732 26.315,16.906C26.211,16.942 26.105,16.958 26,16.958ZM27.335,20.691C27.157,20.53 26.891,20.52 26.7,20.662C26.661,20.691 22.778,23.562 18,23.562C13.234,23.562 9.338,20.691 9.3,20.662C9.109,20.52 8.843,20.532 8.665,20.691C8.488,20.851 8.448,21.115 8.571,21.319C8.7,21.534 11.788,26.562 18,26.562C24.212,26.562 27.301,21.534 27.429,21.319C27.552,21.114 27.513,20.852 27.335,20.691Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M21.229,3.947C21.229,4.187 21.259,4.419 21.311,4.643C21.736,7.286 24.675,10.074 26.781,10.84C28.446,10.235 30.627,8.364 31.679,6.301C29.59,3.861 26.86,1.987 23.75,0.939C22.318,1.196 21.229,2.441 21.229,3.947ZM13.743,29.078C13.8,28.836 13.833,28.584 13.833,28.324C13.833,26.491 12.347,25.005 10.514,25.005C9.401,25.005 8.42,25.554 7.817,26.394C7.215,25.555 6.233,25.005 5.12,25.005C3.879,25.005 2.809,25.694 2.24,26.703C4.064,29.998 6.89,32.66 10.308,34.277C11.945,32.926 13.439,30.97 13.743,29.078ZM34.301,25.642C34.019,24.692 33.149,23.995 32.107,23.995C31.336,23.995 30.656,24.375 30.239,24.957C29.822,24.375 29.142,23.995 28.371,23.995C27.101,23.995 26.072,25.024 26.072,26.294C26.072,26.474 26.095,26.648 26.134,26.816C26.441,28.721 28.482,30.712 30.043,31.377C31.819,29.777 33.274,27.83 34.301,25.642Z"
++      android:fillColor="#FFAC33"/>
++  <path
++      android:pathData="M33.625,3.269C33.625,1.577 32.253,0.206 30.562,0.206C29.535,0.206 28.629,0.713 28.073,1.488C27.517,0.713 26.611,0.206 25.584,0.206C23.892,0.206 22.521,1.577 22.521,3.269C22.521,3.509 22.551,3.741 22.603,3.965C23.029,6.608 25.967,9.396 28.073,10.162C30.179,9.396 33.117,6.608 33.542,3.966C33.595,3.741 33.625,3.509 33.625,3.269ZM12.208,28.408C12.208,26.575 10.722,25.089 8.889,25.089C7.776,25.089 6.795,25.638 6.192,26.478C5.59,25.638 4.608,25.089 3.495,25.089C1.662,25.089 0.176,26.575 0.176,28.408C0.176,28.668 0.209,28.919 0.265,29.162C0.726,32.025 3.909,35.046 6.191,35.876C8.473,35.047 11.656,32.026 12.117,29.163C12.175,28.919 12.208,28.667 12.208,28.408ZM35.948,26.127C35.948,24.857 34.919,23.828 33.649,23.828C32.878,23.828 32.198,24.208 31.781,24.79C31.364,24.208 30.684,23.828 29.913,23.828C28.643,23.828 27.614,24.857 27.614,26.127C27.614,26.307 27.637,26.481 27.676,26.649C27.995,28.632 30.2,30.725 31.781,31.299C33.361,30.725 35.567,28.632 35.885,26.649C35.925,26.481 35.948,26.307 35.948,26.127Z"
++      android:fillColor="#DD2E44"/>
++</vector>
+diff --git a/core/util/src/main/res/drawable/shameful.xml b/core/util/src/main/res/drawable/shameful.xml
+new file mode 100644
+index 0000000..cf6ae00
+--- /dev/null
++++ b/core/util/src/main/res/drawable/shameful.xml
+@@ -0,0 +1,15 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="35dp"
++    android:height="32dp"
++    android:viewportWidth="35"
++    android:viewportHeight="32">
++  <path
++      android:pathData="M16,32C24.837,32 32,24.837 32,16C32,7.163 24.837,0 16,0C7.163,0 0,7.163 0,16C0,24.837 7.163,32 16,32Z"
++      android:fillColor="#FFCC4D"/>
++  <path
++      android:pathData="M11.471,11.529C11.471,13.235 10.484,14.617 9.265,14.617C8.046,14.617 7.059,13.235 7.059,11.529C7.059,9.824 8.046,8.441 9.265,8.441C10.483,8.441 11.471,9.824 11.471,11.529ZM23,11.529C23,13.235 22.013,14.617 20.794,14.617C19.576,14.617 18.588,13.235 18.588,11.529C18.588,9.824 19.576,8.441 20.794,8.441C22.013,8.441 23,9.824 23,11.529ZM10.118,27.382C11.883,22.97 21.589,22.97 21.589,24.735C21.588,25.618 14.529,23.853 10.118,27.382Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M32.262,15.5H17C15.489,15.5 14.266,16.844 14.266,18.5C14.266,20.157 15.49,21.5 17,21.5H32.262C33.775,21.5 35,20.157 35,18.5C35,16.844 33.774,15.5 32.262,15.5Z"
++      android:fillColor="#F4900C"/>
++</vector>
+diff --git a/core/util/src/main/res/drawable/surprised.xml b/core/util/src/main/res/drawable/surprised.xml
+new file mode 100644
+index 0000000..a05ca5c
+--- /dev/null
++++ b/core/util/src/main/res/drawable/surprised.xml
+@@ -0,0 +1,24 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M36,18C36,27.941 27.941,36 18,36C8.06,36 0,27.941 0,18C0,8.06 8.06,0 18,0C27.941,0 36,8.06 36,18Z"
++      android:fillColor="#FFCC4D"/>
++  <path
++      android:pathData="M18,33C20.761,33 23,30.314 23,27C23,23.686 20.761,21 18,21C15.239,21 13,23.686 13,27C13,30.314 15.239,33 18,33Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M5.999,11C5.791,11 5.58,10.935 5.4,10.8C4.958,10.469 4.869,9.842 5.2,9.4C8.462,5.05 12.816,5 13,5C13.552,5 14,5.448 14,6C14,6.551 13.555,6.998 13.004,7C12.849,7.002 9.436,7.086 6.8,10.6C6.604,10.862 6.303,11 5.999,11ZM30.001,11C29.696,11 29.397,10.862 29.2,10.6C26.56,7.079 23.139,7.002 22.994,7C22.444,6.994 22,6.544 22.003,5.995C22.006,5.444 22.45,5 23,5C23.184,5 27.537,5.05 30.8,9.4C31.132,9.842 31.042,10.469 30.6,10.8C30.42,10.935 30.21,11 30.001,11Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M18,23C16.343,23 15,24.79 15,27H21C21,24.79 19.657,23 18,23Z"
++      android:fillColor="#F5F8FA"/>
++  <path
++      android:pathData="M12,18C13.381,18 14.5,16.433 14.5,14.5C14.5,12.567 13.381,11 12,11C10.619,11 9.5,12.567 9.5,14.5C9.5,16.433 10.619,18 12,18Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M24,18C25.381,18 26.5,16.433 26.5,14.5C26.5,12.567 25.381,11 24,11C22.619,11 21.5,12.567 21.5,14.5C21.5,16.433 22.619,18 24,18Z"
++      android:fillColor="#664500"/>
++</vector>
+diff --git a/core/util/src/main/res/drawable/suspicious.xml b/core/util/src/main/res/drawable/suspicious.xml
+new file mode 100644
+index 0000000..07a2544
+--- /dev/null
++++ b/core/util/src/main/res/drawable/suspicious.xml
+@@ -0,0 +1,18 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M36,18C36,27.941 27.941,36 18,36C8.059,36 0,27.941 0,18C0,8.059 8.059,0 18,0C27.941,0 36,8.059 36,18Z"
++      android:fillColor="#FFCC4D"/>
++  <path
++      android:pathData="M12,19.25C13.381,19.25 14.5,18.019 14.5,16.5C14.5,14.981 13.381,13.75 12,13.75C10.619,13.75 9.5,14.981 9.5,16.5C9.5,18.019 10.619,19.25 12,19.25Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M24,20C25.381,20 26.5,18.433 26.5,16.5C26.5,14.567 25.381,13 24,13C22.619,13 21.5,14.567 21.5,16.5C21.5,18.433 22.619,20 24,20Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M7.102,12.559C7.351,12.735 7.676,12.795 7.987,12.694C12.174,11.339 15.014,13.248 15.133,13.33C15.586,13.642 16.208,13.531 16.523,13.08C16.838,12.629 16.731,12.009 16.282,11.692C16.132,11.586 12.546,9.117 7.372,10.791C6.846,10.961 6.558,11.525 6.729,12.05C6.797,12.264 6.932,12.438 7.102,12.559ZM25,26H11C10.448,26 10,25.553 10,25C10,24.447 10.448,24 11,24H25C25.553,24 26,24.447 26,25C26,25.553 25.553,26 25,26ZM30.001,10.408C29.633,10.408 29.27,10.247 29.022,9.937C27.627,8.186 24.723,6.65 23.708,6.65C23.066,6.65 21.783,7.561 21.104,8.218C20.608,8.7 19.816,8.685 19.337,8.19C18.857,7.695 18.868,6.905 19.361,6.424C19.752,6.044 21.797,4.149 23.708,4.149C25.713,4.149 29.246,6.205 30.978,8.378C31.409,8.918 31.319,9.704 30.78,10.134C30.549,10.319 30.273,10.408 30.001,10.408Z"
++      android:fillColor="#664500"/>
++</vector>
+diff --git a/core/util/src/main/res/drawable/tense.xml b/core/util/src/main/res/drawable/tense.xml
+new file mode 100644
+index 0000000..97e1de8
+--- /dev/null
++++ b/core/util/src/main/res/drawable/tense.xml
+@@ -0,0 +1,21 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="36dp"
++    android:height="36dp"
++    android:viewportWidth="36"
++    android:viewportHeight="36">
++  <path
++      android:pathData="M36,18C36,27.941 27.941,36 18,36C8.06,36 0,27.941 0,18C0,8.06 8.06,0 18,0C27.941,0 36,8.06 36,18Z"
++      android:fillColor="#FFCC4D"/>
++  <path
++      android:pathData="M12,17C13.381,17 14.5,15.433 14.5,13.5C14.5,11.567 13.381,10 12,10C10.619,10 9.5,11.567 9.5,13.5C9.5,15.433 10.619,17 12,17Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M24,17C25.381,17 26.5,15.433 26.5,13.5C26.5,11.567 25.381,10 24,10C22.619,10 21.5,11.567 21.5,13.5C21.5,15.433 22.619,17 24,17Z"
++      android:fillColor="#664500"/>
++  <path
++      android:pathData="M25,21C27.209,21 29,22.791 29,25C29,27.209 27.209,29 25,29H11C8.791,29 7,27.209 7,25C7,22.791 8.791,21 11,21H25Z"
++      android:fillColor="#ffffff"/>
++  <path
++      android:pathData="M25,20H11C8.243,20 6,22.243 6,25C6,27.757 8.243,30 11,30H25C27.757,30 30,27.757 30,25C30,22.243 27.757,20 25,20ZM25,22C26.483,22 27.71,23.084 27.949,24.5H24.5V22H25ZM23.5,22V24.5H20.5V22H23.5ZM19.5,22V24.5H16.5V22H19.5ZM15.5,22V24.5H12.5V22H15.5ZM11,22H11.5V24.5H8.051C8.29,23.084 9.517,22 11,22ZM11,28C9.517,28 8.29,26.916 8.051,25.5H11.5V28H11ZM12.5,28V25.5H15.5V28H12.5ZM16.5,28V25.5H19.5V28H16.5ZM20.5,28V25.5H23.5V28H20.5ZM25,28H24.5V25.5H27.949C27.71,26.916 26.483,28 25,28Z"
++      android:fillColor="#664500"/>
++</vector>
+diff --git a/core/util/src/test/java/com/prateektimer/util/ExampleUnitTest.kt b/core/util/src/test/java/com/prateektimer/util/ExampleUnitTest.kt
+new file mode 100644
+index 0000000..80e54dd
+--- /dev/null
++++ b/core/util/src/test/java/com/prateektimer/util/ExampleUnitTest.kt
+@@ -0,0 +1,17 @@
++package com.prateektimer.util
++
++import org.junit.Test
++
++import org.junit.Assert.*
++
++/**
++ * Example local unit test, which will execute on the development machine (host).
++ *
++ * See [testing documentation](http://d.android.com/tools/testing).
++ */
++class ExampleUnitTest {
++    @Test
++    fun addition_isCorrect() {
++        assertEquals(4, 2 + 2)
++    }
++}
+\ No newline at end of file
+diff --git a/gradle/libs.versions.toml b/gradle/libs.versions.toml
+index dc128c4..136e14f 100644
+--- a/gradle/libs.versions.toml
++++ b/gradle/libs.versions.toml
+@@ -9,7 +9,8 @@ junit = "4.13.2"
+ junit-ext = "1.1.5"
+ espresso = "3.5.1"
+ compose-navigation = "2.5.3"
+-firebase = "21.1.0"
++firebase-auth = "22.1.2"
++firebase-storage = "20.2.1"
+ room = "2.5.0"
+ runtime-compose = "2.6.0-alpha04"
+ splash = "1.0.0"
+@@ -24,7 +25,7 @@ message-bar-compose = "1.0.5"
+ one-tap-compose = "1.0.0"
+ desugar = "1.2.0"
+ agp = "8.1.1"
+-org-jetbrains-kotlin-android = "1.9.0"
++org-jetbrains-kotlin-android = "1.8.20"
+ appcompat = "1.6.1"
+ material = "1.8.0"
+ 
+@@ -43,8 +44,8 @@ compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref =
+ compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose"}
+ 
+ navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "compose-navigation"}
+-firebase-auth = { module = "com.google.firebase:firebase-auth-ktx", version.ref = "firebase"}
+-firebase-storage = { module = "com.google.firebase:firebase-storage-ktx", version.ref = "firebase"}
++firebase-auth = { module = "com.google.firebase:firebase-auth-ktx", version.ref = "firebase-auth"}
++firebase-storage = { module = "com.google.firebase:firebase-storage-ktx", version.ref = "firebase_storage"}
+ room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+ room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+ room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+diff --git a/settings.gradle b/settings.gradle
+index 30f6a2f..3c898d4 100644
+--- a/settings.gradle
++++ b/settings.gradle
+@@ -16,3 +16,5 @@ dependencyResolutionManagement {
+ 
+ rootProject.name = "DiaryApp"
+ include ':app'
++include ':core:ui'
++include ':core:util'
+-- 
+2.39.1.windows.1
+
