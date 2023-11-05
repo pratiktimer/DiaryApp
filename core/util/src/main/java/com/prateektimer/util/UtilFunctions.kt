@@ -5,8 +5,6 @@ import android.util.Log
 import androidx.core.net.toUri
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storageMetadata
-import com.prateektimer.diaryapp.data.database.entity.ImageToUpload
-import com.prateektimer.diaryapp.data.database.entity.ImagesToDelete
 import io.realm.kotlin.types.RealmInstant
 import java.time.Instant
 
@@ -47,25 +45,7 @@ fun RealmInstant.toInstant(): Instant {
     }
 }
 
-fun retryUploadingImageTofirebase(
-    imageToUpload: ImageToUpload,
-    onSuccess:()-> Unit
-){
-    val storage = FirebaseStorage.getInstance().reference
-    storage.child(imageToUpload.remoteImagePath).putFile(
-        imageToUpload.imageUri.toUri(),
-       storageMetadata {  },
-        imageToUpload.sessionUri.toUri()
-    ).addOnSuccessListener { onSuccess() }
-}
 
-fun retryDeletingImageTofirebase(
-    imageToDelete: ImagesToDelete,
-    onSuccess:()-> Unit
-){
-    val storage = FirebaseStorage.getInstance().reference
-    storage.child(imageToDelete.remoteImagePath).delete().addOnSuccessListener { onSuccess() }
-}
 
 
 fun Instant.toRealmInstant(): RealmInstant {

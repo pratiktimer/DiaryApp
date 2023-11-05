@@ -31,8 +31,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
         coreLibraryDesugaringEnabled true
     }
     kotlinOptions {
@@ -44,81 +44,41 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion ProjectConfig.extensionVersion
     }
-    packaging {
-        resources {
-            excludes += '/META-INF/{AL2.0,LGPL2.1}'
-        }
-    }
-    buildToolsVersion '34.0.0'
+//    packagingOptions {
+//        resources.excludes.add("META-INF/*")
+//    }
 }
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.12.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.2'
-    implementation 'androidx.activity:activity-compose:1.7.2'
-    implementation "androidx.compose.ui:ui:$compose_version"
-    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
-    implementation 'androidx.compose.material3:material3:1.2.0-alpha08'
-    implementation 'com.google.firebase:firebase-inappmessaging-ktx:20.4.0'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:1.5.1"
-    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
-    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
-
     // Compose Navigation
-    implementation "androidx.navigation:navigation-compose:2.7.3"
+    implementation libs.navigation.compose
 
     // Firebase
-    implementation 'com.google.firebase:firebase-auth-ktx:22.1.2'
-    implementation 'com.google.firebase:firebase-storage-ktx:20.2.1'
+    implementation libs.firebase.storage
 
     // Room components
-    implementation "androidx.room:room-runtime:2.5.2"
-    ksp "androidx.room:room-compiler:2.5.2"
-    implementation "androidx.room:room-ktx:2.5.2"
-
-    // Runtime Compose
-    implementation "androidx.lifecycle:lifecycle-runtime-compose:2.6.2"
+    implementation libs.room.runtime
+    ksp libs.room.compiler
+    implementation libs.room.ktx
 
     // Splash API
-    implementation "androidx.core:core-splashscreen:1.0.1"
+    implementation libs.splash.api
 
     // Mongo DB Realm
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1"
-    implementation "io.realm.kotlin:library-sync:1.11.0"
+    implementation libs.realm.sync
 
     // Dagger Hilt
-    implementation "com.google.dagger:hilt-android:2.48"
-    ksp "com.google.dagger:hilt-compiler:2.48"
-    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
-
-    // Coil
-    implementation "io.coil-kt:coil-compose:2.3.0"
-
-    // Pager - Accompanist [DEPRECATED]
-    //implementation "com.google.accompanist:accompanist-pager:0.27.0"
-
-    // Date-Time Picker
-    implementation 'com.maxkeppeler.sheets-compose-dialogs:core:1.0.2'
-
-    // CALENDAR
-    implementation "com.maxkeppeler.sheets-compose-dialogs:calendar:1.0.2"
-
-    // CLOCK
-    implementation "com.maxkeppeler.sheets-compose-dialogs:clock:1.0.2"
-
-    // Message Bar Compose
-    implementation 'com.github.stevdza-san:MessageBarCompose:1.0.5'
-
-    // One-Tap Compose
-    implementation 'com.github.stevdza-san:OneTapCompose:1.0.7'
+    implementation libs.hilt.android
+    ksp libs.hilt.compiler
 
     // Desugar JDK
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
+    coreLibraryDesugaring libs.desugar.jdk
 
     implementation(project(":core:ui"))
     implementation(project(":core:util"))
+    implementation(project(":data:mongo"))
+    implementation(project(":feature:auth"))
+    implementation(project(":feature:home"))
+    implementation(project(":feature:write"))
 }
