@@ -6,6 +6,9 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -81,6 +84,7 @@ fun Gallery(
 
 }
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GalleryUploader(
@@ -101,38 +105,23 @@ fun GalleryUploader(
             onImageSelect(it)
         }
     }
-    BoxWithConstraints(modifier = modifier) {
-        val numberOfVisibleImages = remember {
-            derivedStateOf {
-                max(
-                    a = 0,
-                    b = this.maxWidth.div(spaceBetween + imageSize).toInt().minus(2)
-                )
-            }
-        }
-
-        val remainingImages = remember {
-            derivedStateOf {
-                galleryState.images.size - numberOfVisibleImages.value
-            }
-        }
-
         Row {
-            
+
             AddImageButton(
                 imageSize = imageSize ,
                 imageShape = imageShape,
                 onClick = {
-                        onAddClicked()
-                        multiplePhotoPicker.launch(
-                            PickVisualMediaRequest(
-                                ActivityResultContracts.PickVisualMedia.ImageOnly
-                            )
-                          )
-                    }
-                )
-            Spacer(modifier = Modifier.width(spaceBetween))
-            galleryState.images.take(numberOfVisibleImages.value).forEach { galleryImage ->
+                    onAddClicked()
+                    multiplePhotoPicker.launch(
+                        PickVisualMediaRequest(
+                            ActivityResultContracts.PickVisualMedia.ImageOnly
+                        )
+                    )
+                }
+            )
+            LazyRow{
+                items(galleryState.images){galleryImage->
+                    Spacer(modifier = Modifier.width(spaceBetween))
                 AsyncImage(
                     modifier = Modifier
                         .clip(imageShape)
@@ -145,18 +134,88 @@ fun GalleryUploader(
                     contentScale = ContentScale.Crop,
                     contentDescription = "Gallery Image"
                 )
-                Spacer(modifier = Modifier.width(spaceBetween))
-            }
-            if (remainingImages.value > 0) {
-                LastImageOverlay(
-                    imageSize = imageSize,
-                    imageShape = imageShape,
-                    remainingImages = remainingImages.value
-                )
+                }
             }
         }
-    }
+    
 }
+//
+//@OptIn(ExperimentalMaterial3Api::class)
+//@Composable
+//fun GalleryUploader(
+//    modifier: Modifier = Modifier,
+//    galleryState: GalleryState,
+//    imageSize: Dp = 60.dp,
+//    imageShape: CornerBasedShape = Shapes().medium,
+//    spaceBetween: Dp = 12.dp,
+//    onAddClicked:()-> Unit,
+//    onImageSelect:(Uri) -> Unit,
+//    onImageClicked:(GalleryImage) -> Unit
+//){
+//
+//    val multiplePhotoPicker = rememberLauncherForActivityResult(
+//        contract = ActivityResultContracts.PickMultipleVisualMedia(maxItems = 8)
+//    ){ images ->
+//        images.forEach {
+//            onImageSelect(it)
+//        }
+//    }
+//    BoxWithConstraints(modifier = modifier) {
+//        val numberOfVisibleImages = remember {
+//            derivedStateOf {
+//                max(
+//                    a = 0,
+//                    b = this.maxWidth.div(spaceBetween + imageSize).toInt().minus(2)
+//                )
+//            }
+//        }
+//
+//        val remainingImages = remember {
+//            derivedStateOf {
+//                galleryState.images.size - numberOfVisibleImages.value
+//            }
+//        }
+//
+//        Row {
+//            
+//            AddImageButton(
+//                imageSize = imageSize ,
+//                imageShape = imageShape,
+//                onClick = {
+//                        onAddClicked()
+//                        multiplePhotoPicker.launch(
+//                            PickVisualMediaRequest(
+//                                ActivityResultContracts.PickVisualMedia.ImageOnly
+//                            )
+//                          )
+//                    }
+//                )
+//            Spacer(modifier = Modifier.width(spaceBetween))
+//            galleryState.images.take(numberOfVisibleImages.value).forEach { galleryImage ->
+//                AsyncImage(
+//                    modifier = Modifier
+//                        .clip(imageShape)
+//                        .size(imageSize)
+//                        .clickable { onImageClicked(galleryImage) },
+//                    model = ImageRequest.Builder(LocalContext.current)
+//                        .data(galleryImage.image)
+//                        .crossfade(true)
+//                        .build(),
+//                    contentScale = ContentScale.Crop,
+//                    contentDescription = "Gallery Image"
+//                )
+//                Spacer(modifier = Modifier.width(spaceBetween))
+//            }
+//            if (remainingImages.value > 0) {
+//                LastImageOverlay(
+//                    imageSize = imageSize,
+//                    imageShape = imageShape,
+//                    remainingImages = remainingImages.value
+//                )
+//            }
+//        }
+//    }
+//}
 
 
 @Composable

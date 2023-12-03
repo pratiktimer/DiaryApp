@@ -215,8 +215,8 @@ class WriteViewModel @Inject constructor(
     }
 
     fun  addImage(image: Uri, imageType: String){
-     val remoteImagePath = "images/${FirebaseAuth.getInstance().currentUser?.uid}/"+"${image.lastPathSegment}-${System.currentTimeMillis()}.$imageType"
-
+        val remoteImagePath = "images/${FirebaseAuth.getInstance().currentUser?.uid}/" +
+                "${image.lastPathSegment}-${System.currentTimeMillis()}.$imageType"
         galleryState.addImage(
             GalleryImage(
                 image = image,
@@ -259,14 +259,14 @@ class WriteViewModel @Inject constructor(
         }
     }
 
-    private fun uploadImagesToFirebase(){
+    private fun uploadImagesToFirebase() {
         val storage = FirebaseStorage.getInstance().reference
-        galleryState.images.forEach {galleryImage->
+        galleryState.images.forEach { galleryImage ->
             val imagePath = storage.child(galleryImage.remoteImagePath)
             imagePath.putFile(galleryImage.image)
                 .addOnProgressListener {
                     val sessionUri = it.uploadSessionUri
-                    if(sessionUri != null){
+                    if (sessionUri != null) {
                         viewModelScope.launch(Dispatchers.IO) {
                             imageToUploadDao.addImagesToUpload(
                                 ImageToUpload(
